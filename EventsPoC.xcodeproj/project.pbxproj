@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F10CAC1178CE4FA00FA77E8 /* GoogleGeoCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F10CAC0178CE4FA00FA77E8 /* GoogleGeoCoder.m */; };
 		1F530A5C177BA59F009A27C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F530A5B177BA59F009A27C0 /* UIKit.framework */; };
 		1F530A5E177BA59F009A27C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F530A5D177BA59F009A27C0 /* Foundation.framework */; };
 		1F530A60177BA59F009A27C0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F530A5F177BA59F009A27C0 /* CoreGraphics.framework */; };
@@ -24,6 +25,29 @@
 		1F530A85177BA5A0009A27C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F530A5D177BA59F009A27C0 /* Foundation.framework */; };
 		1F530A8D177BA5A0009A27C0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F530A8B177BA5A0009A27C0 /* InfoPlist.strings */; };
 		1F530A90177BA5A0009A27C0 /* EventsPoCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530A8F177BA5A0009A27C0 /* EventsPoCTests.m */; };
+		1F530A9B177BB00E009A27C0 /* EventsMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530A9A177BB00E009A27C0 /* EventsMapViewController.m */; };
+		1F530A9E177BB15E009A27C0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F530A9C177BB0A4009A27C0 /* MapKit.framework */; };
+		1F530AA0177BD290009A27C0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F530A9F177BD290009A27C0 /* CoreLocation.framework */; };
+		1F530AA3177BDE9C009A27C0 /* EventAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530AA2177BDE9C009A27C0 /* EventAnnotation.m */; };
+		1F530AA6177D049A009A27C0 /* EventGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530AA5177D049A009A27C0 /* EventGeocoder.m */; };
+		1F9F8E391818AC3A0058DD5C /* MapViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F8E381818AC3A0058DD5C /* MapViewControllerDelegate.m */; };
+		1F9F8E3F1818B61C0058DD5C /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F8E3E1818B61C0058DD5C /* EventDetailViewController.m */; };
+		1F9F8E421819FB0C0058DD5C /* EventsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F8E411819FB0C0058DD5C /* EventsList.m */; };
+		1F9F8E451819FF290058DD5C /* EventAnnotationAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F8E441819FF290058DD5C /* EventAnnotationAdapter.m */; };
+		1F9F8E48181A00E80058DD5C /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9F8E47181A00E80058DD5C /* Event.m */; };
+		DB05E98F1C6EAE7300AF2B12 /* FBGetEventsOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB05E98E1C6EAE7300AF2B12 /* FBGetEventsOperation.m */; };
+		DB05E9921C6EB0A200AF2B12 /* FBEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = DB05E9911C6EB0A200AF2B12 /* FBEvent.m */; };
+		DB05E9961C6EBB7B00AF2B12 /* AsynchronousOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB05E9951C6EBB7B00AF2B12 /* AsynchronousOperation.m */; };
+		DB25E5BB1C6C10C70068C64F /* OAAuthorization.m in Sources */ = {isa = PBXBuildFile; fileRef = DB25E5BA1C6C10C70068C64F /* OAAuthorization.m */; };
+		DB25E5BE1C6C1AEF0068C64F /* OAuthLoginHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB25E5BD1C6C1AEF0068C64F /* OAuthLoginHelper.m */; };
+		DB25E5C21C6C338F0068C64F /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB25E5C11C6C338F0068C64F /* FBSDKCoreKit.framework */; };
+		DB25E5C51C6C34AC0068C64F /* FBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB25E5C41C6C34AC0068C64F /* FBLoginViewController.m */; };
+		DB25E5C71C6C36480068C64F /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB25E5C61C6C36480068C64F /* FBSDKLoginKit.framework */; };
+		DB2899911C5B222E005D0C3C /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB2899901C5B222E005D0C3C /* Contacts.framework */; };
+		DB7DF3A01C62F630008AB469 /* GoogleGeoCoderLocationDO.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7DF39F1C62F630008AB469 /* GoogleGeoCoderLocationDO.m */; };
+		DB7DF3A71C6437E9008AB469 /* FBManualLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7DF3A61C6437E9008AB469 /* FBManualLoginViewController.m */; };
+		DB7DF3AD1C643DED008AB469 /* EventsListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7DF3AC1C643DED008AB469 /* EventsListTableViewController.m */; };
+		DB7DF3B11C643F8F008AB469 /* EventsListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7DF3B01C643F8F008AB469 /* EventsListTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +61,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F10CABE178CE47600FA77E8 /* GeoCoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeoCoder.h; sourceTree = "<group>"; };
+		1F10CABF178CE4FA00FA77E8 /* GoogleGeoCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleGeoCoder.h; sourceTree = "<group>"; };
+		1F10CAC0178CE4FA00FA77E8 /* GoogleGeoCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleGeoCoder.m; sourceTree = "<group>"; };
 		1F530A58177BA59F009A27C0 /* EventsPoC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventsPoC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F530A5B177BA59F009A27C0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1F530A5D177BA59F009A27C0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -60,6 +87,47 @@
 		1F530A8C177BA5A0009A27C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1F530A8E177BA5A0009A27C0 /* EventsPoCTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventsPoCTests.h; sourceTree = "<group>"; };
 		1F530A8F177BA5A0009A27C0 /* EventsPoCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventsPoCTests.m; sourceTree = "<group>"; };
+		1F530A99177BB00E009A27C0 /* EventsMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsMapViewController.h; sourceTree = "<group>"; };
+		1F530A9A177BB00E009A27C0 /* EventsMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsMapViewController.m; sourceTree = "<group>"; };
+		1F530A9C177BB0A4009A27C0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		1F530A9F177BD290009A27C0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		1F530AA1177BDE9C009A27C0 /* EventAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventAnnotation.h; sourceTree = "<group>"; };
+		1F530AA2177BDE9C009A27C0 /* EventAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventAnnotation.m; sourceTree = "<group>"; };
+		1F530AA4177D049A009A27C0 /* EventGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventGeocoder.h; sourceTree = "<group>"; };
+		1F530AA5177D049A009A27C0 /* EventGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventGeocoder.m; sourceTree = "<group>"; };
+		1F9F8E371818AC3A0058DD5C /* MapViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewControllerDelegate.h; sourceTree = "<group>"; };
+		1F9F8E381818AC3A0058DD5C /* MapViewControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewControllerDelegate.m; sourceTree = "<group>"; };
+		1F9F8E3D1818B61C0058DD5C /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailViewController.h; sourceTree = "<group>"; };
+		1F9F8E3E1818B61C0058DD5C /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
+		1F9F8E401819FB0C0058DD5C /* EventsList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsList.h; sourceTree = "<group>"; };
+		1F9F8E411819FB0C0058DD5C /* EventsList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsList.m; sourceTree = "<group>"; };
+		1F9F8E431819FF290058DD5C /* EventAnnotationAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventAnnotationAdapter.h; sourceTree = "<group>"; };
+		1F9F8E441819FF290058DD5C /* EventAnnotationAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventAnnotationAdapter.m; sourceTree = "<group>"; };
+		1F9F8E46181A00E80058DD5C /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		1F9F8E47181A00E80058DD5C /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
+		DB05E98D1C6EAE7300AF2B12 /* FBGetEventsOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGetEventsOperation.h; sourceTree = "<group>"; };
+		DB05E98E1C6EAE7300AF2B12 /* FBGetEventsOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBGetEventsOperation.m; sourceTree = "<group>"; };
+		DB05E9901C6EB0A200AF2B12 /* FBEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBEvent.h; sourceTree = "<group>"; };
+		DB05E9911C6EB0A200AF2B12 /* FBEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBEvent.m; sourceTree = "<group>"; };
+		DB05E9941C6EBB7B00AF2B12 /* AsynchronousOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsynchronousOperation.h; sourceTree = "<group>"; };
+		DB05E9951C6EBB7B00AF2B12 /* AsynchronousOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsynchronousOperation.m; sourceTree = "<group>"; };
+		DB25E5B91C6C10C70068C64F /* OAAuthorization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAAuthorization.h; sourceTree = "<group>"; };
+		DB25E5BA1C6C10C70068C64F /* OAAuthorization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAAuthorization.m; sourceTree = "<group>"; };
+		DB25E5BC1C6C1AEF0068C64F /* OAuthLoginHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthLoginHelper.h; sourceTree = "<group>"; };
+		DB25E5BD1C6C1AEF0068C64F /* OAuthLoginHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthLoginHelper.m; sourceTree = "<group>"; };
+		DB25E5C11C6C338F0068C64F /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "FacebookSDKs-iOS-20160210/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		DB25E5C31C6C34AC0068C64F /* FBLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoginViewController.h; sourceTree = "<group>"; };
+		DB25E5C41C6C34AC0068C64F /* FBLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginViewController.m; sourceTree = "<group>"; };
+		DB25E5C61C6C36480068C64F /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "FacebookSDKs-iOS-20160210/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		DB2899901C5B222E005D0C3C /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		DB7DF39E1C62F630008AB469 /* GoogleGeoCoderLocationDO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleGeoCoderLocationDO.h; sourceTree = "<group>"; };
+		DB7DF39F1C62F630008AB469 /* GoogleGeoCoderLocationDO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleGeoCoderLocationDO.m; sourceTree = "<group>"; };
+		DB7DF3A51C6437E9008AB469 /* FBManualLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBManualLoginViewController.h; sourceTree = "<group>"; };
+		DB7DF3A61C6437E9008AB469 /* FBManualLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBManualLoginViewController.m; sourceTree = "<group>"; };
+		DB7DF3AB1C643DED008AB469 /* EventsListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsListTableViewController.h; sourceTree = "<group>"; };
+		DB7DF3AC1C643DED008AB469 /* EventsListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsListTableViewController.m; sourceTree = "<group>"; };
+		DB7DF3AF1C643F8F008AB469 /* EventsListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsListTableViewCell.h; sourceTree = "<group>"; };
+		DB7DF3B01C643F8F008AB469 /* EventsListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsListTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,8 +135,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB2899911C5B222E005D0C3C /* Contacts.framework in Frameworks */,
+				1F530AA0177BD290009A27C0 /* CoreLocation.framework in Frameworks */,
+				1F530A9E177BB15E009A27C0 /* MapKit.framework in Frameworks */,
 				1F530A5C177BA59F009A27C0 /* UIKit.framework in Frameworks */,
+				DB25E5C21C6C338F0068C64F /* FBSDKCoreKit.framework in Frameworks */,
 				1F530A5E177BA59F009A27C0 /* Foundation.framework in Frameworks */,
+				DB25E5C71C6C36480068C64F /* FBSDKLoginKit.framework in Frameworks */,
 				1F530A60177BA59F009A27C0 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -108,6 +181,11 @@
 		1F530A5A177BA59F009A27C0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DB25E5C61C6C36480068C64F /* FBSDKLoginKit.framework */,
+				DB25E5C11C6C338F0068C64F /* FBSDKCoreKit.framework */,
+				DB2899901C5B222E005D0C3C /* Contacts.framework */,
+				1F530A9F177BD290009A27C0 /* CoreLocation.framework */,
+				1F530A9C177BB0A4009A27C0 /* MapKit.framework */,
 				1F530A5B177BA59F009A27C0 /* UIKit.framework */,
 				1F530A5D177BA59F009A27C0 /* Foundation.framework */,
 				1F530A5F177BA59F009A27C0 /* CoreGraphics.framework */,
@@ -119,6 +197,13 @@
 		1F530A61177BA59F009A27C0 /* EventsPoC */ = {
 			isa = PBXGroup;
 			children = (
+				DB05E9931C6EBB6800AF2B12 /* Core */,
+				DB25E5B81C6C108F0068C64F /* OAuth */,
+				DB7DF3AE1C643F72008AB469 /* Events List */,
+				DB7DF3A41C643317008AB469 /* Facebook */,
+				DB7DF3A31C64324E008AB469 /* Event GeoCoder (Old) */,
+				DB7DF3A21C643216008AB469 /* Google GeoCoder */,
+				DB7DF3A11C6431CB008AB469 /* Events Map */,
 				1F530A6A177BA59F009A27C0 /* AppDelegate.h */,
 				1F530A6B177BA59F009A27C0 /* AppDelegate.m */,
 				1F530A73177BA59F009A27C0 /* MainStoryboard_iPhone.storyboard */,
@@ -163,6 +248,102 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		DB05E9931C6EBB6800AF2B12 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				DB05E9941C6EBB7B00AF2B12 /* AsynchronousOperation.h */,
+				DB05E9951C6EBB7B00AF2B12 /* AsynchronousOperation.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		DB1EC1C41C62DE320028A888 /* Data Objects */ = {
+			isa = PBXGroup;
+			children = (
+				DB7DF39E1C62F630008AB469 /* GoogleGeoCoderLocationDO.h */,
+				DB7DF39F1C62F630008AB469 /* GoogleGeoCoderLocationDO.m */,
+			);
+			name = "Data Objects";
+			sourceTree = "<group>";
+		};
+		DB25E5B81C6C108F0068C64F /* OAuth */ = {
+			isa = PBXGroup;
+			children = (
+				DB25E5B91C6C10C70068C64F /* OAAuthorization.h */,
+				DB25E5BA1C6C10C70068C64F /* OAAuthorization.m */,
+				DB25E5BC1C6C1AEF0068C64F /* OAuthLoginHelper.h */,
+				DB25E5BD1C6C1AEF0068C64F /* OAuthLoginHelper.m */,
+			);
+			name = OAuth;
+			sourceTree = "<group>";
+		};
+		DB7DF3A11C6431CB008AB469 /* Events Map */ = {
+			isa = PBXGroup;
+			children = (
+				1F530A99177BB00E009A27C0 /* EventsMapViewController.h */,
+				1F530A9A177BB00E009A27C0 /* EventsMapViewController.m */,
+				1F9F8E371818AC3A0058DD5C /* MapViewControllerDelegate.h */,
+				1F9F8E381818AC3A0058DD5C /* MapViewControllerDelegate.m */,
+				1F530AA1177BDE9C009A27C0 /* EventAnnotation.h */,
+				1F530AA2177BDE9C009A27C0 /* EventAnnotation.m */,
+				1F9F8E3D1818B61C0058DD5C /* EventDetailViewController.h */,
+				1F9F8E3E1818B61C0058DD5C /* EventDetailViewController.m */,
+				1F9F8E431819FF290058DD5C /* EventAnnotationAdapter.h */,
+				1F9F8E441819FF290058DD5C /* EventAnnotationAdapter.m */,
+				1F9F8E46181A00E80058DD5C /* Event.h */,
+				1F9F8E47181A00E80058DD5C /* Event.m */,
+				1F9F8E401819FB0C0058DD5C /* EventsList.h */,
+				1F9F8E411819FB0C0058DD5C /* EventsList.m */,
+			);
+			name = "Events Map";
+			sourceTree = "<group>";
+		};
+		DB7DF3A21C643216008AB469 /* Google GeoCoder */ = {
+			isa = PBXGroup;
+			children = (
+				1F10CABF178CE4FA00FA77E8 /* GoogleGeoCoder.h */,
+				1F10CAC0178CE4FA00FA77E8 /* GoogleGeoCoder.m */,
+				DB1EC1C41C62DE320028A888 /* Data Objects */,
+			);
+			name = "Google GeoCoder";
+			sourceTree = "<group>";
+		};
+		DB7DF3A31C64324E008AB469 /* Event GeoCoder (Old) */ = {
+			isa = PBXGroup;
+			children = (
+				1F530AA4177D049A009A27C0 /* EventGeocoder.h */,
+				1F530AA5177D049A009A27C0 /* EventGeocoder.m */,
+				1F10CABE178CE47600FA77E8 /* GeoCoder.h */,
+			);
+			name = "Event GeoCoder (Old)";
+			sourceTree = "<group>";
+		};
+		DB7DF3A41C643317008AB469 /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				DB7DF3A51C6437E9008AB469 /* FBManualLoginViewController.h */,
+				DB7DF3A61C6437E9008AB469 /* FBManualLoginViewController.m */,
+				DB25E5C31C6C34AC0068C64F /* FBLoginViewController.h */,
+				DB25E5C41C6C34AC0068C64F /* FBLoginViewController.m */,
+				DB05E98D1C6EAE7300AF2B12 /* FBGetEventsOperation.h */,
+				DB05E98E1C6EAE7300AF2B12 /* FBGetEventsOperation.m */,
+				DB05E9901C6EB0A200AF2B12 /* FBEvent.h */,
+				DB05E9911C6EB0A200AF2B12 /* FBEvent.m */,
+			);
+			name = Facebook;
+			sourceTree = "<group>";
+		};
+		DB7DF3AE1C643F72008AB469 /* Events List */ = {
+			isa = PBXGroup;
+			children = (
+				DB7DF3AB1C643DED008AB469 /* EventsListTableViewController.h */,
+				DB7DF3AC1C643DED008AB469 /* EventsListTableViewController.m */,
+				DB7DF3AF1C643F8F008AB469 /* EventsListTableViewCell.h */,
+				DB7DF3B01C643F8F008AB469 /* EventsListTableViewCell.m */,
+			);
+			name = "Events List";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -200,7 +381,7 @@
 			name = EventsPoCTests;
 			productName = EventsPoCTests;
 			productReference = 1F530A81177BA5A0009A27C0 /* EventsPoCTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -208,6 +389,7 @@
 		1F530A50177BA59F009A27C0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Jeff Price";
 			};
@@ -274,9 +456,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F9F8E48181A00E80058DD5C /* Event.m in Sources */,
+				1F9F8E3F1818B61C0058DD5C /* EventDetailViewController.m in Sources */,
+				1F9F8E421819FB0C0058DD5C /* EventsList.m in Sources */,
 				1F530A68177BA59F009A27C0 /* main.m in Sources */,
+				DB7DF3A01C62F630008AB469 /* GoogleGeoCoderLocationDO.m in Sources */,
+				DB05E9961C6EBB7B00AF2B12 /* AsynchronousOperation.m in Sources */,
+				1F9F8E451819FF290058DD5C /* EventAnnotationAdapter.m in Sources */,
 				1F530A6C177BA59F009A27C0 /* AppDelegate.m in Sources */,
+				DB25E5BE1C6C1AEF0068C64F /* OAuthLoginHelper.m in Sources */,
 				1F530A7B177BA5A0009A27C0 /* ViewController.m in Sources */,
+				DB7DF3B11C643F8F008AB469 /* EventsListTableViewCell.m in Sources */,
+				DB25E5C51C6C34AC0068C64F /* FBLoginViewController.m in Sources */,
+				DB7DF3A71C6437E9008AB469 /* FBManualLoginViewController.m in Sources */,
+				1F530A9B177BB00E009A27C0 /* EventsMapViewController.m in Sources */,
+				1F530AA3177BDE9C009A27C0 /* EventAnnotation.m in Sources */,
+				DB05E9921C6EB0A200AF2B12 /* FBEvent.m in Sources */,
+				1F530AA6177D049A009A27C0 /* EventGeocoder.m in Sources */,
+				1F9F8E391818AC3A0058DD5C /* MapViewControllerDelegate.m in Sources */,
+				1F10CAC1178CE4FA00FA77E8 /* GoogleGeoCoder.m in Sources */,
+				DB25E5BB1C6C10C70068C64F /* OAAuthorization.m in Sources */,
+				DB7DF3AD1C643DED008AB469 /* EventsListTableViewController.m in Sources */,
+				DB05E98F1C6EAE7300AF2B12 /* FBGetEventsOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +549,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEFINES_MODULE = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -359,7 +561,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -380,11 +582,12 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEFINES_MODULE = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -395,10 +598,21 @@
 		1F530A94177BA5A0009A27C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FacebookSDKs-iOS-20160210",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EventsPoC/EventsPoC-Prefix.pch";
 				INFOPLIST_FILE = "EventsPoC/EventsPoC-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ca.jeffprice.Events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "EventsPoC-Swift.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -406,10 +620,20 @@
 		1F530A95177BA5A0009A27C0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FacebookSDKs-iOS-20160210",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EventsPoC/EventsPoC-Prefix.pch";
 				INFOPLIST_FILE = "EventsPoC/EventsPoC-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ca.jeffprice.Events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "EventsPoC-Swift.h";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -467,6 +691,7 @@
 				1F530A95177BA5A0009A27C0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1F530A96177BA5A0009A27C0 /* Build configuration list for PBXNativeTarget "EventsPoCTests" */ = {
 			isa = XCConfigurationList;
@@ -475,6 +700,7 @@
 				1F530A98177BA5A0009A27C0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
