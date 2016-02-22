@@ -11,9 +11,11 @@
 #import "FBEvent.h"
 #import "FBGetEventsOperation.h"
 
-#import "Event.h"
+#import "MapEvent.h"
 #import "EventsList.h"
 #import "EventsListTableViewCell.h"
+#import "AppState.h"
+
 
 @interface EventsListTableViewController ()
 @property (nonatomic, strong) EventsList *events;
@@ -27,23 +29,23 @@
 
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 101.0;
-    
-    __weak __typeof(self) weakSelf = self;
-    FBGetEventsOperation *getFBEventsOp = [[FBGetEventsOperation alloc] initWithUser:@"me" completion:^(NSArray<FBEvent *> *fbEvents, NSError *fbEventsError) {
-        
-        if(fbEvents && !fbEventsError) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                weakSelf.fbEvents = fbEvents;
-                [weakSelf.tableView reloadData];
-            });
-        } else{
-            NSLog(@"FB EVENTS ERROR: %@", fbEventsError.localizedDescription);
-        }
-        
-    }];
-    
-    NSOperationQueue *fbEventOpQ = [NSOperationQueue new];
-    [fbEventOpQ addOperation:getFBEventsOp];
+    [self addNotificationCenter];
+//    __weak __typeof(self) weakSelf = self;
+//    FBGetEventsOperation *getFBEventsOp = [[FBGetEventsOperation alloc] initWithObjectId:@"me" completion:^(NSArray<FBEvent *> *fbEvents, NSError *fbEventsError) {
+//        
+//        if(fbEvents && !fbEventsError) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                weakSelf.fbEvents = fbEvents;
+//                [weakSelf.tableView reloadData];
+//            });
+//        } else{
+//            NSLog(@"FB EVENTS ERROR: %@", fbEventsError.localizedDescription);
+//        }
+//        
+//    }];
+//    
+//    NSOperationQueue *fbEventOpQ = [NSOperationQueue new];
+//    [fbEventOpQ addOperation:getFBEventsOp];
     
 }
 
@@ -77,6 +79,25 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+}
+
+
+#pragma mark - SegmentedViewControllerProtocol Methods
+- (NSString *)displayName {
+    return NSLocalizedString(@"List View", @"A label indicating this view shows events in a list format");
+}
+
+- (void)addNotificationCenter {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleUpdatedEventsList:) name:@"EventsListUpdated" object:nil];
+}
+
+- (void)removeNotificationCenter {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"EventsListUpdated" object:nil];
+}
+
+- (void)handleUpdatedEventsList:(NSNotification *)notification {
+    self.fbEvents = (NSArray<FBEvent*> *)[AppState sharedInstance].events.allItems;
+    [self.tableView reloadData];
 }
 
 @end

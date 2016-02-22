@@ -1,44 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gqQ-F7-oxY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="KRs-b0-7tj">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
-        <scene sceneID="yQM-YA-OyP">
-            <objects>
-                <navigationController definesPresentationContext="YES" id="McM-De-baQ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="nPj-Xn-buO"/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ssS-Ia-6fr">
-                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="9OK-TD-GFi" kind="relationship" relationship="rootViewController" id="NRy-6I-GB4"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cah-fp-7TM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1365" y="829.22535211267598"/>
-        </scene>
         <!--Map-->
         <scene sceneID="fh2-Mn-XuH">
             <objects>
-                <viewController storyboardIdentifier="EventsMap" id="9OK-TD-GFi" customClass="EventsMapViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EventsMapViewController" id="9OK-TD-GFi" customClass="EventsMapViewController" sceneMemberID="viewController">
                     <mapView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="g4b-fk-G1f">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </mapView>
+                    <tabBarItem key="tabBarItem" title="Map View" image="tabbar_map_view_icon" id="yN1-0f-c7r"/>
                     <navigationItem key="navigationItem" title="Map" id="hnr-u4-1T4">
-                        <barButtonItem key="rightBarButtonItem" title="Configure" id="iB3-bF-Ouj">
-                            <connections>
-                                <segue destination="fiB-sQ-PU3" kind="presentation" id="hbp-bK-qfZ"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Configure" id="iB3-bF-Ouj"/>
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="g4b-fk-G1f" id="l5t-9H-pD3"/>
@@ -49,23 +27,42 @@
             </objects>
             <point key="canvasLocation" x="2190" y="829.22535211267598"/>
         </scene>
-        <!--Item-->
-        <scene sceneID="IXX-kI-JE8">
+        <!--Main View Controller-->
+        <scene sceneID="4mh-Sx-Xai">
             <objects>
-                <navigationController id="kPJ-M8-p3s" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="uZY-dh-Ox2"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xNP-mU-jmg">
+                <tabBarController id="cry-SQ-qcj" customClass="MainViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="U37-xF-p3F"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="4vi-Q9-VN0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="9OK-TD-GFi" kind="relationship" relationship="viewControllers" id="Gz5-bp-PYX"/>
+                        <segue destination="5qR-EQ-oaC" kind="relationship" relationship="viewControllers" id="WI3-HK-H9t"/>
+                        <segue destination="2Zh-8h-tcS" kind="relationship" relationship="viewControllers" id="06p-Ue-zhK"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jgm-o2-7Zd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1236" y="1383"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="fQe-Ed-CoM">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MsE-XF-9RU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="KRs-b0-7tj" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="48h-xg-KAr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="5qR-EQ-oaC" kind="relationship" relationship="rootViewController" id="0ta-ti-BlP"/>
+                        <segue destination="cry-SQ-qcj" kind="relationship" relationship="rootViewController" id="ib9-03-Ugy"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RlH-s4-yNq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1365" y="1806.338028169014"/>
+            <point key="canvasLocation" x="479" y="1383"/>
         </scene>
         <!--Events List-->
         <scene sceneID="mpp-N7-PsO">
@@ -126,6 +123,7 @@
                             <outlet property="delegate" destination="5qR-EQ-oaC" id="Hm1-HL-4Q5"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" title="List View" image="tabbar_list_view_icon" id="3SB-k8-IPz"/>
                     <navigationItem key="navigationItem" title="Events List" id="D1S-aN-pDh">
                         <barButtonItem key="backBarButtonItem" title="Back" id="0s6-C6-HOp"/>
                     </navigationItem>
@@ -134,39 +132,38 @@
             </objects>
             <point key="canvasLocation" x="2208" y="1799"/>
         </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="kMO-Hc-Ibl">
+        <!--Configuration-->
+        <scene sceneID="o7C-8X-frN">
             <objects>
-                <tabBarController id="gqQ-F7-oxY" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="SXc-vb-1NZ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
+                <tableViewController id="2Zh-8h-tcS" customClass="ConfigurationTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="G9X-OF-HJh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FBLoginCell" id="ZQH-dL-a5q">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZQH-dL-a5q" id="giD-0g-yUr">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="2Zh-8h-tcS" id="RhR-ql-Wzy"/>
+                            <outlet property="delegate" destination="2Zh-8h-tcS" id="CPi-DS-H0s"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Configure" image="tabbar_configure_view_icon" id="YFH-tI-tgI"/>
+                    <navigationItem key="navigationItem" title="Configuration" id="UiS-Vn-DMg"/>
                     <connections>
-                        <segue destination="McM-De-baQ" kind="relationship" relationship="viewControllers" id="acX-tB-fFl"/>
-                        <segue destination="kPJ-M8-p3s" kind="relationship" relationship="viewControllers" id="9pX-vg-P9A"/>
+                        <segue destination="fNn-Wf-Xsg" kind="show" identifier="SegueToFBLoginVC" id="izQ-Ad-WYn"/>
                     </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UhG-l7-VaW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qt3-Gy-W1w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-315" y="1608.8028169014083"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="zY0-fC-tvO">
-            <objects>
-                <navigationController id="fiB-sQ-PU3" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qea-8g-qLu">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="fNn-Wf-Xsg" kind="relationship" relationship="rootViewController" id="a9j-Qw-580"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BR4-ky-gyX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3003.75" y="102.46478873239435"/>
+            <point key="canvasLocation" x="2255" y="2726"/>
         </scene>
         <!--Facebook Login-->
         <scene sceneID="y1N-YO-sdt">
@@ -221,13 +218,7 @@
                             <constraint firstItem="DUa-o4-PfQ" firstAttribute="centerX" secondItem="LZ2-pj-arO" secondAttribute="centerX" id="g9o-Tg-ygo"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Facebook Login" id="Qvu-vJ-5eV">
-                        <barButtonItem key="leftBarButtonItem" title="Close" id="0WJ-EP-dyM">
-                            <connections>
-                                <action selector="onDone:" destination="fNn-Wf-Xsg" id="l3n-ki-SI2"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Facebook Login" id="Qvu-vJ-5eV"/>
                     <connections>
                         <outlet property="customFBLoginButton" destination="mOT-Tt-zph" id="CAR-sz-51M"/>
                         <outlet property="fbLoginButtonContainer" destination="UCM-hO-Y4s" id="XfR-bg-k1R"/>
@@ -237,7 +228,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bql-bB-gK9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3807" y="99"/>
+            <point key="canvasLocation" x="3079" y="2726"/>
         </scene>
         <!--Event Detail View Controller-->
         <scene sceneID="RCi-DY-jJh">
@@ -291,4 +282,9 @@
             <point key="canvasLocation" x="2992.5" y="1035.2112676056338"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="tabbar_configure_view_icon" width="25" height="25"/>
+        <image name="tabbar_list_view_icon" width="25" height="25"/>
+        <image name="tabbar_map_view_icon" width="25" height="25"/>
+    </resources>
 </document>

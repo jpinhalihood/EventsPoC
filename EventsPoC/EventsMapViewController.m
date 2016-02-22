@@ -15,7 +15,7 @@
 #import "EventDetailViewController.h"
 
 #import "EventsList.h"
-#import "Event.h"
+#import "MapEvent.h"
 
 @interface EventsMapViewController ()
 @property (nonatomic, strong) NSArray *addresses;
@@ -67,7 +67,7 @@
                       nil];
     EventsList* events = [[EventsList alloc] init];
     for(NSString* addy in self.addresses) {
-        Event* e = [[Event alloc] init];
+        MapEvent* e = [[MapEvent alloc] init];
         e.address = addy;
         [events add: e];
     }
@@ -87,7 +87,7 @@
         });        
     };
     
-    for(Event *event in events.allItems) {
+    for(MapEvent *event in events.allItems) {
         GoogleGeoCoder *geoCoder = [[GoogleGeoCoder alloc] initWithAddress:event.address];
         geoCoder.completionAction = completionAction;
         NSOperationQueue *coderQ = [NSOperationQueue new];
@@ -139,5 +139,11 @@
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
     
+}
+
+
+#pragma mark - SegmentedViewControllerProtocol Methods
+- (NSString *)displayName {
+    return NSLocalizedString(@"Map View", @"A label indicating this view displays events in a map view");
 }
 @end

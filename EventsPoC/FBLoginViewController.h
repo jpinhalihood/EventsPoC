@@ -12,5 +12,5 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface FBLoginViewController : UIViewController
-
+@property (nonatomic, assign) BOOL shouldShowCloseButton;
 @end

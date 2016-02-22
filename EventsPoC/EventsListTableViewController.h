@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SegmentedViewControllerProtocol.h"
 
-@interface EventsListTableViewController : UITableViewController
+@interface EventsListTableViewController : UITableViewController<SegmentedViewControllerProtocol>
 
 @end

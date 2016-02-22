@@ -7,16 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Event.h"
+#import "EventProtocol.h"
 
 
 @interface EventsList : NSObject
 
--(void)add:(Event *)event;
+-(void)add:(NSObject<EventProtocol> *)event;
+-(void)addItems:(NSArray<NSObject<EventProtocol> *> *)items;
 -(void)removeObjectAtIndex:(NSUInteger)index;
--(void)remove:(Event *)event;
+-(void)remove:(NSObject<EventProtocol> *)event;
 -(NSArray *)toArray;
--(Event *)itemAt:(NSUInteger)index;
+-(NSObject<EventProtocol> *)itemAt:(NSUInteger)index;
 -(NSArray *)allItems;
 -(NSUInteger)count;
+
++(EventsList *)listByAddingItemsFromList:(EventsList *)list;
 @end

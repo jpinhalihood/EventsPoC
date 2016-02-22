@@ -41,6 +41,11 @@
         [self completeLogin];
     }
     
+    if(self.shouldShowCloseButton) {
+        UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(onDone:)];
+        self.navigationItem.hidesBackButton = YES;
+        self.navigationItem.leftBarButtonItem = closeButton;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,7 +79,7 @@
 
 - (void)loginWithCompletion:(void (^) (FBSDKLoginManagerLoginResult *result, NSError *error))completion {
     FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
-    [loginManager logInWithReadPermissions:@[@"public_profile", @"email", @"user_friends", @"user_events"]
+    [loginManager logInWithReadPermissions:@[@"public_profile", @"email", @"user_friends", @"user_events", @"user_likes"]
                         fromViewController:self
                                    handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
                                 if (error) {

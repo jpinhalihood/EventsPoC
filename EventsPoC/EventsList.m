@@ -22,19 +22,33 @@
     return self;
 }
 
--(void)add:(Event *)event
+-(void)add:(NSObject<EventProtocol> *)event
 {
-    [self.items addObject:event];
+    @synchronized(self) {
+        [self.items addObject:event];
+    }
+}
+
+-(void)addItems:(NSArray<NSObject<EventProtocol>*> *)items {
+    @synchronized(self) {
+        for(NSObject<EventProtocol> *event in items) {
+            [self.items addObject:event];
+        }
+    }
 }
 
 -(void)removeObjectAtIndex:(NSUInteger)index
 {
-    [self.items removeObjectAtIndex:index];
+    @synchronized(self) {
+        [self.items removeObjectAtIndex:index];
+    }
 }
 
--(void)remove:(Event*)event
+-(void)remove:(NSObject<EventProtocol>*)event
 {
-    [self.items removeObject:event];
+    @synchronized(self) {
+        [self.items removeObject:event];
+    }
 }
 
 -(NSArray*)toArray
@@ -42,7 +56,7 @@
     return self.items;
 }
 
--(Event*)itemAt:(NSUInteger)index
+-(NSObject<EventProtocol>*)itemAt:(NSUInteger)index
 {
     return [self.items objectAtIndex:index];
 }
@@ -55,5 +69,15 @@
 -(NSUInteger)count
 {
     return self.items.count;
+}
+
+
++(EventsList *)listByAddingItemsFromList:(EventsList *)list {
+    EventsList *newList = [EventsList new];
+    for(NSObject<EventProtocol> *event in list.allItems) {
+        [newList add:event];
+    }
+    
+    return newList;
 }
 @end

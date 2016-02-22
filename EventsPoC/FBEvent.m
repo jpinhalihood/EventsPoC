@@ -11,6 +11,7 @@
 NSString * const KeyFBEventId = @"id";
 NSString * const KeyFBEventName = @"name";
 NSString * const KeyFBEventStartTime = @"start_time";
+NSString * const KeyFBEventEndTime = @"end_time";
 NSString * const KeyFBEventCover = @"cover";
 NSString * const KeyFBEventCoverSource = @"source";
 NSString * const KeyFBEventPlace = @"place";
@@ -39,6 +40,10 @@ NSString * const KeyFBEventRsvpStatus = @"rsvp_status";
         NSString *dateTime = json[KeyFBEventStartTime];
         _startTime = [formatter dateFromString:dateTime];
 
+        dateTime = json[KeyFBEventEndTime];
+        _endTime = [formatter dateFromString:dateTime];
+        
+        
         NSDictionary *cover = [json objectForKey:KeyFBEventCover];
         _coverArtUrl = cover[KeyFBEventCoverSource];
         

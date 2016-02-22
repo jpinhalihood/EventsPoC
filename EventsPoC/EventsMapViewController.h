@@ -10,9 +10,9 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 
+#import "SegmentedViewControllerProtocol.h"
 
-
-@interface EventsMapViewController : UIViewController<MKMapViewDelegate, CLLocationManagerDelegate>
+@interface EventsMapViewController : UIViewController<MKMapViewDelegate, CLLocationManagerDelegate, SegmentedViewControllerProtocol>
 
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @end

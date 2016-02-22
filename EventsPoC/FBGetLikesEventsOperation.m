@@ -1,31 +1,29 @@
 //
-//  FBGetEventsOperation.m
+//  FBGetLikesEventsOperation.m
 //  EventsPoC
 //
-//  Created by Jeff Price on 2016-02-12.
+//  Created by Jeff Price on 2016-02-18.
 //  Copyright © 2016 Jeff Price. All rights reserved.
 //
 
-#import "FBGetEventsOperation.h"
-
+#import "FBGetLikesEventsOperation.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "FBEvent.h"
+#import "FBGetEventsOperation.h"
 
-NSUInteger const FBGetEventsOperationDefaultLimit = 10;
 
-@interface FBGetEventsOperation()
+@interface FBGetLikesEventsOperation()
 @property (nonatomic, strong) NSMutableArray<FBEvent*> *events;
 @property (nonatomic, strong) NSString *identifier;
 @property (nonatomic, copy) void (^completionAction)(NSArray<FBEvent*>*, NSError *);
 @end
 
-@implementation FBGetEventsOperation
+@implementation FBGetLikesEventsOperation
 
--(instancetype)initWithObjectId:(NSString *)identifier completion:(void (^) (NSArray<FBEvent*> *, NSError *))completion {
+-(instancetype)initWithObjectIds:(NSArray<NSString *> *)objectIds completion:(void (^) (NSArray<FBEvent*> *, NSError *))completion {
     if(self = [super init]) {
         _completionAction = completion;
-        _identifier = identifier;
-        _limit = FBGetEventsOperationDefaultLimit;
+        _objectIds = objectIds;
     }
     return self;
 }
@@ -35,37 +33,41 @@ NSUInteger const FBGetEventsOperationDefaultLimit = 10;
         if(self.isCancelled) {
             return;
         }
-                
+        
         self.events = [NSMutableArray new];
         if([[FBSDKAccessToken currentAccessToken].expirationDate compare:[NSDate new]] == NSOrderedDescending) {
-            
-            NSString *url = [self getRequestUrl];
+
             NSError *error = nil;
-            while (url != nil && !self.isCancelled) {
+            for(NSString *objectId in self.objectIds) {
+                NSString *url = [self getRequestUrlWithObjectId:objectId];
                 
-                NSMutableArray *newEvents = nil;
-                NSDictionary *json = nil;
-
-                url = [self fetchDataForUrl:url json:&json error:&error];
-                if(json && !error) {
-                    NSArray<NSDictionary*> *dataJson = [json objectForKey:@"data"];
-                    newEvents = [self getEventsFromJsonArray:dataJson];
+                // Get all pages
+                while (url != nil && !self.isCancelled) {
+                    
+                    NSMutableArray *newEvents = nil;
+                    NSDictionary *json = nil;
+                    
+                    url = [self fetchDataForUrl:url json:&json error:&error];
+                    if(json && !error) {
+                        NSArray<NSDictionary*> *dataJson = [json objectForKey:@"data"];
+                        newEvents = [self getEventsFromJsonArray:dataJson];
+                    }
+                    
+                    [self.events addObjectsFromArray:newEvents];
+                    
                 }
-                
-                [self.events addObjectsFromArray:newEvents];
-                
             }
-
+   
+            
             NSArray *allEvents = [NSArray arrayWithArray:self.events];
-            if(self.completionAction) {
-                self.completionAction(allEvents, error);   
-            }
+            self.completionAction(allEvents, error);
             [self completeOperation];
         }
     }
 }
 
-- (NSString *)getRequestUrl {
+
+- (NSString *)getRequestUrlWithObjectId:(NSString *)objectId {
     NSString *accessToken = [FBSDKAccessToken currentAccessToken].tokenString;
     
     NSDateFormatter *formatter = [NSDateFormatter new];
@@ -80,8 +82,7 @@ NSUInteger const FBGetEventsOperationDefaultLimit = 10;
         until = [NSString stringWithFormat:@"&until=%@", [formatter stringFromDate:self.endDate]];
     }
     
-    
-    NSString *url = [NSString stringWithFormat:@"https://graph.facebook.com/v2.5/%@/events?access_token=%@&pretty=0&limit=%lul&fields=id,name,description,start_time,end_time,rsvp_status,cover,place%@%@", self.identifier, accessToken, (unsigned long)self.limit, since, until];
+    NSString *url = [NSString stringWithFormat:@"https://graph.facebook.com/v2.5/%@/events?access_token=%@&pretty=0&limit=1000%@%@", objectId, accessToken, since, until];
     
     return url;
 }
@@ -99,17 +100,4 @@ NSUInteger const FBGetEventsOperationDefaultLimit = 10;
     return events;
 }
 
-- (NSString *)getNextUrlFromJson:(NSDictionary *)pagingJson {
-    return pagingJson[@"next"];
-}
-
-- (void)completeOperation {
-    self.completionAction = nil;
-    [super completeOperation];
-}
-
-- (void)cancel {
-    [self.task cancel];
-    [super cancel];
-}
 @end

@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 Jeff Price. All rights reserved.
 //
 
-#import "Event.h"
+#import "MapEvent.h"
 
 
-@interface Event()
+@interface MapEvent()
 
 @end
 
-@implementation Event
+@implementation MapEvent
 
 @end

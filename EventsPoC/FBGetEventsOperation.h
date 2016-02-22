@@ -7,10 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AsynchronousOperation.h"
+#import "FBPagedApiOperation.h"
 
 @class FBEvent;
 
-@interface FBGetEventsOperation : AsynchronousOperation
--(instancetype)initWithUser:(NSString *)user completion:(void (^) (NSArray<FBEvent*> *, NSError *))completion;
+@interface FBGetEventsOperation : FBPagedApiOperation
+
+@property (nonatomic, assign) NSUInteger limit;
+@property (nonatomic, strong) NSDate *startDate;
+@property (nonatomic, strong) NSDate *endDate;
+
+-(instancetype)initWithObjectId:(NSString *)identifier completion:(void (^) (NSArray<FBEvent*> *, NSError *))completion;
 @end

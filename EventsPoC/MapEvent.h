@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "EventAnnotation.h"
+#import "EventProtocol.h"
+@interface MapEvent : NSObject
 
-@interface Event : NSObject
 @property (nonatomic, strong) EventAnnotation* annotation;
 @property (nonatomic, strong) NSString* title;
 @property (nonatomic, strong) NSString* subtitle;

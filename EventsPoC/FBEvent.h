@@ -7,11 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "EventProtocol.h"
 
-@interface FBEvent : NSObject
+
+@interface FBEvent : NSObject<EventProtocol>
+
 @property (nonatomic, strong) NSNumber *eventId;
 @property (nonatomic, strong) NSString *eventName;
 @property (nonatomic, strong) NSDate *startTime;
+@property (nonatomic, strong) NSDate *endTime;
 @property (nonatomic, strong) NSString *coverArtUrl;
 @property (nonatomic, strong) NSString *placeName;
 @property (nonatomic, strong) NSString *placeStreet;
@@ -25,4 +29,5 @@
 @property (nonatomic, strong) NSString *rsvpStatus;
 @property (nonatomic, strong) NSString *eventDescription;
 - (instancetype)initWithDictionary:(NSDictionary *)json;
+
 @end
