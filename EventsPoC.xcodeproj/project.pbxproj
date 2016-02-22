@@ -683,7 +683,7 @@
 				INFOPLIST_FILE = "EventsPoC/EventsPoC-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ca.jeffprice.Events;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.jeffprice.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "EventsPoC-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -705,7 +705,7 @@
 				INFOPLIST_FILE = "EventsPoC/EventsPoC-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ca.jeffprice.Events;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.jeffprice.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "EventsPoC-Swift.h";
 				WRAPPER_EXTENSION = app;
