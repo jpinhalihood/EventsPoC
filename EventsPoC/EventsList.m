@@ -72,6 +72,8 @@
 }
 
 
+
+#pragma mark - Convenience Methods
 +(EventsList *)listByAddingItemsFromList:(EventsList *)list {
     EventsList *newList = [EventsList new];
     for(NSObject<EventProtocol> *event in list.allItems) {
@@ -79,5 +81,14 @@
     }
     
     return newList;
+}
+
++(EventsList *)listFromArrayOfEvents:(NSArray<NSObject<EventProtocol>*> *)events {
+    EventsList *list = [EventsList new];
+    for(NSObject<EventProtocol> *event in events) {
+        [list add:event];
+    }
+    
+    return list;
 }
 @end

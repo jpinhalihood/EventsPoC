@@ -8,18 +8,15 @@
 
 #import "EventsListTableViewController.h"
 
-#import "FBEvent.h"
-#import "FBGetEventsOperation.h"
-
-#import "MapEvent.h"
-#import "EventsList.h"
-#import "EventsListTableViewCell.h"
 #import "AppState.h"
+#import "EventsList.h"
+#import "EventProtocol.h"
+#import "EventsListTableViewCell.h"
 
+#import "EventNotifications.h"
 
 @interface EventsListTableViewController ()
 @property (nonatomic, strong) EventsList *events;
-@property (nonatomic, strong) NSArray<FBEvent*> *fbEvents;
 @end
 
 @implementation EventsListTableViewController
@@ -27,26 +24,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor darkGrayColor]}];
+    
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 101.0;
     [self addNotificationCenter];
-//    __weak __typeof(self) weakSelf = self;
-//    FBGetEventsOperation *getFBEventsOp = [[FBGetEventsOperation alloc] initWithObjectId:@"me" completion:^(NSArray<FBEvent *> *fbEvents, NSError *fbEventsError) {
-//        
-//        if(fbEvents && !fbEventsError) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                weakSelf.fbEvents = fbEvents;
-//                [weakSelf.tableView reloadData];
-//            });
-//        } else{
-//            NSLog(@"FB EVENTS ERROR: %@", fbEventsError.localizedDescription);
-//        }
-//        
-//    }];
-//    
-//    NSOperationQueue *fbEventOpQ = [NSOperationQueue new];
-//    [fbEventOpQ addOperation:getFBEventsOp];
     
+    self.events = [AppState sharedInstance].events;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.tableView reloadData];
+}
+
+- (void)dealloc {
+    [self removeNotificationCenter];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,7 +55,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.fbEvents.count;
+    return self.events.count;
 }
 
 
@@ -70,7 +64,7 @@
     
     EventsListTableViewCell *eventsListCell = [tableView dequeueReusableCellWithIdentifier:EventsListTableViewCellId forIndexPath:indexPath];
     
-    FBEvent *event = self.fbEvents[indexPath.row];
+    NSObject<EventProtocol> *event = [self.events itemAt:indexPath.row];
     [eventsListCell configureWithTitle:event.eventName description:event.eventDescription startDate:event.startTime];
     
     return eventsListCell;
@@ -88,15 +82,17 @@
 }
 
 - (void)addNotificationCenter {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleUpdatedEventsList:) name:@"EventsListUpdated" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleUpdatedEventsList:) name:EventsListUpdatedNotification object:nil];
 }
 
 - (void)removeNotificationCenter {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"EventsListUpdated" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EventsListUpdatedNotification object:nil];
 }
 
 - (void)handleUpdatedEventsList:(NSNotification *)notification {
-    self.fbEvents = (NSArray<FBEvent*> *)[AppState sharedInstance].events.allItems;
+    NSDictionary *userInfo = notification.userInfo;
+    self.events = [userInfo objectForKey:KeyEventsListUpdatedNotificationPayload];
+
     [self.tableView reloadData];
 }
 

@@ -7,13 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "EventProtocol.h"
 
 @class EventAnnotation;
-
+@class EventsList;
 
 @interface EventAnnotationAdapter : NSObject
 
 +(EventAnnotation*) adaptFromJSON:(NSDictionary *)json;
 +(NSArray<EventAnnotation *> *)makeAnnotationsFromGoogleGeoCodeLocationJson:(NSDictionary *)json;
-
++(EventAnnotation *)adaptFromEvent:(NSObject<EventProtocol> *)event;
++(NSArray<EventAnnotation *> *)adaptFromEventsList:(EventsList *)events;
 @end

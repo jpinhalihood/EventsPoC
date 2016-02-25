@@ -12,14 +12,15 @@
 
 @interface EventsList : NSObject
 
--(void)add:(NSObject<EventProtocol> *)event;
--(void)addItems:(NSArray<NSObject<EventProtocol> *> *)items;
+-(void)add:(NSObject<EventProtocol> * _Nonnull)event;
+-(void)addItems:(NSArray<NSObject<EventProtocol> *> * _Nonnull)items;
 -(void)removeObjectAtIndex:(NSUInteger)index;
--(void)remove:(NSObject<EventProtocol> *)event;
--(NSArray *)toArray;
--(NSObject<EventProtocol> *)itemAt:(NSUInteger)index;
--(NSArray *)allItems;
+-(void)remove:(NSObject<EventProtocol> * _Nonnull)event;
+-(NSArray * _Nonnull)toArray;
+-(NSObject<EventProtocol> * _Nonnull)itemAt:(NSUInteger)index;
+-(NSArray * _Nonnull)allItems;
 -(NSUInteger)count;
 
-+(EventsList *)listByAddingItemsFromList:(EventsList *)list;
++(EventsList * _Nonnull)listByAddingItemsFromList:(EventsList * _Nonnull)list;
++(EventsList * _Nonnull)listFromArrayOfEvents:(NSArray<NSObject<EventProtocol>*> *_Nonnull)events;
 @end

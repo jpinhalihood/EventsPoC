@@ -19,7 +19,6 @@
 		1F530A72177BA59F009A27C0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F530A71177BA59F009A27C0 /* Default-568h@2x.png */; };
 		1F530A75177BA5A0009A27C0 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F530A73177BA59F009A27C0 /* MainStoryboard_iPhone.storyboard */; };
 		1F530A78177BA5A0009A27C0 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F530A76177BA5A0009A27C0 /* MainStoryboard_iPad.storyboard */; };
-		1F530A7B177BA5A0009A27C0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F530A7A177BA5A0009A27C0 /* ViewController.m */; };
 		1F530A83177BA5A0009A27C0 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F530A82177BA5A0009A27C0 /* SenTestingKit.framework */; };
 		1F530A84177BA5A0009A27C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F530A5B177BA59F009A27C0 /* UIKit.framework */; };
 		1F530A85177BA5A0009A27C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F530A5D177BA59F009A27C0 /* Foundation.framework */; };
@@ -38,6 +37,9 @@
 		DB05E98F1C6EAE7300AF2B12 /* FBGetEventsOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB05E98E1C6EAE7300AF2B12 /* FBGetEventsOperation.m */; };
 		DB05E9921C6EB0A200AF2B12 /* FBEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = DB05E9911C6EB0A200AF2B12 /* FBEvent.m */; };
 		DB05E9961C6EBB7B00AF2B12 /* AsynchronousOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB05E9951C6EBB7B00AF2B12 /* AsynchronousOperation.m */; };
+		DB228CC11C7D4D7700B6451D /* EventNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = DB228CC01C7D4D7700B6451D /* EventNotifications.m */; };
+		DB228CC81C7D552700B6451D /* EventsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DB228CC71C7D552700B6451D /* EventsManager.m */; };
+		DB228CCB1C7E8F7D00B6451D /* FBGetLikesAndEventsOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB228CCA1C7E8F7D00B6451D /* FBGetLikesAndEventsOperation.m */; };
 		DB25E5BB1C6C10C70068C64F /* OAAuthorization.m in Sources */ = {isa = PBXBuildFile; fileRef = DB25E5BA1C6C10C70068C64F /* OAAuthorization.m */; };
 		DB25E5BE1C6C1AEF0068C64F /* OAuthLoginHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB25E5BD1C6C1AEF0068C64F /* OAuthLoginHelper.m */; };
 		DB25E5C21C6C338F0068C64F /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB25E5C11C6C338F0068C64F /* FBSDKCoreKit.framework */; };
@@ -87,8 +89,6 @@
 		1F530A71177BA59F009A27C0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		1F530A74177BA5A0009A27C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		1F530A77177BA5A0009A27C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		1F530A79177BA5A0009A27C0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		1F530A7A177BA5A0009A27C0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		1F530A81177BA5A0009A27C0 /* EventsPoCTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EventsPoCTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F530A82177BA5A0009A27C0 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		1F530A8A177BA5A0009A27C0 /* EventsPoCTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EventsPoCTests-Info.plist"; sourceTree = "<group>"; };
@@ -119,6 +119,12 @@
 		DB05E9911C6EB0A200AF2B12 /* FBEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBEvent.m; sourceTree = "<group>"; };
 		DB05E9941C6EBB7B00AF2B12 /* AsynchronousOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsynchronousOperation.h; sourceTree = "<group>"; };
 		DB05E9951C6EBB7B00AF2B12 /* AsynchronousOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsynchronousOperation.m; sourceTree = "<group>"; };
+		DB228CBF1C7D4D7700B6451D /* EventNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventNotifications.h; sourceTree = "<group>"; };
+		DB228CC01C7D4D7700B6451D /* EventNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventNotifications.m; sourceTree = "<group>"; };
+		DB228CC61C7D552700B6451D /* EventsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsManager.h; sourceTree = "<group>"; };
+		DB228CC71C7D552700B6451D /* EventsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsManager.m; sourceTree = "<group>"; };
+		DB228CC91C7E8F7D00B6451D /* FBGetLikesAndEventsOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGetLikesAndEventsOperation.h; sourceTree = "<group>"; };
+		DB228CCA1C7E8F7D00B6451D /* FBGetLikesAndEventsOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBGetLikesAndEventsOperation.m; sourceTree = "<group>"; };
 		DB25E5B91C6C10C70068C64F /* OAAuthorization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAAuthorization.h; sourceTree = "<group>"; };
 		DB25E5BA1C6C10C70068C64F /* OAAuthorization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAAuthorization.m; sourceTree = "<group>"; };
 		DB25E5BC1C6C1AEF0068C64F /* OAuthLoginHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthLoginHelper.h; sourceTree = "<group>"; };
@@ -153,6 +159,7 @@
 		DB7DF3AC1C643DED008AB469 /* EventsListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsListTableViewController.m; sourceTree = "<group>"; };
 		DB7DF3AF1C643F8F008AB469 /* EventsListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsListTableViewCell.h; sourceTree = "<group>"; };
 		DB7DF3B01C643F8F008AB469 /* EventsListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsListTableViewCell.m; sourceTree = "<group>"; };
+		DBABE8AB1C7D35B400512FAC /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +194,7 @@
 		1F530A4F177BA59F009A27C0 = {
 			isa = PBXGroup;
 			children = (
+				DBABE8AB1C7D35B400512FAC /* version.h */,
 				1F530A61177BA59F009A27C0 /* EventsPoC */,
 				1F530A88177BA5A0009A27C0 /* EventsPoCTests */,
 				1F530A5A177BA59F009A27C0 /* Frameworks */,
@@ -222,25 +230,17 @@
 		1F530A61177BA59F009A27C0 /* EventsPoC */ = {
 			isa = PBXGroup;
 			children = (
-				DB711E401C7562C4008A3930 /* Configuration */,
+				DB228CC21C7D531800B6451D /* UI */,
 				DB05E9931C6EBB6800AF2B12 /* Core */,
 				DB25E5B81C6C108F0068C64F /* OAuth */,
-				DB7DF3AE1C643F72008AB469 /* Events List */,
 				DB7DF3A41C643317008AB469 /* Facebook */,
 				DB7DF3A31C64324E008AB469 /* Event GeoCoder (Old) */,
 				DB7DF3A21C643216008AB469 /* Google GeoCoder */,
-				DB7DF3A11C6431CB008AB469 /* Events Map */,
 				1F530A6A177BA59F009A27C0 /* AppDelegate.h */,
 				1F530A6B177BA59F009A27C0 /* AppDelegate.m */,
-				1F530A73177BA59F009A27C0 /* MainStoryboard_iPhone.storyboard */,
-				1F530A76177BA5A0009A27C0 /* MainStoryboard_iPad.storyboard */,
-				1F530A79177BA5A0009A27C0 /* ViewController.h */,
-				1F530A7A177BA5A0009A27C0 /* ViewController.m */,
 				1F530A62177BA59F009A27C0 /* Supporting Files */,
 				DB711E3D1C755199008A3930 /* SegmentedViewControllerProtocol.h */,
 				DB711E3E1C755847008A3930 /* Media.xcassets */,
-				DB711E441C756701008A3930 /* MainViewController.h */,
-				DB711E451C756701008A3930 /* MainViewController.m */,
 			);
 			path = EventsPoC;
 			sourceTree = "<group>";
@@ -281,7 +281,7 @@
 		DB05E9931C6EBB6800AF2B12 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				DB60A8851C769BA500DF6A0A /* Data Objects */,
+				DB60A8851C769BA500DF6A0A /* Events */,
 				DB05E9941C6EBB7B00AF2B12 /* AsynchronousOperation.h */,
 				DB05E9951C6EBB7B00AF2B12 /* AsynchronousOperation.m */,
 				DB711E4A1C7695B4008A3930 /* AppState.h */,
@@ -299,6 +299,20 @@
 			name = "Data Objects";
 			sourceTree = "<group>";
 		};
+		DB228CC21C7D531800B6451D /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				1F530A73177BA59F009A27C0 /* MainStoryboard_iPhone.storyboard */,
+				1F530A76177BA5A0009A27C0 /* MainStoryboard_iPad.storyboard */,
+				DB711E441C756701008A3930 /* MainViewController.h */,
+				DB711E451C756701008A3930 /* MainViewController.m */,
+				DB711E401C7562C4008A3930 /* Configuration View */,
+				DB7DF3AE1C643F72008AB469 /* List View */,
+				DB7DF3A11C6431CB008AB469 /* Map View */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		DB25E5B81C6C108F0068C64F /* OAuth */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,14 +324,18 @@
 			name = OAuth;
 			sourceTree = "<group>";
 		};
-		DB60A8851C769BA500DF6A0A /* Data Objects */ = {
+		DB60A8851C769BA500DF6A0A /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				DB228CBF1C7D4D7700B6451D /* EventNotifications.h */,
+				DB228CC01C7D4D7700B6451D /* EventNotifications.m */,
 				DB60A8841C76993500DF6A0A /* EventProtocol.h */,
 				1F9F8E401819FB0C0058DD5C /* EventsList.h */,
 				1F9F8E411819FB0C0058DD5C /* EventsList.m */,
+				DB228CC61C7D552700B6451D /* EventsManager.h */,
+				DB228CC71C7D552700B6451D /* EventsManager.m */,
 			);
-			name = "Data Objects";
+			name = Events;
 			sourceTree = "<group>";
 		};
 		DB60A88F1C76BE2400DF6A0A /* Operations */ = {
@@ -331,20 +349,22 @@
 				DB60A88A1C76A4D900DF6A0A /* FBPagedApiOperation.m */,
 				DB60A88C1C76BE1B00DF6A0A /* FBGetLikesOperation.h */,
 				DB60A88D1C76BE1B00DF6A0A /* FBGetLikesOperation.m */,
+				DB228CC91C7E8F7D00B6451D /* FBGetLikesAndEventsOperation.h */,
+				DB228CCA1C7E8F7D00B6451D /* FBGetLikesAndEventsOperation.m */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
 		};
-		DB711E401C7562C4008A3930 /* Configuration */ = {
+		DB711E401C7562C4008A3930 /* Configuration View */ = {
 			isa = PBXGroup;
 			children = (
 				DB711E411C7562E0008A3930 /* ConfigurationTableViewController.h */,
 				DB711E421C7562E0008A3930 /* ConfigurationTableViewController.m */,
 			);
-			name = Configuration;
+			name = "Configuration View";
 			sourceTree = "<group>";
 		};
-		DB7DF3A11C6431CB008AB469 /* Events Map */ = {
+		DB7DF3A11C6431CB008AB469 /* Map View */ = {
 			isa = PBXGroup;
 			children = (
 				1F530A99177BB00E009A27C0 /* EventsMapViewController.h */,
@@ -358,7 +378,7 @@
 				1F9F8E46181A00E80058DD5C /* MapEvent.h */,
 				1F9F8E47181A00E80058DD5C /* MapEvent.m */,
 			);
-			name = "Events Map";
+			name = "Map View";
 			sourceTree = "<group>";
 		};
 		DB7DF3A21C643216008AB469 /* Google GeoCoder */ = {
@@ -399,7 +419,7 @@
 			name = Facebook;
 			sourceTree = "<group>";
 		};
-		DB7DF3AE1C643F72008AB469 /* Events List */ = {
+		DB7DF3AE1C643F72008AB469 /* List View */ = {
 			isa = PBXGroup;
 			children = (
 				DB7DF3AB1C643DED008AB469 /* EventsListTableViewController.h */,
@@ -407,7 +427,7 @@
 				DB7DF3AF1C643F8F008AB469 /* EventsListTableViewCell.h */,
 				DB7DF3B01C643F8F008AB469 /* EventsListTableViewCell.m */,
 			);
-			name = "Events List";
+			name = "List View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -533,15 +553,17 @@
 				DB711E431C7562E0008A3930 /* ConfigurationTableViewController.m in Sources */,
 				1F9F8E48181A00E80058DD5C /* MapEvent.m in Sources */,
 				1F9F8E3F1818B61C0058DD5C /* EventDetailViewController.m in Sources */,
+				DB228CC11C7D4D7700B6451D /* EventNotifications.m in Sources */,
 				1F9F8E421819FB0C0058DD5C /* EventsList.m in Sources */,
+				DB228CCB1C7E8F7D00B6451D /* FBGetLikesAndEventsOperation.m in Sources */,
 				1F530A68177BA59F009A27C0 /* main.m in Sources */,
 				DB7DF3A01C62F630008AB469 /* GoogleGeoCoderLocationDO.m in Sources */,
 				DB05E9961C6EBB7B00AF2B12 /* AsynchronousOperation.m in Sources */,
 				1F9F8E451819FF290058DD5C /* EventAnnotationAdapter.m in Sources */,
 				1F530A6C177BA59F009A27C0 /* AppDelegate.m in Sources */,
 				DB25E5BE1C6C1AEF0068C64F /* OAuthLoginHelper.m in Sources */,
+				DB228CC81C7D552700B6451D /* EventsManager.m in Sources */,
 				DB711E4C1C7695B4008A3930 /* AppState.m in Sources */,
-				1F530A7B177BA5A0009A27C0 /* ViewController.m in Sources */,
 				DB7DF3B11C643F8F008AB469 /* EventsListTableViewCell.m in Sources */,
 				DB25E5C51C6C34AC0068C64F /* FBLoginViewController.m in Sources */,
 				DB7DF3A71C6437E9008AB469 /* FBManualLoginViewController.m in Sources */,
@@ -684,6 +706,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -699,6 +722,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "EventsPoC-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -709,6 +733,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -723,6 +748,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "EventsPoC-Swift.h";
+				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

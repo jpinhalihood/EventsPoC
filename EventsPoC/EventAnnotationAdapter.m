@@ -9,6 +9,9 @@
 
 #import "EventAnnotationAdapter.h"
 #import "EventAnnotation.h"
+#import "EventProtocol.h"
+#import "EventsList.h"
+
 
 @implementation EventAnnotationAdapter
 
@@ -42,5 +45,22 @@
     return [NSArray arrayWithArray:annotations];
 }
 
++(EventAnnotation *)adaptFromEvent:(NSObject<EventProtocol> *)event {
+    CLLocationCoordinate2D coords;
+    coords.latitude = [event.placeLattitude doubleValue];
+    coords.longitude = [event.placeLongitude doubleValue];
+    
+    EventAnnotation* annotation = [[EventAnnotation alloc] initWithCoordinate:coords title:event.eventName subtitle:event.eventDescription];
+    return annotation;
+}
+
++(NSArray<EventAnnotation *> *)adaptFromEventsList:(EventsList *)events {
+    NSMutableArray<EventAnnotation *> *annotations = [NSMutableArray new];
+    for(NSObject<EventProtocol> *event in events.allItems) {
+        EventAnnotation *annotation = [EventAnnotationAdapter adaptFromEvent:event];
+        [annotations addObject:annotation];
+    }
+    return [NSArray arrayWithArray:annotations];
+}
 
 @end

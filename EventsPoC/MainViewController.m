@@ -10,13 +10,12 @@
 
 #import "FBSession.h"
 
-#import "FBGetEventsOperation.h"
-#import "FBGetLikesEventsOperation.h"
-#import "FBGetLikesOperation.h"
+#import "EventsManager.h"
 
 #import "AppState.h"
 #import "EventsList.h"
 
+#import "EventNotifications.h"
 
 @interface MainViewController ()
 
@@ -29,91 +28,21 @@
 
     if(![FBSession getAccessToken]) {
         [FBSession renewFromViewController:self];
-    } else {
-        [self loadEvents];
+    } else {        
+        [EventsManager loadEventsWithCompletion:^(EventsList *events, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if(events && events.count > 0 && !error) {
+                    [AppState sharedInstance].events = events;
+                    NSDictionary *userInfo = @{KeyEventsListUpdatedNotificationPayload : events };
+                    [[NSNotificationCenter defaultCenter] postNotificationName:EventsListUpdatedNotification object:nil userInfo:userInfo];
+                }                
+            });
+        }];
     }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-}
-
-
-- (void)loadEvents {
-
-    NSDate *start = [NSDate new];
-    NSDate *end = [start dateByAddingTimeInterval:60 * 60 * 24];
-
-    
-    NSOperationQueue *queue = [NSOperationQueue new];
-    
-    // Get my events
-    FBGetEventsOperation *eventsOp = [[FBGetEventsOperation alloc] initWithObjectId:@"me" completion:^(NSArray<FBEvent *> *fbEvents, NSError *error) {
-        
-        NSMutableArray<NSObject<EventProtocol>*> *events = [[NSMutableArray alloc] initWithCapacity:fbEvents.count];
-        for(NSObject<EventProtocol> *fbEvent in fbEvents) {
-            [events addObject:fbEvent];
-        }
-        
-        [[AppState sharedInstance].events addItems:events];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"EventsListUpdated" object:nil];
-            
-            NSLog(@"%ld Personal Events\n", (long)fbEvents.count);
-            for(NSObject<EventProtocol> *event in fbEvents) {
-                NSLog(@"Id: %@ | Name: %@\n", event.eventId, event.eventName);
-            }
-        });
-
-    }];
-    
-    eventsOp.startDate = start;
-    eventsOp.endDate = end;
-    
-    
-    // Get my likes
-    __block NSArray<NSString *> *objectIds = nil;
-    FBGetLikesOperation *likesOp = [[FBGetLikesOperation alloc] initWithObjectId:@"me" completion:^(NSArray<NSString *> *objIds, NSError *error) {
-        
-        objectIds = objIds;
-        
-        FBGetLikesEventsOperation *likeEventsOp = [[FBGetLikesEventsOperation alloc] initWithObjectIds:objectIds completion:^(NSArray<FBEvent *> *fbEvents, NSError *error) {
-            
-            NSMutableArray<NSObject<EventProtocol>*> *events = [[NSMutableArray alloc] initWithCapacity:fbEvents.count];
-            for(NSObject<EventProtocol> *fbEvent in fbEvents) {
-                [events addObject:fbEvent];
-            }
-            
-            [[AppState sharedInstance].events addItems:events];
-            
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"EventsListUpdated" object:nil];
-                
-                NSLog(@"%ld Page Events\n", (long)fbEvents.count);
-                for(NSObject<EventProtocol> *event in fbEvents) {
-                    NSLog(@"Id: %@ | Name: %@ | Date: %@\n", event.eventId, event.eventName, event.startTime);
-                }
-            });
-        }];
-        
-        likeEventsOp.startDate = start;
-        likeEventsOp.endDate = end;
-        
-        [queue addOperation:likeEventsOp];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"\n%ld Likes\n", (long)objectIds.count);
-        });
-    }];
-    
-
-    [queue addOperation:eventsOp];
-    [queue addOperation:likesOp];
-
-
 }
 
 

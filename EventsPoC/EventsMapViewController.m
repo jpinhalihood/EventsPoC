@@ -16,12 +16,18 @@
 
 #import "EventsList.h"
 #import "MapEvent.h"
+#import "EventNotifications.h"
+#import "FBEvent.h"
+#import "AppState.h"
 
 @interface EventsMapViewController ()
 @property (nonatomic, strong) NSArray *addresses;
 @property (nonatomic, strong) NSMutableArray *convertedItems;
 @property (nonatomic, strong) MapViewControllerDelegate* mapDelegate;
 @property (nonatomic, strong) CLLocationManager *locationManager;
+
+@property (nonatomic, strong) EventsList *events;
+@property (nonatomic, strong) NSArray<FBEvent*> *fbEvents;
 @end
 
 @implementation EventsMapViewController
@@ -39,60 +45,37 @@
 {
     [super viewDidLoad];
     
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor darkGrayColor]}];
+    
     self.mapDelegate = [[MapViewControllerDelegate alloc] initWithSegue:@"ShowEventDetailSegue"
                                                      fromViewController:self];
     self.mapView.delegate = self.mapDelegate;
-    
+    [self addNotificationCenter];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-
     self.locationManager = [CLLocationManager new];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     [self.locationManager requestAlwaysAuthorization];
-    
-    EventsList* events = [self initializeEvents];
-    [self mapEvents:events];
 }
 
-
--(EventsList*) initializeEvents
-{
-    self.addresses = [NSArray arrayWithObjects:
-                      @"Argyle Bar and Grill, Argyle Street, Halifax, NS",
-                      @"Pacifico Bar And Grill, 1505 Barrington Street, Halifax, NS",
-                      nil];
-    EventsList* events = [[EventsList alloc] init];
-    for(NSString* addy in self.addresses) {
-        MapEvent* e = [[MapEvent alloc] init];
-        e.address = addy;
-        [events add: e];
-    }
-    return events;
+- (void)dealloc {
+    [self removeNotificationCenter];
 }
-
 
 -(void)mapEvents:(EventsList *)events
 {
     __weak typeof(self) weakSelf = self;
-    void (^completionAction)(NSDictionary *, NSError *) = ^(NSDictionary *json, NSError *error) {
-        NSArray<EventAnnotation *> *annotations = [EventAnnotationAdapter makeAnnotationsFromGoogleGeoCodeLocationJson:json];
-        NSArray<MKPlacemark*> *placemarks = [weakSelf pinAnnotations:annotations];
+    NSArray<EventAnnotation *> *annotations = [EventAnnotationAdapter adaptFromEventsList:events];
+    NSArray<MKPlacemark*> *placemarks = [weakSelf pinAnnotations:annotations];
 
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf.mapView addAnnotations:placemarks];
-        });        
-    };
-    
-    for(MapEvent *event in events.allItems) {
-        GoogleGeoCoder *geoCoder = [[GoogleGeoCoder alloc] initWithAddress:event.address];
-        geoCoder.completionAction = completionAction;
-        NSOperationQueue *coderQ = [NSOperationQueue new];
-        [coderQ addOperation:geoCoder];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf.mapView addAnnotations:placemarks];
+    });
 }
 
 
@@ -138,7 +121,8 @@
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
-    
+//    CLLocation *location = (CLLocation *)locations.firstObject;
+//    NSLog(@"Updated locations: LAT: %f | LNG: %f", location.coordinate.latitude, location.coordinate.longitude);
 }
 
 
@@ -146,4 +130,21 @@
 - (NSString *)displayName {
     return NSLocalizedString(@"Map View", @"A label indicating this view displays events in a map view");
 }
+
+
+#pragma mark - Notification Handling
+- (void)addNotificationCenter {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleUpdatedEventsList:) name:EventsListUpdatedNotification object:nil];
+}
+
+- (void)removeNotificationCenter {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EventsListUpdatedNotification object:nil];
+}
+
+- (void)handleUpdatedEventsList:(NSNotification *)notification {
+    NSDictionary *userInfo = notification.userInfo;
+    self.events = [userInfo objectForKey:KeyEventsListUpdatedNotificationPayload];
+    [self mapEvents:self.events];
+}
+
 @end
