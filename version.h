@@ -9,6 +9,6 @@
 #ifndef version_h
 #define version_h
 
-1.0.0
+#define BLDNO 1.0.0
 
 #endif /* version_h */
