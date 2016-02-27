@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSString *eventDescription;
 @property (nonatomic, strong) NSNumber *placeLongitude;
 @property (nonatomic, strong) NSNumber *placeLattitude;
+@property (nonatomic, strong) NSString *eventHost;
 
 @end
 #endif /* EventProtocol_h */

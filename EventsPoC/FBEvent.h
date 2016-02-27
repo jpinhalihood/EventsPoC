@@ -25,7 +25,7 @@
 @property (nonatomic, strong) NSString *placeZip;
 @property (nonatomic, strong) NSNumber *placeLongitude;
 @property (nonatomic, strong) NSNumber *placeLattitude;
-
+@property (nonatomic, strong) NSString *eventHost;
 @property (nonatomic, strong) NSString *rsvpStatus;
 @property (nonatomic, strong) NSString *eventDescription;
 - (instancetype)initWithDictionary:(NSDictionary *)json;

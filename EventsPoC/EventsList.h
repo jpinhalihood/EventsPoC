@@ -20,6 +20,9 @@
 -(NSObject<EventProtocol> * _Nonnull)itemAt:(NSUInteger)index;
 -(NSArray * _Nonnull)allItems;
 -(NSUInteger)count;
+-(void)removeAllItems;
+
+-(EventsList *_Nonnull)filterByLattitude:(NSNumber *_Nonnull)lattitude longitude:(NSNumber *_Nonnull)longitude;
 
 +(EventsList * _Nonnull)listByAddingItemsFromList:(EventsList * _Nonnull)list;
 +(EventsList * _Nonnull)listFromArrayOfEvents:(NSArray<NSObject<EventProtocol>*> *_Nonnull)events;

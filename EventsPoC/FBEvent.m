@@ -26,6 +26,9 @@ NSString * const KeyFBEventPlaceLocationLat = @"latitude";
 NSString * const KeyFBEventPlaceLocationLng = @"longitude";
 NSString * const KeyFBEventDescription = @"description";
 NSString * const KeyFBEventRsvpStatus = @"rsvp_status";
+NSString * const KeyFBEventHost = @"owner";
+
+
 @implementation FBEvent
 
 - (instancetype)initWithDictionary:(NSDictionary *)json {
@@ -34,6 +37,9 @@ NSString * const KeyFBEventRsvpStatus = @"rsvp_status";
         _eventName = json[KeyFBEventName];
         _eventDescription = json[KeyFBEventDescription];
         _rsvpStatus = json[KeyFBEventRsvpStatus];
+        
+        NSDictionary *host = json[KeyFBEventHost];
+        _eventHost = host[KeyFBEventName];
         
         NSDateFormatter *formatter = [NSDateFormatter new];
         [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
@@ -58,7 +64,7 @@ NSString * const KeyFBEventRsvpStatus = @"rsvp_status";
         _placeZip = location[KeyFBEventPlaceZip];
         _placeLattitude = location[KeyFBEventPlaceLocationLat];
         _placeLongitude = location[KeyFBEventPlaceLocationLng];
-        
+
     }
     
     return self;

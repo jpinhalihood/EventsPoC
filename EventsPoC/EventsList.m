@@ -71,6 +71,17 @@
     return self.items.count;
 }
 
+-(void)removeAllItems {
+    [self.items removeAllObjects];
+}
+
+
+-(EventsList *)filterByLattitude:(NSNumber *)lattitude longitude:(NSNumber *)longitude {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"placeLattitude=%@ AND placeLongitude=%@", lattitude, longitude];
+    NSArray *filtered = [self.allItems filteredArrayUsingPredicate:predicate];
+    EventsList *filteredList = [EventsList listFromArrayOfEvents:filtered];
+    return filteredList;
+}
 
 
 #pragma mark - Convenience Methods

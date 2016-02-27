@@ -45,7 +45,6 @@
         <!--Main View Controller-->
         <scene sceneID="4mh-Sx-Xai">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jgm-o2-7Zd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController id="cry-SQ-qcj" customClass="MainViewController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="U37-xF-p3F"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="4vi-Q9-VN0">
@@ -60,6 +59,7 @@
                         <segue destination="Sc6-lY-2hb" kind="relationship" relationship="viewControllers" id="fDJ-h1-7Ya"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jgm-o2-7Zd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="698" y="1411"/>
         </scene>
@@ -84,32 +84,38 @@
         <scene sceneID="mpp-N7-PsO">
             <objects>
                 <tableViewController storyboardIdentifier="EventsListTableViewController" id="5qR-EQ-oaC" customClass="EventsListTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="101" sectionHeaderHeight="28" sectionFooterHeight="28" id="DVm-Yr-xsG">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" sectionHeaderHeight="28" sectionFooterHeight="28" id="DVm-Yr-xsG">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventsListTableViewCell" rowHeight="101" id="Vzm-m0-kGV" customClass="EventsListTableViewCell">
-                                <rect key="frame" x="0.0" y="92" width="600" height="101"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventsListTableViewCell" rowHeight="125" id="Vzm-m0-kGV" customClass="EventsListTableViewCell">
+                                <rect key="frame" x="0.0" y="92" width="600" height="125"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vzm-m0-kGV" id="Znf-LC-og8">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="100.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="124.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" placeholderIntrinsicWidth="567" placeholderIntrinsicHeight="19.5" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZY-VA-W9j">
-                                            <rect key="frame" x="17" y="17" width="567" height="19.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" misplaced="YES" placeholderIntrinsicWidth="567" placeholderIntrinsicHeight="19.5" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZY-VA-W9j">
+                                            <rect key="frame" x="17" y="17" width="567" height="12"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="753" placeholderIntrinsicWidth="567" placeholderIntrinsicHeight="24.5" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ftN-Yo-7LI">
-                                            <rect key="frame" x="17" y="40" width="567" height="24.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="755" misplaced="YES" placeholderIntrinsicWidth="24.5" placeholderIntrinsicHeight="21" text="Host" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjx-nj-cJh">
+                                            <rect key="frame" x="17" y="32" width="314.5" height="21"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="754" misplaced="YES" placeholderIntrinsicWidth="567" placeholderIntrinsicHeight="24.5" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ftN-Yo-7LI">
+                                            <rect key="frame" x="17" y="61" width="567" height="24.5"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Jun 1, 2016 @ 9:00 am" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uQm-mD-460">
-                                            <rect key="frame" x="455" y="72" width="129" height="14.5"/>
+                                            <rect key="frame" x="462" y="93" width="121.5" height="14.5"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -117,18 +123,21 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="eZY-VA-W9j" firstAttribute="leading" secondItem="Znf-LC-og8" secondAttribute="leadingMargin" constant="9" id="AzW-Bf-emH"/>
-                                        <constraint firstItem="ftN-Yo-7LI" firstAttribute="top" secondItem="eZY-VA-W9j" secondAttribute="bottom" constant="4" id="CV4-fR-mwG"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="uQm-mD-460" secondAttribute="trailing" constant="8" id="GJa-pl-iO6"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="eZY-VA-W9j" secondAttribute="trailing" constant="8" id="LzI-2W-bFk"/>
+                                        <constraint firstItem="kjx-nj-cJh" firstAttribute="top" secondItem="eZY-VA-W9j" secondAttribute="bottom" constant="3" id="MG7-CS-ICX"/>
                                         <constraint firstItem="eZY-VA-W9j" firstAttribute="top" secondItem="Znf-LC-og8" secondAttribute="topMargin" constant="9" id="SNn-CX-bG3"/>
+                                        <constraint firstItem="kjx-nj-cJh" firstAttribute="leading" secondItem="eZY-VA-W9j" secondAttribute="leading" id="Sl3-2C-qaB"/>
+                                        <constraint firstItem="ftN-Yo-7LI" firstAttribute="leading" secondItem="eZY-VA-W9j" secondAttribute="leading" id="Wp3-ap-uv7"/>
                                         <constraint firstItem="uQm-mD-460" firstAttribute="top" secondItem="ftN-Yo-7LI" secondAttribute="bottom" constant="8" id="bbv-my-xUm"/>
+                                        <constraint firstItem="ftN-Yo-7LI" firstAttribute="top" secondItem="kjx-nj-cJh" secondAttribute="bottom" constant="8" id="lxz-DT-I49"/>
                                         <constraint firstItem="ftN-Yo-7LI" firstAttribute="trailing" secondItem="eZY-VA-W9j" secondAttribute="trailing" id="ra3-be-rlj"/>
-                                        <constraint firstItem="ftN-Yo-7LI" firstAttribute="leading" secondItem="eZY-VA-W9j" secondAttribute="leading" id="usM-S6-apN"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="uQm-mD-460" secondAttribute="bottom" constant="6" id="vdc-1b-zoa"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="uQm-mD-460" secondAttribute="bottom" constant="9" id="vdc-1b-zoa"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="descriptionLabel" destination="ftN-Yo-7LI" id="Gz4-TG-0p1"/>
+                                    <outlet property="hostLabel" destination="kjx-nj-cJh" id="klm-5z-5Cq"/>
                                     <outlet property="startTimeLabel" destination="uQm-mD-460" id="nd9-tz-Jvq"/>
                                     <outlet property="titleLabel" destination="eZY-VA-W9j" id="7lj-91-bly"/>
                                 </connections>

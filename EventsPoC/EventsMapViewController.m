@@ -27,8 +27,15 @@
 @property (nonatomic, strong) CLLocationManager *locationManager;
 
 @property (nonatomic, strong) EventsList *events;
-@property (nonatomic, strong) NSArray<FBEvent*> *fbEvents;
+@property (nonatomic, strong) EventsList *filteredEvents;
+@property (nonatomic, strong) NSNumber *radius;
+
+@property (nonatomic, strong) CLLocation *lastLocation;
+@property (nonatomic, strong) NSDate *lastLocationUpdate;
 @end
+
+double const EventsMapDefaultRadius = 500000; // 50km in meters
+NSTimeInterval const EventsMapDefaultLocationUpdateInterval = 60;
 
 @implementation EventsMapViewController
 
@@ -37,6 +44,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        _radius = [NSNumber numberWithDouble:EventsMapDefaultRadius];
     }
     return self;
 }
@@ -47,7 +55,7 @@
     
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor darkGrayColor]}];
-    
+    self.lastLocationUpdate = [NSDate new];
     self.mapDelegate = [[MapViewControllerDelegate alloc] initWithSegue:@"ShowEventDetailSegue"
                                                      fromViewController:self];
     self.mapView.delegate = self.mapDelegate;
@@ -121,15 +129,33 @@
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
-//    CLLocation *location = (CLLocation *)locations.firstObject;
-//    NSLog(@"Updated locations: LAT: %f | LNG: %f", location.coordinate.latitude, location.coordinate.longitude);
+    CLLocation *location = (CLLocation *)locations.firstObject;
+
+    NSDate *now = [NSDate new];
+    NSTimeInterval secondsSinceLastLocationUpdate = [now timeIntervalSinceDate:self.lastLocationUpdate];
+    if(secondsSinceLastLocationUpdate >= EventsMapDefaultLocationUpdateInterval
+       || [location distanceFromLocation:self.lastLocation] > self.radius.doubleValue) {
+        for(NSObject<EventProtocol> *event in self.events.allItems) {
+            if(event.placeLongitude && event.placeLattitude) {
+                CLLocation *eventLocation = [[CLLocation alloc] initWithLatitude:event.placeLattitude.doubleValue
+                                                                       longitude:event.placeLongitude.doubleValue];
+                if([eventLocation distanceFromLocation:location] <= self.radius.doubleValue) {
+                    if(!self.filteredEvents) {
+                        self.filteredEvents = [EventsList new];
+                    }
+                    [self.filteredEvents removeAllItems];
+                    [self.filteredEvents add:event];
+                }
+            }
+        }
+        
+        self.lastLocationUpdate = [NSDate new];
+        self.lastLocation = location;
+        [self mapEvents:self.filteredEvents];
+    }
+    
 }
 
-
-#pragma mark - SegmentedViewControllerProtocol Methods
-- (NSString *)displayName {
-    return NSLocalizedString(@"Map View", @"A label indicating this view displays events in a map view");
-}
 
 
 #pragma mark - Notification Handling
@@ -144,7 +170,7 @@
 - (void)handleUpdatedEventsList:(NSNotification *)notification {
     NSDictionary *userInfo = notification.userInfo;
     self.events = [userInfo objectForKey:KeyEventsListUpdatedNotificationPayload];
-    [self mapEvents:self.events];
+
 }
 
 @end

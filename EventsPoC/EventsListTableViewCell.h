@@ -12,6 +12,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *descriptionLabel;
 @property (nonatomic, weak) IBOutlet UILabel *startTimeLabel;
+@property (nonatomic, weak) IBOutlet UILabel *hostLabel;
 
-- (void)configureWithTitle:(NSString *)title description:(NSString *)description startDate:(NSDate *)startDate;
+- (void)configureWithTitle:(NSString *)title description:(NSString *)description startDate:(NSDate *)startDate host:(NSString *)host;
 @end

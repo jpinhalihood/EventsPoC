@@ -30,10 +30,12 @@
     // Configure the view for the selected state
 }
 
-- (void)configureWithTitle:(NSString *)title description:(NSString *)description startDate:(NSDate *)startDate {
+- (void)configureWithTitle:(NSString *)title description:(NSString *)description startDate:(NSDate *)startDate host:(NSString *)host
+ {
     self.titleLabel.text = title;
     self.descriptionLabel.text = description;
-    
+    self.hostLabel.text = [@"Host: " stringByAppendingString:host];
+     
     NSDateFormatter *formatter = [NSDateFormatter new];
     [formatter setDateFormat:@"MMM dd, yyyy '@' hh:mm a'"];
 

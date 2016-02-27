@@ -65,7 +65,7 @@
     EventsListTableViewCell *eventsListCell = [tableView dequeueReusableCellWithIdentifier:EventsListTableViewCellId forIndexPath:indexPath];
     
     NSObject<EventProtocol> *event = [self.events itemAt:indexPath.row];
-    [eventsListCell configureWithTitle:event.eventName description:event.eventDescription startDate:event.startTime];
+    [eventsListCell configureWithTitle:event.eventName description:event.eventDescription startDate:event.startTime host:event.eventHost];
     
     return eventsListCell;
 }

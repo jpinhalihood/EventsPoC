@@ -172,7 +172,7 @@
         until = [NSString stringWithFormat:@"&until=%@", [formatter stringFromDate:self.endDate]];
     }
     
-    NSString *url = [NSString stringWithFormat:@"%@/events?pretty=0&limit=1000%@%@", objectId, since, until];
+    NSString *url = [NSString stringWithFormat:@"%@/events?pretty=0&limit=1000%@%@&fields=description,name,place,owner,start_time,end_time,rsvp_status", objectId, since, until];
     
     return url;
 }
@@ -223,7 +223,7 @@
     
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     __block NSArray *json = nil;
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60 * 5];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:payload];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
