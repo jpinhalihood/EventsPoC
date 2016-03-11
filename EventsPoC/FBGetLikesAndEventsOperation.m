@@ -40,8 +40,18 @@
             NSString *accessToken = [FBSDKAccessToken currentAccessToken].tokenString;
             
             // Get object ids for likes
-            self.objectIds = [self getObjectIdsWithAccessToken:accessToken];
+            NSArray<NSString *> *likeObjectIds = [self getLikeObjectIdsWithAccessToken:accessToken];
+            NSMutableSet *setOfLikeObjectIds = [NSMutableSet setWithArray:likeObjectIds];
+
+            // Get object ids for friends
+            NSArray<NSString *> *friendObjectIds = [self getFriendObjectIdsWithAccessToken:accessToken];
+            NSMutableSet *setOfFriendObjectIds = [NSMutableSet setWithArray:friendObjectIds];
+
+            // Union to eliminate the duplicates
+            NSMutableSet *combinedSetOfObjectIds = [NSMutableSet setWithSet:setOfLikeObjectIds];
+            [combinedSetOfObjectIds unionSet:setOfFriendObjectIds];
             
+            self.objectIds = [combinedSetOfObjectIds allObjects];
             
             if(self.isCancelled) {
                 return;
@@ -108,9 +118,36 @@
 }
 
 
-- (NSArray<NSString *> *)getObjectIdsWithAccessToken:(NSString *)accessToken {
+
+
+- (NSArray<NSString *> *)getLikeObjectIdsWithAccessToken:(NSString *)accessToken {
 
     NSString *url = [NSString stringWithFormat:@"https://graph.facebook.com/v2.5/%@/likes?access_token=%@&pretty=0&limit=100", self.identifier, accessToken];
+    
+    NSError *error = nil;
+    NSMutableArray<NSString *> *objectIds = [NSMutableArray new];
+    [objectIds addObject:self.identifier];
+    
+    while (url != nil && !self.isCancelled) {
+        
+        NSDictionary *json = nil;
+        url = [self fetchDataForUrl:url json:&json error:&error];
+        
+        if(json && !error) {
+            NSArray<NSDictionary*> *dataJson = [json objectForKey:@"data"];
+            for(NSDictionary *likeJson in dataJson) {
+                NSString *objectId = [likeJson objectForKey:@"id"];
+                [objectIds addObject:objectId];
+            }
+        }
+    }
+    
+    return [NSArray arrayWithArray:objectIds];
+}
+
+- (NSArray<NSString *> *)getFriendObjectIdsWithAccessToken:(NSString *)accessToken {
+    
+    NSString *url = [NSString stringWithFormat:@"https://graph.facebook.com/v2.5/%@/friends?type=attending&access_token=%@&pretty=0&limit=100", self.identifier, accessToken];
     
     NSError *error = nil;
     NSMutableArray<NSString *> *objectIds = [NSMutableArray new];

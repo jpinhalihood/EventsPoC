@@ -15,15 +15,13 @@
     return [FBSDKAccessToken currentAccessToken].tokenString;
 }
 
-+ (void)renewFromViewController:(UIViewController *)callingVc {
++ (void)renewFromViewController:(UINavigationController *)callingVc {
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
     FBLoginViewController *fbLoginVc = [sb instantiateViewControllerWithIdentifier:@"FBLoginViewController"];
-    fbLoginVc.shouldShowCloseButton = YES;
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:fbLoginVc];
-    
-    nav.modalPresentationStyle = UIModalPresentationFormSheet;
-    nav.preferredContentSize = CGSizeMake(300.0, 400.0);
+    fbLoginVc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    fbLoginVc.preferredContentSize = CGSizeMake(300.0, 400.0);
 
-    [callingVc.navigationController presentViewController:nav animated:YES completion:nil];
+    [callingVc presentViewController:fbLoginVc animated:YES completion:nil];
+
 }
 @end

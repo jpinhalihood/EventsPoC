@@ -25,17 +25,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
     if(![FBSession getAccessToken]) {
-        [FBSession renewFromViewController:self];
-    } else {        
+        [FBSession renewFromViewController:self.selectedViewController];
+    } else {
         [EventsManager loadEventsWithCompletion:^(EventsList *events, NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(events && events.count > 0 && !error) {
                     [AppState sharedInstance].events = events;
                     NSDictionary *userInfo = @{KeyEventsListUpdatedNotificationPayload : events };
                     [[NSNotificationCenter defaultCenter] postNotificationName:EventsListUpdatedNotification object:nil userInfo:userInfo];
-                }                
+                }
             });
         }];
     }

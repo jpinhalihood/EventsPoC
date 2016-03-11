@@ -50,7 +50,7 @@
     coords.latitude = [event.placeLattitude doubleValue];
     coords.longitude = [event.placeLongitude doubleValue];
     
-    EventAnnotation* annotation = [[EventAnnotation alloc] initWithCoordinate:coords title:event.eventName subtitle:event.eventDescription];
+    EventAnnotation* annotation = [[EventAnnotation alloc] initWithCoordinate:coords title:event.eventName subtitle:event.eventHost];
     return annotation;
 }
 

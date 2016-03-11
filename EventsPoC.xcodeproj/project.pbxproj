@@ -46,18 +46,20 @@
 		DB25E5C51C6C34AC0068C64F /* FBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB25E5C41C6C34AC0068C64F /* FBLoginViewController.m */; };
 		DB25E5C71C6C36480068C64F /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB25E5C61C6C36480068C64F /* FBSDKLoginKit.framework */; };
 		DB2899911C5B222E005D0C3C /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB2899901C5B222E005D0C3C /* Contacts.framework */; };
-		DB60A8881C76A45400DF6A0A /* FBGetLikesEventsOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB60A8871C76A45400DF6A0A /* FBGetLikesEventsOperation.m */; };
 		DB60A88B1C76A4D900DF6A0A /* FBPagedApiOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB60A88A1C76A4D900DF6A0A /* FBPagedApiOperation.m */; };
-		DB60A88E1C76BE1B00DF6A0A /* FBGetLikesOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB60A88D1C76BE1B00DF6A0A /* FBGetLikesOperation.m */; };
 		DB711E3F1C755847008A3930 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB711E3E1C755847008A3930 /* Media.xcassets */; };
 		DB711E431C7562E0008A3930 /* ConfigurationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB711E421C7562E0008A3930 /* ConfigurationTableViewController.m */; };
 		DB711E461C756701008A3930 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB711E451C756701008A3930 /* MainViewController.m */; };
 		DB711E491C756753008A3930 /* FBSession.m in Sources */ = {isa = PBXBuildFile; fileRef = DB711E481C756753008A3930 /* FBSession.m */; };
 		DB711E4C1C7695B4008A3930 /* AppState.m in Sources */ = {isa = PBXBuildFile; fileRef = DB711E4B1C7695B4008A3930 /* AppState.m */; };
 		DB7DF3A01C62F630008AB469 /* GoogleGeoCoderLocationDO.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7DF39F1C62F630008AB469 /* GoogleGeoCoderLocationDO.m */; };
-		DB7DF3A71C6437E9008AB469 /* FBManualLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7DF3A61C6437E9008AB469 /* FBManualLoginViewController.m */; };
 		DB7DF3AD1C643DED008AB469 /* EventsListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7DF3AC1C643DED008AB469 /* EventsListTableViewController.m */; };
 		DB7DF3B11C643F8F008AB469 /* EventsListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7DF3B01C643F8F008AB469 /* EventsListTableViewCell.m */; };
+		DBA681C41C85137E00335C51 /* EventAnnotationCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBA681C31C85137E00335C51 /* EventAnnotationCalloutView.xib */; };
+		DBA681C61C8515BA00335C51 /* DateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBA681C51C8515BA00335C51 /* DateView.xib */; };
+		DBA681C91C8516C100335C51 /* DateView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA681C81C8516C100335C51 /* DateView.m */; };
+		DBA681CC1C8519C600335C51 /* EventAnnotationCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA681CB1C8519C600335C51 /* EventAnnotationCalloutView.m */; };
+		DBA681CF1C85262900335C51 /* TestCalloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA681CE1C85262900335C51 /* TestCalloutViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,12 +137,8 @@
 		DB25E5C61C6C36480068C64F /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "FacebookSDKs-iOS-20160210/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		DB2899901C5B222E005D0C3C /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		DB60A8841C76993500DF6A0A /* EventProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventProtocol.h; sourceTree = "<group>"; };
-		DB60A8861C76A45400DF6A0A /* FBGetLikesEventsOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGetLikesEventsOperation.h; sourceTree = "<group>"; };
-		DB60A8871C76A45400DF6A0A /* FBGetLikesEventsOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBGetLikesEventsOperation.m; sourceTree = "<group>"; };
 		DB60A8891C76A4D900DF6A0A /* FBPagedApiOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPagedApiOperation.h; sourceTree = "<group>"; };
 		DB60A88A1C76A4D900DF6A0A /* FBPagedApiOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPagedApiOperation.m; sourceTree = "<group>"; };
-		DB60A88C1C76BE1B00DF6A0A /* FBGetLikesOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGetLikesOperation.h; sourceTree = "<group>"; };
-		DB60A88D1C76BE1B00DF6A0A /* FBGetLikesOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBGetLikesOperation.m; sourceTree = "<group>"; };
 		DB711E3D1C755199008A3930 /* SegmentedViewControllerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SegmentedViewControllerProtocol.h; sourceTree = "<group>"; };
 		DB711E3E1C755847008A3930 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		DB711E411C7562E0008A3930 /* ConfigurationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationTableViewController.h; sourceTree = "<group>"; };
@@ -153,12 +151,18 @@
 		DB711E4B1C7695B4008A3930 /* AppState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppState.m; sourceTree = "<group>"; };
 		DB7DF39E1C62F630008AB469 /* GoogleGeoCoderLocationDO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleGeoCoderLocationDO.h; sourceTree = "<group>"; };
 		DB7DF39F1C62F630008AB469 /* GoogleGeoCoderLocationDO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleGeoCoderLocationDO.m; sourceTree = "<group>"; };
-		DB7DF3A51C6437E9008AB469 /* FBManualLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBManualLoginViewController.h; sourceTree = "<group>"; };
-		DB7DF3A61C6437E9008AB469 /* FBManualLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBManualLoginViewController.m; sourceTree = "<group>"; };
 		DB7DF3AB1C643DED008AB469 /* EventsListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsListTableViewController.h; sourceTree = "<group>"; };
 		DB7DF3AC1C643DED008AB469 /* EventsListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsListTableViewController.m; sourceTree = "<group>"; };
 		DB7DF3AF1C643F8F008AB469 /* EventsListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsListTableViewCell.h; sourceTree = "<group>"; };
 		DB7DF3B01C643F8F008AB469 /* EventsListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsListTableViewCell.m; sourceTree = "<group>"; };
+		DBA681C31C85137E00335C51 /* EventAnnotationCalloutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventAnnotationCalloutView.xib; sourceTree = "<group>"; };
+		DBA681C51C8515BA00335C51 /* DateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DateView.xib; sourceTree = "<group>"; };
+		DBA681C71C8516C100335C51 /* DateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateView.h; sourceTree = "<group>"; };
+		DBA681C81C8516C100335C51 /* DateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateView.m; sourceTree = "<group>"; };
+		DBA681CA1C8519C600335C51 /* EventAnnotationCalloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventAnnotationCalloutView.h; sourceTree = "<group>"; };
+		DBA681CB1C8519C600335C51 /* EventAnnotationCalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventAnnotationCalloutView.m; sourceTree = "<group>"; };
+		DBA681CD1C85262900335C51 /* TestCalloutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestCalloutViewController.h; sourceTree = "<group>"; };
+		DBA681CE1C85262900335C51 /* TestCalloutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestCalloutViewController.m; sourceTree = "<group>"; };
 		DBABE8AB1C7D35B400512FAC /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -302,6 +306,9 @@
 		DB228CC21C7D531800B6451D /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				DBA681C31C85137E00335C51 /* EventAnnotationCalloutView.xib */,
+				DBA681CA1C8519C600335C51 /* EventAnnotationCalloutView.h */,
+				DBA681CB1C8519C600335C51 /* EventAnnotationCalloutView.m */,
 				1F530A73177BA59F009A27C0 /* MainStoryboard_iPhone.storyboard */,
 				1F530A76177BA5A0009A27C0 /* MainStoryboard_iPad.storyboard */,
 				DB711E441C756701008A3930 /* MainViewController.h */,
@@ -309,6 +316,11 @@
 				DB711E401C7562C4008A3930 /* Configuration View */,
 				DB7DF3AE1C643F72008AB469 /* List View */,
 				DB7DF3A11C6431CB008AB469 /* Map View */,
+				DBA681C51C8515BA00335C51 /* DateView.xib */,
+				DBA681C71C8516C100335C51 /* DateView.h */,
+				DBA681C81C8516C100335C51 /* DateView.m */,
+				DBA681CD1C85262900335C51 /* TestCalloutViewController.h */,
+				DBA681CE1C85262900335C51 /* TestCalloutViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -343,12 +355,8 @@
 			children = (
 				DB05E98D1C6EAE7300AF2B12 /* FBGetEventsOperation.h */,
 				DB05E98E1C6EAE7300AF2B12 /* FBGetEventsOperation.m */,
-				DB60A8861C76A45400DF6A0A /* FBGetLikesEventsOperation.h */,
-				DB60A8871C76A45400DF6A0A /* FBGetLikesEventsOperation.m */,
 				DB60A8891C76A4D900DF6A0A /* FBPagedApiOperation.h */,
 				DB60A88A1C76A4D900DF6A0A /* FBPagedApiOperation.m */,
-				DB60A88C1C76BE1B00DF6A0A /* FBGetLikesOperation.h */,
-				DB60A88D1C76BE1B00DF6A0A /* FBGetLikesOperation.m */,
 				DB228CC91C7E8F7D00B6451D /* FBGetLikesAndEventsOperation.h */,
 				DB228CCA1C7E8F7D00B6451D /* FBGetLikesAndEventsOperation.m */,
 			);
@@ -407,8 +415,6 @@
 			isa = PBXGroup;
 			children = (
 				DB60A88F1C76BE2400DF6A0A /* Operations */,
-				DB7DF3A51C6437E9008AB469 /* FBManualLoginViewController.h */,
-				DB7DF3A61C6437E9008AB469 /* FBManualLoginViewController.m */,
 				DB25E5C31C6C34AC0068C64F /* FBLoginViewController.h */,
 				DB25E5C41C6C34AC0068C64F /* FBLoginViewController.m */,
 				DB05E9901C6EB0A200AF2B12 /* FBEvent.h */,
@@ -507,9 +513,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBA681C41C85137E00335C51 /* EventAnnotationCalloutView.xib in Resources */,
 				1F530A66177BA59F009A27C0 /* InfoPlist.strings in Resources */,
 				1F530A6E177BA59F009A27C0 /* Default.png in Resources */,
 				DB711E3F1C755847008A3930 /* Media.xcassets in Resources */,
+				DBA681C61C8515BA00335C51 /* DateView.xib in Resources */,
 				1F530A70177BA59F009A27C0 /* Default@2x.png in Resources */,
 				1F530A72177BA59F009A27C0 /* Default-568h@2x.png in Resources */,
 				1F530A75177BA5A0009A27C0 /* MainStoryboard_iPhone.storyboard in Resources */,
@@ -553,7 +561,9 @@
 				DB711E431C7562E0008A3930 /* ConfigurationTableViewController.m in Sources */,
 				1F9F8E48181A00E80058DD5C /* MapEvent.m in Sources */,
 				1F9F8E3F1818B61C0058DD5C /* EventDetailViewController.m in Sources */,
+				DBA681CC1C8519C600335C51 /* EventAnnotationCalloutView.m in Sources */,
 				DB228CC11C7D4D7700B6451D /* EventNotifications.m in Sources */,
+				DBA681CF1C85262900335C51 /* TestCalloutViewController.m in Sources */,
 				1F9F8E421819FB0C0058DD5C /* EventsList.m in Sources */,
 				DB228CCB1C7E8F7D00B6451D /* FBGetLikesAndEventsOperation.m in Sources */,
 				1F530A68177BA59F009A27C0 /* main.m in Sources */,
@@ -566,18 +576,16 @@
 				DB711E4C1C7695B4008A3930 /* AppState.m in Sources */,
 				DB7DF3B11C643F8F008AB469 /* EventsListTableViewCell.m in Sources */,
 				DB25E5C51C6C34AC0068C64F /* FBLoginViewController.m in Sources */,
-				DB7DF3A71C6437E9008AB469 /* FBManualLoginViewController.m in Sources */,
 				1F530A9B177BB00E009A27C0 /* EventsMapViewController.m in Sources */,
 				1F530AA3177BDE9C009A27C0 /* EventAnnotation.m in Sources */,
 				DB05E9921C6EB0A200AF2B12 /* FBEvent.m in Sources */,
-				DB60A8881C76A45400DF6A0A /* FBGetLikesEventsOperation.m in Sources */,
-				DB60A88E1C76BE1B00DF6A0A /* FBGetLikesOperation.m in Sources */,
 				1F530AA6177D049A009A27C0 /* EventGeocoder.m in Sources */,
 				1F9F8E391818AC3A0058DD5C /* MapViewControllerDelegate.m in Sources */,
 				DB711E461C756701008A3930 /* MainViewController.m in Sources */,
 				1F10CAC1178CE4FA00FA77E8 /* GoogleGeoCoder.m in Sources */,
 				DB25E5BB1C6C10C70068C64F /* OAAuthorization.m in Sources */,
 				DB7DF3AD1C643DED008AB469 /* EventsListTableViewController.m in Sources */,
+				DBA681C91C8516C100335C51 /* DateView.m in Sources */,
 				DB05E98F1C6EAE7300AF2B12 /* FBGetEventsOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,9 +11,10 @@
 
 @interface FBLoginViewController ()
 @property (nonatomic, weak) IBOutlet UILabel *usernameLabel;
-@property (nonatomic, weak) IBOutlet UIView *fbLoginButtonContainer;
 @property (nonatomic, weak) IBOutlet UIView *fbProfilePictureContainer;
 @property (nonatomic, weak) IBOutlet UIButton *customFBLoginButton;
+@property (nonatomic, weak) IBOutlet UIButton *closeButton;
+@property (nonatomic, weak) IBOutlet UIView *container;
 
 @property (nonatomic, strong) FBSDKProfilePictureView *fbUserProfileImage;
 
@@ -21,13 +22,39 @@
 
 @implementation FBLoginViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.container.layer.cornerRadius = 5.0;
+    self.container.layer.masksToBounds = YES;
+    self.fbUserProfileImage.layer.cornerRadius = 40.0;
+    self.fbUserProfileImage.layer.masksToBounds = YES;
+    
+//    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+//    UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:blur];
+//    blurView.frame = self.view.bounds;
+//    [self.view insertSubview:blurView belowSubview:self.container];
+//    
+//    NSDictionary *views = @{ @"blurView" : blurView };
+//    NSArray *constraintsH = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[blurView]-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views];
+//    
+//    NSArray *constraintsV = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[blurView]-|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:views];
+//
+//    NSArray *constraints = [constraintsH arrayByAddingObjectsFromArray:constraintsV];
+//    [self.view addConstraints:constraints];
+    
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.usernameLabel.text = @"";
     self.fbUserProfileImage = [[FBSDKProfilePictureView alloc] initWithFrame:self.fbProfilePictureContainer.bounds];
     [self.fbProfilePictureContainer addSubview:self.fbUserProfileImage];
-    self.fbUserProfileImage.layer.cornerRadius = 80.0;
-    self.fbUserProfileImage.layer.masksToBounds = YES;
+    
+    [self.closeButton addTarget:self action:@selector(onDone:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
 
     if(![self isLoggedIn]) {

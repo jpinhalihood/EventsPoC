@@ -8,6 +8,7 @@
 
 #import "ConfigurationTableViewController.h"
 
+
 @interface ConfigurationTableViewController ()
 
 @end
@@ -41,7 +42,6 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FBLoginViewController" forIndexPath:indexPath];
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"FBLoginCell"];
     cell.textLabel.text = @"Connect Facebook";
     return cell;
@@ -56,7 +56,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if([[segue identifier] isEqualToString:@"SegueToFBLoginVC"]) {
-        
     }
 }
 

@@ -13,5 +13,5 @@
 
 @interface FBSession : NSObject
 + (NSString *)getAccessToken;
-+ (void)renewFromViewController:(UIViewController *)callingVc;
++ (void)renewFromViewController:(UINavigationController *)callingVc;
 @end

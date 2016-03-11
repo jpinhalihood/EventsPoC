@@ -20,6 +20,9 @@
 #import "FBEvent.h"
 #import "AppState.h"
 
+#import "EventAnnotationCalloutView.h"
+#import "DateView.h"
+
 @interface EventsMapViewController ()
 @property (nonatomic, strong) NSArray *addresses;
 @property (nonatomic, strong) NSMutableArray *convertedItems;
@@ -32,6 +35,7 @@
 
 @property (nonatomic, strong) CLLocation *lastLocation;
 @property (nonatomic, strong) NSDate *lastLocationUpdate;
+
 @end
 
 double const EventsMapDefaultRadius = 500000; // 50km in meters
@@ -56,9 +60,10 @@ NSTimeInterval const EventsMapDefaultLocationUpdateInterval = 60;
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor darkGrayColor]}];
     self.lastLocationUpdate = [NSDate new];
-    self.mapDelegate = [[MapViewControllerDelegate alloc] initWithSegue:@"ShowEventDetailSegue"
-                                                     fromViewController:self];
-    self.mapView.delegate = self.mapDelegate;
+    self.radius = [NSNumber numberWithDouble:EventsMapDefaultRadius];
+//    self.mapDelegate = [[MapViewControllerDelegate alloc] initWithSegue:@"ShowEventDetailSegue"
+//                                                     fromViewController:self];
+    self.mapView.delegate = self;
     [self addNotificationCenter];
 }
 
@@ -73,6 +78,18 @@ NSTimeInterval const EventsMapDefaultLocationUpdateInterval = 60;
 
 - (void)dealloc {
     [self removeNotificationCenter];
+}
+
+- (void)initTestEvents {
+    NSObject<EventProtocol> *event = [FBEvent new];
+    event.eventDescription = @"This is a fake event description!";
+    event.eventHost = @"Yours Truly";
+    event.eventName = @"A Fake Event";
+    CLLocation *currentLocation = [self.locationManager location];
+    event.placeLattitude = [NSNumber numberWithDouble:currentLocation.coordinate.latitude];
+    event.placeLongitude = [NSNumber numberWithDouble:currentLocation.coordinate.longitude];
+    
+    [self.events add:event];
 }
 
 -(void)mapEvents:(EventsList *)events
@@ -104,12 +121,58 @@ NSTimeInterval const EventsMapDefaultLocationUpdateInterval = 60;
     // Dispose of any resources that can be recreated.
 }
 
+
+#pragma mark - MKMapViewDelegate Methods
 - (void) mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
-    NSLog(@"Selected");
-    [self performSegueWithIdentifier: @"ShowEventDetailSegue" sender: self];
+
+
 }
 
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+
+    MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"pin"];
+    if([annotation isKindOfClass:[MKPlacemark class]]) {
+        if(!annotationView) {
+            annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:nil reuseIdentifier:@"pin"];
+            annotationView.canShowCallout = YES;
+        }
+        
+        annotationView.annotation = annotation;
+        
+        EventAnnotationCalloutView *callout = [[[NSBundle mainBundle] loadNibNamed:@"EventAnnotationCalloutView" owner:self options:nil] firstObject];
+        callout.hostLabel.text = @"Hosted by Johnny Appleseed";
+        callout.addressLabel.text = @"31 Claudia Crescent, Middle Sackville, NS";
+        [callout setDate:[NSDate new]];
+        annotationView.detailCalloutAccessoryView = callout;
+        
+        NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:callout attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:200.0];
+        NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:callout attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:111.0];
+        
+        [callout addConstraints:@[width, height]];
+        
+        
+        annotationView.canShowCallout = YES;
+        annotationView.rightCalloutAccessoryView = nil;
+        
+        
+
+    }
+    
+    return annotationView;
+    
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+
+    
+//    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
+//    TestCalloutViewController *vc = (TestCalloutViewController*)[sb instantiateViewControllerWithIdentifier:@"TestCalloutViewController"];
+
+    
+    
+    view.canShowCallout = YES;
+}
 
 #pragma mark - CLLocationManagerDelegate Methods
 -(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
@@ -132,23 +195,11 @@ NSTimeInterval const EventsMapDefaultLocationUpdateInterval = 60;
     CLLocation *location = (CLLocation *)locations.firstObject;
 
     NSDate *now = [NSDate new];
-    NSTimeInterval secondsSinceLastLocationUpdate = [now timeIntervalSinceDate:self.lastLocationUpdate];
-    if(secondsSinceLastLocationUpdate >= EventsMapDefaultLocationUpdateInterval
+    NSTimeInterval secondsSinceLastLocationUpdate = [self.lastLocationUpdate timeIntervalSinceDate:now];
+    if(secondsSinceLastLocationUpdate *-1 >= EventsMapDefaultLocationUpdateInterval
        || [location distanceFromLocation:self.lastLocation] > self.radius.doubleValue) {
-        for(NSObject<EventProtocol> *event in self.events.allItems) {
-            if(event.placeLongitude && event.placeLattitude) {
-                CLLocation *eventLocation = [[CLLocation alloc] initWithLatitude:event.placeLattitude.doubleValue
-                                                                       longitude:event.placeLongitude.doubleValue];
-                if([eventLocation distanceFromLocation:location] <= self.radius.doubleValue) {
-                    if(!self.filteredEvents) {
-                        self.filteredEvents = [EventsList new];
-                    }
-                    [self.filteredEvents removeAllItems];
-                    [self.filteredEvents add:event];
-                }
-            }
-        }
         
+        [self filterEventsForLocation:location];
         self.lastLocationUpdate = [NSDate new];
         self.lastLocation = location;
         [self mapEvents:self.filteredEvents];
@@ -156,6 +207,26 @@ NSTimeInterval const EventsMapDefaultLocationUpdateInterval = 60;
     
 }
 
+- (void)filterEventsForLocation:(CLLocation *)location {
+    
+    if(!self.filteredEvents) {
+        self.filteredEvents = [EventsList new];
+    }
+    [self.filteredEvents removeAllItems];
+    
+    for(NSObject<EventProtocol> *event in self.events.allItems) {
+        if(event.placeLongitude && event.placeLattitude) {
+            CLLocation *eventLocation = [[CLLocation alloc] initWithLatitude:event.placeLattitude.doubleValue
+                                                                   longitude:event.placeLongitude.doubleValue];
+            if([eventLocation distanceFromLocation:location] <= self.radius.doubleValue) {
+                [self.filteredEvents add:event];
+            }
+        }
+    }
+    
+    self.lastLocationUpdate = [NSDate new];
+    self.lastLocation = location;
+}
 
 
 #pragma mark - Notification Handling
@@ -170,7 +241,10 @@ NSTimeInterval const EventsMapDefaultLocationUpdateInterval = 60;
 - (void)handleUpdatedEventsList:(NSNotification *)notification {
     NSDictionary *userInfo = notification.userInfo;
     self.events = [userInfo objectForKey:KeyEventsListUpdatedNotificationPayload];
-
+    [self initTestEvents];
+    CLLocation *currentLocation = [self.locationManager location];
+    [self filterEventsForLocation:currentLocation];
+    [self mapEvents:self.filteredEvents];
 }
 
 @end

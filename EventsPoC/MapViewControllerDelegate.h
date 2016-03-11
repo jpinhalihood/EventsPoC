@@ -13,7 +13,7 @@
 @interface MapViewControllerDelegate : NSObject<MKMapViewDelegate>
 
 
-- (id) initWithSegue: (NSString*) segueName
-  fromViewController: (UIViewController*) source;
+- (id) initWithSegue:(NSString*)segueName
+  fromViewController:(UIViewController*)source;
 
 @end
