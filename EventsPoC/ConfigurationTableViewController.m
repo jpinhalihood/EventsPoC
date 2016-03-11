@@ -8,6 +8,8 @@
 
 #import "ConfigurationTableViewController.h"
 
+#import "RadiusSelectionTableViewCell.h"
+#import "EventsManager.h"
 
 @interface ConfigurationTableViewController ()
 
@@ -17,6 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -37,14 +41,30 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return 2;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"FBLoginCell"];
-    cell.textLabel.text = @"Connect Facebook";
-    return cell;
+
+    if(indexPath.row == 0) {
+        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"FBLoginCell" forIndexPath:indexPath];
+        cell.textLabel.text = @"Connect Facebook";
+        return cell;
+        
+    } else {
+        RadiusSelectionTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"RadiusSelectionCell" forIndexPath:indexPath];
+        cell.initialRadius = [NSNumber numberWithDouble:EventsDefaultRadius];
+        cell.radiusChangedAction = ^(CGFloat newRadius) {
+            [EventsManager sharedInstance].radius = [NSNumber numberWithFloat:newRadius];
+        };
+        return cell;
+    }
+
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewAutomaticDimension;
 }
 
 -( void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

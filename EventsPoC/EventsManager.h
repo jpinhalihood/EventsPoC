@@ -12,7 +12,18 @@
 
 @class EventsList;
 
-@interface EventsManager : NSObject
+FOUNDATION_EXPORT double const EventsDefaultRadius;
+
+@interface EventsManager : NSObject<CLLocationManagerDelegate>
+
+@property (nonatomic, strong) NSNumber *radius;
+@property (nonatomic, strong) EventsList *allEvents;
+@property (nonatomic, strong) EventsList *filteredEvents;
+@property (nonatomic, copy) void (^locationUpdatedAction)(EventsList *);
+
++ (EventsManager *)sharedInstance;
+- (void)start;
+
 + (void)loadEventsWithCompletion:(void (^) (EventsList *events, NSError *error))completion;
 + (void)loadEventsBetween:(NSDate *)startDate and:(NSDate *)endDate completion:(void (^) (EventsList *events, NSError *error))completion;
 + (void)loadEventsBetween:(NSDate *)startDate

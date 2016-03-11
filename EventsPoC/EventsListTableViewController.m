@@ -12,7 +12,7 @@
 #import "EventsList.h"
 #import "EventProtocol.h"
 #import "EventsListTableViewCell.h"
-
+#import "EventsManager.h"
 #import "EventNotifications.h"
 
 @interface EventsListTableViewController ()
@@ -31,7 +31,8 @@
     self.tableView.estimatedRowHeight = 101.0;
     [self addNotificationCenter];
     
-    self.events = [AppState sharedInstance].events;
+//    self.events = [AppState sharedInstance].events;
+    self.events = [EventsManager sharedInstance].filteredEvents;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -90,9 +91,9 @@
 }
 
 - (void)handleUpdatedEventsList:(NSNotification *)notification {
-    NSDictionary *userInfo = notification.userInfo;
-    self.events = [userInfo objectForKey:KeyEventsListUpdatedNotificationPayload];
-
+//    NSDictionary *userInfo = notification.userInfo;
+//    self.events = [userInfo objectForKey:KeyEventsListUpdatedNotificationPayload];
+    self.events = [EventsManager sharedInstance].filteredEvents;
     [self.tableView reloadData];
 }
 

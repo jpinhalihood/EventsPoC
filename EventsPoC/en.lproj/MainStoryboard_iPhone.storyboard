@@ -151,7 +151,6 @@
                     <tabBarItem key="tabBarItem" title="List View" image="tabbar_list_view_icon" id="3SB-k8-IPz"/>
                     <navigationItem key="navigationItem" title="Events List" id="D1S-aN-pDh">
                         <barButtonItem key="backBarButtonItem" title="Back" id="0s6-C6-HOp"/>
-                        <barButtonItem key="rightBarButtonItem" title="Configure" id="aWe-pb-yU2"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cCi-ah-9Rh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -225,6 +224,75 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="0r3-e7-Txa" kind="presentation" identifier="SegueToFBLoginVC" trigger="accessoryAction" id="mQf-li-uuS"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RadiusSelectionCell" rowHeight="89" id="ERo-Xv-yAN" customClass="RadiusSelectionTableViewCell">
+                                <rect key="frame" x="0.0" y="136" width="600" height="89"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ERo-Xv-yAN" id="tfY-0a-D7U">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="88.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lNQ-07-yQ4">
+                                            <rect key="frame" x="8" y="8" width="584" height="72.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Radius (km):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EiY-58-aTk">
+                                                    <rect key="frame" x="0.0" y="0.0" width="85.5" height="19"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minValue="2" maxValue="200" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0n-kl-jUc">
+                                                    <rect key="frame" x="-2" y="22" width="588" height="31"/>
+                                                </slider>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10km" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Fa-wr-YLg">
+                                                    <rect key="frame" x="0.0" y="47" width="34.5" height="17"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200km" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x30-4K-nFf">
+                                                    <rect key="frame" x="541" y="47" width="42.5" height="17"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VBv-wG-a0C">
+                                                    <rect key="frame" x="93" y="0.0" width="27" height="19"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="2Fa-wr-YLg" firstAttribute="leading" secondItem="lNQ-07-yQ4" secondAttribute="leading" id="1Yc-dr-oZ6"/>
+                                                <constraint firstItem="R0n-kl-jUc" firstAttribute="top" secondItem="EiY-58-aTk" secondAttribute="bottom" constant="3" id="6nj-i8-XPt"/>
+                                                <constraint firstItem="EiY-58-aTk" firstAttribute="top" secondItem="lNQ-07-yQ4" secondAttribute="top" id="88V-xD-Sfp"/>
+                                                <constraint firstItem="R0n-kl-jUc" firstAttribute="leading" secondItem="lNQ-07-yQ4" secondAttribute="leading" id="8rh-q1-5yb"/>
+                                                <constraint firstAttribute="trailing" secondItem="R0n-kl-jUc" secondAttribute="trailing" id="DLS-WV-m5e"/>
+                                                <constraint firstAttribute="trailing" secondItem="x30-4K-nFf" secondAttribute="trailing" id="DpN-8a-yPF"/>
+                                                <constraint firstItem="EiY-58-aTk" firstAttribute="leading" secondItem="lNQ-07-yQ4" secondAttribute="leading" id="ECt-E2-pr5"/>
+                                                <constraint firstItem="2Fa-wr-YLg" firstAttribute="top" secondItem="R0n-kl-jUc" secondAttribute="bottom" constant="-5" id="HSP-EJ-Cuh"/>
+                                                <constraint firstItem="VBv-wG-a0C" firstAttribute="leading" secondItem="EiY-58-aTk" secondAttribute="trailing" constant="8" id="J8H-eX-YpA"/>
+                                                <constraint firstAttribute="height" constant="72.5" id="SZJ-1T-eE3"/>
+                                                <constraint firstItem="x30-4K-nFf" firstAttribute="centerY" secondItem="2Fa-wr-YLg" secondAttribute="centerY" id="YEh-Hv-d64"/>
+                                                <constraint firstItem="VBv-wG-a0C" firstAttribute="centerY" secondItem="EiY-58-aTk" secondAttribute="centerY" id="ggH-QC-9oT"/>
+                                                <constraint firstItem="VBv-wG-a0C" firstAttribute="top" secondItem="lNQ-07-yQ4" secondAttribute="top" id="wfv-mc-LuA"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="lNQ-07-yQ4" firstAttribute="leading" secondItem="tfY-0a-D7U" secondAttribute="leadingMargin" id="4Bb-L3-0Xq"/>
+                                        <constraint firstItem="lNQ-07-yQ4" firstAttribute="top" secondItem="tfY-0a-D7U" secondAttribute="topMargin" id="CXg-X4-xdv"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="lNQ-07-yQ4" secondAttribute="bottom" id="Jvi-HC-UGE"/>
+                                        <constraint firstItem="lNQ-07-yQ4" firstAttribute="trailing" secondItem="tfY-0a-D7U" secondAttribute="trailingMargin" id="nH4-cn-ugg"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="maxRadiusLabel" destination="x30-4K-nFf" id="A8N-PH-6nc"/>
+                                    <outlet property="minRadiusLabel" destination="2Fa-wr-YLg" id="kGO-gi-Doh"/>
+                                    <outlet property="radiusLabel" destination="VBv-wG-a0C" id="h1O-nf-U1t"/>
+                                    <outlet property="radiusSlider" destination="R0n-kl-jUc" id="umj-h6-ge7"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
