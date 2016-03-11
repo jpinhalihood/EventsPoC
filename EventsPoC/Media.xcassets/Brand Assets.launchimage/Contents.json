@@ -3,7 +3,6 @@
     {
       "orientation" : "portrait",
       "idiom" : "ipad",
-      "filename" : "icon-120.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "1x"
@@ -11,7 +10,6 @@
     {
       "orientation" : "landscape",
       "idiom" : "ipad",
-      "filename" : "icon-121.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "1x"
@@ -19,7 +17,6 @@
     {
       "orientation" : "portrait",
       "idiom" : "ipad",
-      "filename" : "icon-153.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "2x"
@@ -27,7 +24,6 @@
     {
       "orientation" : "landscape",
       "idiom" : "ipad",
-      "filename" : "icon-152.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "2x"
