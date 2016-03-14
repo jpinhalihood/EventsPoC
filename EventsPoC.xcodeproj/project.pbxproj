@@ -61,7 +61,6 @@
 		DBA681CC1C8519C600335C51 /* EventAnnotationCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA681CB1C8519C600335C51 /* EventAnnotationCalloutView.m */; };
 		DBA681CF1C85262900335C51 /* TestCalloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA681CE1C85262900335C51 /* TestCalloutViewController.m */; };
 		DBAD37101C925CBA005FF45E /* RadiusSelectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBAD370F1C925CBA005FF45E /* RadiusSelectionTableViewCell.m */; };
-		DBAD37141C926D36005FF45E /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBAD37131C926D36005FF45E /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,7 +167,6 @@
 		DBABE8AB1C7D35B400512FAC /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		DBAD370E1C925CBA005FF45E /* RadiusSelectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadiusSelectionTableViewCell.h; sourceTree = "<group>"; };
 		DBAD370F1C925CBA005FF45E /* RadiusSelectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadiusSelectionTableViewCell.m; sourceTree = "<group>"; };
-		DBAD37131C926D36005FF45E /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,7 +201,6 @@
 		1F530A4F177BA59F009A27C0 = {
 			isa = PBXGroup;
 			children = (
-				DBAD37131C926D36005FF45E /* Launch Screen.storyboard */,
 				DBABE8AB1C7D35B400512FAC /* version.h */,
 				1F530A61177BA59F009A27C0 /* EventsPoC */,
 				1F530A88177BA5A0009A27C0 /* EventsPoCTests */,
@@ -529,7 +526,6 @@
 				1F530A70177BA59F009A27C0 /* Default@2x.png in Resources */,
 				1F530A72177BA59F009A27C0 /* Default-568h@2x.png in Resources */,
 				1F530A75177BA5A0009A27C0 /* MainStoryboard_iPhone.storyboard in Resources */,
-				DBAD37141C926D36005FF45E /* Launch Screen.storyboard in Resources */,
 				1F530A78177BA5A0009A27C0 /* MainStoryboard_iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -722,7 +718,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -751,7 +746,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
