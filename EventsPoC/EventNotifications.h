@@ -13,5 +13,4 @@ FOUNDATION_EXPORT NSString * const EventsListUpdatedNotification;
 FOUNDATION_EXPORT NSString * const KeyEventsListUpdatedNotificationPayload;
 
 @interface EventNotifications : NSObject
-
 @end

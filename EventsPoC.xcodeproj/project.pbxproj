@@ -46,6 +46,7 @@
 		DB25E5C51C6C34AC0068C64F /* FBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB25E5C41C6C34AC0068C64F /* FBLoginViewController.m */; };
 		DB25E5C71C6C36480068C64F /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB25E5C61C6C36480068C64F /* FBSDKLoginKit.framework */; };
 		DB2899911C5B222E005D0C3C /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB2899901C5B222E005D0C3C /* Contacts.framework */; };
+		DB352B631C978154000BFE5D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB352B621C978154000BFE5D /* Launch Screen.storyboard */; };
 		DB60A88B1C76A4D900DF6A0A /* FBPagedApiOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB60A88A1C76A4D900DF6A0A /* FBPagedApiOperation.m */; };
 		DB711E3F1C755847008A3930 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB711E3E1C755847008A3930 /* Media.xcassets */; };
 		DB711E431C7562E0008A3930 /* ConfigurationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB711E421C7562E0008A3930 /* ConfigurationTableViewController.m */; };
@@ -137,6 +138,7 @@
 		DB25E5C41C6C34AC0068C64F /* FBLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginViewController.m; sourceTree = "<group>"; };
 		DB25E5C61C6C36480068C64F /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "FacebookSDKs-iOS-20160210/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		DB2899901C5B222E005D0C3C /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		DB352B621C978154000BFE5D /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		DB60A8841C76993500DF6A0A /* EventProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventProtocol.h; sourceTree = "<group>"; };
 		DB60A8891C76A4D900DF6A0A /* FBPagedApiOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPagedApiOperation.h; sourceTree = "<group>"; };
 		DB60A88A1C76A4D900DF6A0A /* FBPagedApiOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPagedApiOperation.m; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 		1F530A4F177BA59F009A27C0 = {
 			isa = PBXGroup;
 			children = (
+				DB352B621C978154000BFE5D /* Launch Screen.storyboard */,
 				DBABE8AB1C7D35B400512FAC /* version.h */,
 				1F530A61177BA59F009A27C0 /* EventsPoC */,
 				1F530A88177BA5A0009A27C0 /* EventsPoCTests */,
@@ -526,6 +529,7 @@
 				1F530A70177BA59F009A27C0 /* Default@2x.png in Resources */,
 				1F530A72177BA59F009A27C0 /* Default-568h@2x.png in Resources */,
 				1F530A75177BA5A0009A27C0 /* MainStoryboard_iPhone.storyboard in Resources */,
+				DB352B631C978154000BFE5D /* Launch Screen.storyboard in Resources */,
 				1F530A78177BA5A0009A27C0 /* MainStoryboard_iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

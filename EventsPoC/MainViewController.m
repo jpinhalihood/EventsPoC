@@ -33,16 +33,8 @@
     if(![FBSession getAccessToken]) {
         [FBSession renewFromViewController:self.selectedViewController];
     } else {
+        [EventsManager sharedInstance].radius = [NSNumber numberWithDouble:EventsDefaultRadius];
         [[EventsManager sharedInstance] start];
-//        [EventsManager loadEventsWithCompletion:^(EventsList *events, NSError *error) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                if(events && events.count > 0 && !error) {
-//                    [AppState sharedInstance].events = events;
-//                    NSDictionary *userInfo = @{KeyEventsListUpdatedNotificationPayload : events };
-//                    [[NSNotificationCenter defaultCenter] postNotificationName:EventsListUpdatedNotification object:nil userInfo:userInfo];
-//                }
-//            });
-//        }];
     }
 }
 

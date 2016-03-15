@@ -24,6 +24,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(manualRefresh) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:self.refreshControl];
+    
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor darkGrayColor]}];
     
@@ -31,7 +35,6 @@
     self.tableView.estimatedRowHeight = 101.0;
     [self addNotificationCenter];
     
-//    self.events = [AppState sharedInstance].events;
     self.events = [EventsManager sharedInstance].filteredEvents;
 }
 
@@ -91,10 +94,15 @@
 }
 
 - (void)handleUpdatedEventsList:(NSNotification *)notification {
-//    NSDictionary *userInfo = notification.userInfo;
-//    self.events = [userInfo objectForKey:KeyEventsListUpdatedNotificationPayload];
+    if(self.refreshControl.isRefreshing) {
+        [self.refreshControl endRefreshing];
+    }
     self.events = [EventsManager sharedInstance].filteredEvents;
     [self.tableView reloadData];
+}
+
+- (void)manualRefresh {
+    [[EventsManager sharedInstance] start];
 }
 
 @end

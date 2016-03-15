@@ -18,7 +18,7 @@
 #import "FBGetLikesAndEventsOperation.h"
 
 NSTimeInterval const EventsDefaultLocationUpdateInterval = 60;
-double const EventsDefaultRadius = 2000; // 2km in meters
+double const EventsDefaultRadius = 200 *1000; // 200 km in meters
 
 @interface EventsManager()
 
@@ -100,7 +100,6 @@ double const EventsDefaultRadius = 2000; // 2km in meters
 - (void)setRadius:(NSNumber *)radius {
     _radius = radius;
     [self filterEventsForLocation:self.lastLocation];
-    [self postEventsUpdatedNotification];
 }
 
 
