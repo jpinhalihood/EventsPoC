@@ -1,3 +1,5 @@
+sh "export PATH=\"/usr/local/bin:$PATH\""
+
 # Customise this file, documentation can be found here:
 # https://github.com/fastlane/fastlane/tree/master/docs
 # All available actions: https://github.com/fastlane/fastlane/blob/master/docs/Actions.md
