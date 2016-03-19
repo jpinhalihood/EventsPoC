@@ -43,6 +43,7 @@ platform :ios do
     # You can also use other beta testing services here (run `fastlane actions`)
   end
 
+  # From https://blog.xmartlabs.com/2016/03/07/ci-with-xcode-server-and-fastlane/
   desc "Update the build number"
   lane :before_integration do
     build_number = number_of_commits
@@ -72,21 +73,6 @@ platform :ios do
       path: './EventsPoC/NearMe-Info.plist',
       message: "Version bump to #{version_number} (#{build_number}) by CI Builder"
     )
-
-    ipa_folder = "#{ENV['XCS_DERIVED_DATA_DIR']}/deploy/#{version_number}.#{build_number}/"
-    ipa_path = "#{ipa_folder}/#{target}.ipa"
-    sh "mkdir -p #{ipa_folder}"
-
-  # Export the IPA from the archive file created by the bot
-    sh "xcrun xcodebuild -exportArchive -archivePath \"#{ENV['XCS_ARCHIVE']}\" -exportPath \"#{ipa_path}\" -IDEPostProgressNotifications=YES -DVTAllowServerCertificates=YES -DVTSigningCertificateSourceLogLevel=3 -DVTSigningCertificateManagerLogLevel=3 -DTDKProvisioningProfileExtraSearchPaths=/Library/Developer/XcodeServer/ProvisioningProfiles -exportOptionsPlist './ExportOptions.plist'"
-
-    # Upload the build to iTunes Connect, it won't submit this IPA for review.
-    deliver(
-      force: true,
-      ipa: ipa_path
-    )
-
-
 
     # Keep committing and tagging actions after export & upload to prevent confirm
     # the changes to the repo if something went wrong
