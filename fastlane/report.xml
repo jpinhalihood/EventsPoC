@@ -3,22 +3,34 @@
   <testsuite name="fastlane.lanes">
     
       
-      <testcase classname="fastlane.lanes" name="0: Verifying required fastlane version" time="0.000343">
+      <testcase classname="fastlane.lanes" name="0: Verifying required fastlane version" time="0.000355">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.000248">
+      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.000316">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: number_of_commits" time="0.012521">
+      <testcase classname="fastlane.lanes" name="2: get_info_plist_value" time="0.002561">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: set_info_plist_value" time="0.003884">
+      <testcase classname="fastlane.lanes" name="3: get_info_plist_value" time="0.002363">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="4: git_commit" time="0.054108">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="5: mkdir -p /deploy/1.0.5.43/" time="0.00378">
+        
+          <failure message="/Library/Ruby/Gems/2.0.0/gems/fastlane-1.63.1/lib/fastlane/actions/actions_helper.rb:33:in `execute_action'&#10;/Library/Ruby/Gems/2.0.0/gems/fastlane-1.63.1/lib/fastlane/fast_file.rb:181:in `sh'&#10;Fastfile:79:in `block (2 levels) in parsing_binding'&#10;/Library/Ruby/Gems/2.0.0/gems/fastlane-1.63.1/lib/fastlane/lane.rb:36:in `call'&#10;/Library/Ruby/Gems/2.0.0/gems/fastlane-1.63.1/lib/fastlane/lane.rb:36:in `call'&#10;/Library/Ruby/Gems/2.0.0/gems/fastlane-1.63.1/lib/fastlane/runner.rb:52:in `block in execute'&#10;/Library/Ruby/Gems/2.0.0/gems/fastlane-1.63.1/lib/fastlane/runner.rb:46:in `chdir'&#10;/Library/Ruby/Gems/2.0.0/gems/fastlane-1.63.1/lib/fastlane/runner.rb:46:in `execute'&#10;/Library/Ruby/Gems/2.0.0/gems/fastlane-1.63.1/lib/fastlane/lane_manager.rb:46:in `cruise_lane'&#10;/Library/Ruby/Gems/2.0.0/gems/fastlane-1.63.1/lib/fastlane/command_line_handler.rb:30:in `handle'&#10;/Library/Ruby/Gems/2.0.0/gems/fastlane-1.63.1/bin/fastlane:38:in `block (2 levels) in run'&#10;/Library/Ruby/Gems/2.0.0/gems/commander-4.3.5/lib/commander/command.rb:178:in `call'&#10;/Library/Ruby/Gems/2.0.0/gems/commander-4.3.5/lib/commander/command.rb:178:in `call'&#10;/Library/Ruby/Gems/2.0.0/gems/commander-4.3.5/lib/commander/command.rb:153:in `run'&#10;/Library/Ruby/Gems/2.0.0/gems/commander-4.3.5/lib/commander/runner.rb:428:in `run_active_command'&#10;/Library/Ruby/Gems/2.0.0/gems/fastlane_core-0.36.8/lib/fastlane_core/ui/fastlane_runner.rb:23:in `run!'&#10;/Library/Ruby/Gems/2.0.0/gems/commander-4.3.5/lib/commander/delegates.rb:15:in `run!'&#10;/Library/Ruby/Gems/2.0.0/gems/fastlane-1.63.1/bin/fastlane:156:in `run'&#10;/Library/Ruby/Gems/2.0.0/gems/fastlane-1.63.1/bin/fastlane:162:in `&lt;top (required)&gt;'&#10;/usr/local/bin/fastlane:23:in `load'&#10;/usr/local/bin/fastlane:23:in `&lt;main&gt;'&#10;&#10;Exit status of command 'mkdir -p /deploy/1.0.5.43/' was 1 instead of 0.&#10;mkdir: /deploy/1.0.5.43/: Permission denied&#10;" />
         
       </testcase>
     

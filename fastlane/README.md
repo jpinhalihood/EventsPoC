@@ -23,6 +23,11 @@ This will also make sure the profile is up to date
 fastlane ios before_integration
 ```
 Update the build number
+### ios after_integration
+```
+fastlane ios after_integration
+```
+Update build number
 ### ios appstore
 ```
 fastlane ios appstore
