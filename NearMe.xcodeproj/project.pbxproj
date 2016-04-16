@@ -19,7 +19,6 @@
 		1F530A72177BA59F009A27C0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F530A71177BA59F009A27C0 /* Default-568h@2x.png */; };
 		1F530A75177BA5A0009A27C0 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F530A73177BA59F009A27C0 /* MainStoryboard_iPhone.storyboard */; };
 		1F530A78177BA5A0009A27C0 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F530A76177BA5A0009A27C0 /* MainStoryboard_iPad.storyboard */; };
-		1F530A83177BA5A0009A27C0 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F530A82177BA5A0009A27C0 /* SenTestingKit.framework */; };
 		1F530A84177BA5A0009A27C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F530A5B177BA59F009A27C0 /* UIKit.framework */; };
 		1F530A85177BA5A0009A27C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F530A5D177BA59F009A27C0 /* Foundation.framework */; };
 		1F530A8D177BA5A0009A27C0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F530A8B177BA5A0009A27C0 /* InfoPlist.strings */; };
@@ -62,6 +61,7 @@
 		DBA681CC1C8519C600335C51 /* EventAnnotationCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA681CB1C8519C600335C51 /* EventAnnotationCalloutView.m */; };
 		DBA681CF1C85262900335C51 /* TestCalloutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBA681CE1C85262900335C51 /* TestCalloutViewController.m */; };
 		DBAD37101C925CBA005FF45E /* RadiusSelectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DBAD370F1C925CBA005FF45E /* RadiusSelectionTableViewCell.m */; };
+		DBD7AE3F1CA62DA900AC0D56 /* FBGetEventsForLocationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD7AE3E1CA62DA900AC0D56 /* FBGetEventsForLocationOperation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,8 +93,7 @@
 		1F530A71177BA59F009A27C0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		1F530A74177BA5A0009A27C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		1F530A77177BA5A0009A27C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		1F530A81177BA5A0009A27C0 /* NearMe.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NearMe.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1F530A82177BA5A0009A27C0 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		1F530A81177BA5A0009A27C0 /* NearMe.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NearMe.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F530A8A177BA5A0009A27C0 /* NearMeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NearMeTests-Info.plist"; sourceTree = "<group>"; };
 		1F530A8C177BA5A0009A27C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1F530A8E177BA5A0009A27C0 /* EventsPoCTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventsPoCTests.h; sourceTree = "<group>"; };
@@ -169,6 +168,8 @@
 		DBABE8AB1C7D35B400512FAC /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		DBAD370E1C925CBA005FF45E /* RadiusSelectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadiusSelectionTableViewCell.h; sourceTree = "<group>"; };
 		DBAD370F1C925CBA005FF45E /* RadiusSelectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadiusSelectionTableViewCell.m; sourceTree = "<group>"; };
+		DBD7AE3D1CA62DA900AC0D56 /* FBGetEventsForLocationOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGetEventsForLocationOperation.h; sourceTree = "<group>"; };
+		DBD7AE3E1CA62DA900AC0D56 /* FBGetEventsForLocationOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBGetEventsForLocationOperation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,7 +192,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F530A83177BA5A0009A27C0 /* SenTestingKit.framework in Frameworks */,
 				1F530A84177BA5A0009A27C0 /* UIKit.framework in Frameworks */,
 				1F530A85177BA5A0009A27C0 /* Foundation.framework in Frameworks */,
 			);
@@ -216,7 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				1F530A58177BA59F009A27C0 /* NearMe.app */,
-				1F530A81177BA5A0009A27C0 /* NearMe.octest */,
+				1F530A81177BA5A0009A27C0 /* NearMe.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -232,7 +232,6 @@
 				1F530A5B177BA59F009A27C0 /* UIKit.framework */,
 				1F530A5D177BA59F009A27C0 /* Foundation.framework */,
 				1F530A5F177BA59F009A27C0 /* CoreGraphics.framework */,
-				1F530A82177BA5A0009A27C0 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -365,6 +364,8 @@
 				DB60A88A1C76A4D900DF6A0A /* FBPagedApiOperation.m */,
 				DB228CC91C7E8F7D00B6451D /* FBGetLikesAndEventsOperation.h */,
 				DB228CCA1C7E8F7D00B6451D /* FBGetLikesAndEventsOperation.m */,
+				DBD7AE3D1CA62DA900AC0D56 /* FBGetEventsForLocationOperation.h */,
+				DBD7AE3E1CA62DA900AC0D56 /* FBGetEventsForLocationOperation.m */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -480,8 +481,8 @@
 			);
 			name = NearMeTests;
 			productName = EventsPoCTests;
-			productReference = 1F530A81177BA5A0009A27C0 /* NearMe.octest */;
-			productType = "com.apple.product-type.bundle.ocunit-test";
+			productReference = 1F530A81177BA5A0009A27C0 /* NearMe.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -490,6 +491,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
+				LastTestingUpgradeCheck = 0730;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Jeff Price";
 				TargetAttributes = {
@@ -566,6 +568,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB60A88B1C76A4D900DF6A0A /* FBPagedApiOperation.m in Sources */,
+				DBD7AE3F1CA62DA900AC0D56 /* FBGetEventsForLocationOperation.m in Sources */,
 				DB711E491C756753008A3930 /* FBSession.m in Sources */,
 				DB711E431C7562E0008A3930 /* ConfigurationTableViewController.m in Sources */,
 				1F9F8E48181A00E80058DD5C /* MapEvent.m in Sources */,
@@ -780,13 +783,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EventsPoC/NearMe-Prefix.pch";
 				INFOPLIST_FILE = "EventsPoCTests/NearMeTests-Info.plist";
 				PRODUCT_NAME = NearMe;
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -797,13 +800,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EventsPoC/NearMe-Prefix.pch";
 				INFOPLIST_FILE = "EventsPoCTests/NearMeTests-Info.plist";
 				PRODUCT_NAME = NearMe;
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

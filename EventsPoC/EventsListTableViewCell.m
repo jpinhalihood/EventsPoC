@@ -34,7 +34,9 @@
  {
     self.titleLabel.text = title;
     self.descriptionLabel.text = description;
-    self.hostLabel.text = [@"Host: " stringByAppendingString:host];
+    if(host) {
+        self.hostLabel.text = [@"Host: " stringByAppendingString:host];
+    }
      
     NSDateFormatter *formatter = [NSDateFormatter new];
     [formatter setDateFormat:@"MMM dd, yyyy '@' hh:mm a'"];

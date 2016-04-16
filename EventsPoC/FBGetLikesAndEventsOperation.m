@@ -10,21 +10,21 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 #import "FBEvent.h"
-
+#import "EventsList.h"
 
 @interface FBGetLikesAndEventsOperation()
-@property (nonatomic, strong) NSMutableArray<FBEvent*> *events;
+@property (nonatomic, strong) EventsList *events;
 @property (nonatomic, strong) NSArray<NSString *> *objectIds;
-@property (nonatomic, copy) void (^completionAction)(NSArray<FBEvent*>*, NSError *);
+@property (nonatomic, copy) void (^completionAction)(EventsList *, NSError *);
 @end
 
 @implementation FBGetLikesAndEventsOperation
 
--(instancetype)initWithCompletion:(void (^) (NSArray<FBEvent*> *, NSError *))completion {
+-(instancetype)initWithCompletion:(void (^) (EventsList *, NSError *))completion {
     if(self = [super init]) {
         _completionAction = completion;
         _identifier = @"me";
-        _events = [NSMutableArray new];
+        _events = [EventsList new];
     }
     return self;
 }
@@ -65,7 +65,7 @@
 
             // Get events
             NSError *error = nil;
-            NSArray *allEvents = [self getEventsForObjectIds:buckets accessToken:accessToken error:&error];
+            EventsList *allEvents = [self getEventsForObjectIds:buckets accessToken:accessToken error:&error];
             
             if(self.completionAction) {
                 self.completionAction(allEvents, error);
@@ -78,9 +78,9 @@
     
 }
 
-- (NSArray<FBEvent*> *)getEventsForObjectIds:(NSArray<NSArray *> *)buckets accessToken:(NSString *)accessToken error:(__autoreleasing NSError **)error {
+- (EventsList *)getEventsForObjectIds:(NSArray<NSArray *> *)buckets accessToken:(NSString *)accessToken error:(__autoreleasing NSError **)error {
 
-    NSMutableArray<FBEvent *> *events = [NSMutableArray new];
+    EventsList *events = [EventsList new];
     for(NSArray *bucket in buckets) {
         
         if(self.isCancelled) {
@@ -106,7 +106,7 @@
                 NSDictionary *bodyJson = [NSJSONSerialization JSONObjectWithData:bodyData options:kNilOptions error:&parseError];
                 NSArray *eventsJson = [bodyJson objectForKey:@"data"];
                 newEvents = [self getEventsFromJsonArray:eventsJson];
-                [events addObjectsFromArray:newEvents];
+                [events mergeItems:newEvents];
             }
         }
         
@@ -114,7 +114,7 @@
     }
     
     
-    return [NSArray arrayWithArray:events];
+    return events;
 }
 
 
@@ -147,7 +147,7 @@
 
 - (NSArray<NSString *> *)getFriendObjectIdsWithAccessToken:(NSString *)accessToken {
     
-    NSString *url = [NSString stringWithFormat:@"https://graph.facebook.com/v2.5/%@/friends?type=attending&access_token=%@&pretty=0&limit=100", self.identifier, accessToken];
+    NSString *url = [NSString stringWithFormat:@"https://graph.facebook.com/v2.5/%@/friends?access_token=%@&pretty=0&limit=100", self.identifier, accessToken];
     
     NSError *error = nil;
     NSMutableArray<NSString *> *objectIds = [NSMutableArray new];
@@ -234,8 +234,8 @@
     NSError *error = nil;
     NSData *data = [NSJSONSerialization dataWithJSONObject:payload options:kNilOptions error:&error];
     
-    //    NSArray *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-    //    NSLog(@"\n\nPayload:\n%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+//    NSArray *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+//    NSLog(@"\n\nPayload:\n%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     
     return data;
     

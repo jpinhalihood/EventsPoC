@@ -33,7 +33,14 @@ NSString * const KeyFBEventHost = @"owner";
 
 - (instancetype)initWithDictionary:(NSDictionary *)json {
     if(self = [super init]) {
-        _eventId = json[KeyFBEventId];
+        NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
+        if([json[KeyFBEventId] isKindOfClass:[NSString class]]) {
+            _eventId = [numberFormatter numberFromString:json[KeyFBEventId]];
+        }
+        else {
+            _eventId = json[KeyFBEventId];
+        }
+                
         _eventName = json[KeyFBEventName];
         _eventDescription = json[KeyFBEventDescription];
         _rsvpStatus = json[KeyFBEventRsvpStatus];

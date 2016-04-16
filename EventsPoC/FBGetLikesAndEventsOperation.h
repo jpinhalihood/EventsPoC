@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 
 #import "FBPagedApiOperation.h"
-@class FBEvent;
 
+@class FBEvent;
+@class EventsList;
 
 @interface FBGetLikesAndEventsOperation : FBPagedApiOperation
 @property (nonatomic, strong) NSString *identifier;
@@ -18,5 +19,5 @@
 @property (nonatomic, strong) NSDate *startDate;
 @property (nonatomic, strong) NSDate *endDate;
 
--(instancetype)initWithCompletion:(void (^) (NSArray<FBEvent*> *, NSError *))completion;
+-(instancetype)initWithCompletion:(void (^) (EventsList *, NSError *))completion;
 @end

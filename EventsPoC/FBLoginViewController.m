@@ -99,8 +99,8 @@
 }
 
 - (BOOL)isLoggedIn {
-    NSLog(@"Token: %@", [FBSDKAccessToken currentAccessToken].tokenString);
-    NSLog(@"Exiration Date: %@", [FBSDKAccessToken currentAccessToken].expirationDate);
+//    NSLog(@"Token: %@", [FBSDKAccessToken currentAccessToken].tokenString);
+//    NSLog(@"Exiration Date: %@", [FBSDKAccessToken currentAccessToken].expirationDate);
     return ([[FBSDKAccessToken currentAccessToken].expirationDate compare:[NSDate new]] == NSOrderedDescending);
 }
 

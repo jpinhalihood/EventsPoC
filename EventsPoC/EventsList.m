@@ -75,13 +75,28 @@
     [self.items removeAllObjects];
 }
 
-
--(EventsList *)filterByLattitude:(NSNumber *)lattitude longitude:(NSNumber *)longitude {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"placeLattitude=%@ AND placeLongitude=%@", lattitude, longitude];
-    NSArray *filtered = [self.allItems filteredArrayUsingPredicate:predicate];
-    EventsList *filteredList = [EventsList listFromArrayOfEvents:filtered];
-    return filteredList;
+-(void)mergeItems:(NSArray<NSObject<EventProtocol>*> *)items {
+    for(NSObject<EventProtocol> *event in items) {
+        if(![self containsItem:event]) {
+            [self.items addObject:event];
+        }
+    }
 }
+
+-(BOOL)containsItem:(NSObject<EventProtocol>*)item {
+    for(NSObject<EventProtocol>* event in self.items) {
+        if([item.eventId isEqualToNumber:event.eventId]) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+-(void)sortUsingDescriptors:(NSArray<NSSortDescriptor *> *)descriptors {
+    [self.items sortUsingDescriptors:descriptors];
+}
+
 
 
 #pragma mark - Convenience Methods

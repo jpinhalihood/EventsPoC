@@ -17,8 +17,9 @@ FOUNDATION_EXPORT double const EventsDefaultRadius;
 @interface EventsManager : NSObject<CLLocationManagerDelegate>
 
 @property (nonatomic, strong) NSNumber *radius;
-@property (nonatomic, strong) EventsList *allEvents;
-@property (nonatomic, strong) EventsList *filteredEvents;
+@property (nonatomic, readonly) EventsList *allEvents;
+@property (nonatomic, readonly) EventsList *filteredEvents;
+
 @property (nonatomic, copy) void (^locationUpdatedAction)(EventsList *);
 
 + (EventsManager *)sharedInstance;

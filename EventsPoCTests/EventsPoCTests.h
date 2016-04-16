@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Jeff Price. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface EventsPoCTests : SenTestCase
+@interface EventsPoCTests : XCTestCase
 
 @end
