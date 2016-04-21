@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSDate *startTime;
 @property (nonatomic, strong) NSDate *endTime;
 @property (nonatomic, strong) NSString *eventDescription;
+@property (nonatomic, strong) NSString *placeName;
 @property (nonatomic, strong) NSNumber *placeLongitude;
 @property (nonatomic, strong) NSNumber *placeLattitude;
 @property (nonatomic, strong) NSString *eventHost;

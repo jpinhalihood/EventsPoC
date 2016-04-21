@@ -106,7 +106,7 @@
 
 - (void)loginWithCompletion:(void (^) (FBSDKLoginManagerLoginResult *result, NSError *error))completion {
     FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
-    [loginManager logInWithReadPermissions:@[@"public_profile", @"email", @"user_friends", @"user_events", @"user_likes"]
+    [loginManager logInWithReadPermissions:@[@"public_profile", @"email", @"user_friends", @"user_events", @"user_likes", @"user_status", @"user_photos", @"user_videos", @"user_location", @"user_birthday", @"user_about_me", @"user_tagged_places", @"user_relationships", @"user_relationship_details", @"user_posts", @"user_hometown", @"email", @"user_managed_groups"]
                         fromViewController:self
                                    handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
                                 if (error) {

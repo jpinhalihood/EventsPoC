@@ -11,6 +11,10 @@
 
 #import "FBEvent.h"
 #import "EventsList.h"
+#import "FBConstants.h"
+#import "FBOperationHelper.h"
+
+
 
 @interface FBGetLikesAndEventsOperation()
 @property (nonatomic, strong) EventsList *events;
@@ -57,7 +61,7 @@
                 return;
             }
             
-            NSArray<NSArray *> *buckets = [self makeBucketsWithObjectIds:self.objectIds];
+            NSArray<NSArray *> *buckets = [FBOperationHelper makeBucketsWithObjectIds:self.objectIds];
 
             if(self.isCancelled) {
                 return;
@@ -78,7 +82,9 @@
     
 }
 
-- (EventsList *)getEventsForObjectIds:(NSArray<NSArray *> *)buckets accessToken:(NSString *)accessToken error:(__autoreleasing NSError **)error {
+- (EventsList *)getEventsForObjectIds:(NSArray<NSArray *> *)buckets
+                          accessToken:(NSString *)accessToken
+                                error:(__autoreleasing NSError **)error {
 
     EventsList *events = [EventsList new];
     for(NSArray *bucket in buckets) {
@@ -88,8 +94,11 @@
         }
         
         NSMutableArray *newEvents = nil;
-        NSData *payload = [self getBatchRequestDataWithObjectIds:bucket accessToken:accessToken];
-        NSString *url = @"https://graph.facebook.com/v2.5";
+        NSData *payload = [FBOperationHelper getBatchRequestDataWithObjectIds:bucket
+                                                                    startDate:self.startDate
+                                                                      endDate:self.endDate
+                                                                  accessToken:accessToken];
+        NSString *url = FBGraphApiBaseUrl;
         NSArray<NSDictionary*> *results = nil;
         
         NSError *fetchError = nil;
@@ -122,7 +131,7 @@
 
 - (NSArray<NSString *> *)getLikeObjectIdsWithAccessToken:(NSString *)accessToken {
 
-    NSString *url = [NSString stringWithFormat:@"https://graph.facebook.com/v2.5/%@/likes?access_token=%@&pretty=0&limit=100", self.identifier, accessToken];
+    NSString *url = [NSString stringWithFormat:@"%@/%@/likes?access_token=%@&pretty=0&limit=100&fields=id", FBGraphApiBaseUrl, self.identifier, accessToken];
     
     NSError *error = nil;
     NSMutableArray<NSString *> *objectIds = [NSMutableArray new];
@@ -147,7 +156,7 @@
 
 - (NSArray<NSString *> *)getFriendObjectIdsWithAccessToken:(NSString *)accessToken {
     
-    NSString *url = [NSString stringWithFormat:@"https://graph.facebook.com/v2.5/%@/friends?access_token=%@&pretty=0&limit=100", self.identifier, accessToken];
+    NSString *url = [NSString stringWithFormat:@"%@/%@/friends?access_token=%@&pretty=0&limit=100&fields=id", FBGraphApiBaseUrl, self.identifier, accessToken];
     
     NSError *error = nil;
     NSMutableArray<NSString *> *objectIds = [NSMutableArray new];
@@ -161,84 +170,13 @@
         if(json && !error) {
             NSArray<NSDictionary*> *dataJson = [json objectForKey:@"data"];
             for(NSDictionary *likeJson in dataJson) {
-                NSString *objectId = [likeJson objectForKey:@"id"];
+                NSString *objectId = (NSString *)[likeJson objectForKey:@"id"];
                 [objectIds addObject:objectId];
             }
         }
     }
     
     return [NSArray arrayWithArray:objectIds];
-}
-
-- (NSArray<NSArray *> *)makeBucketsWithObjectIds:(NSArray<NSString *> *)objectIds {
-
-    NSUInteger count=0;
-    NSMutableArray<NSArray *> *buckets = [NSMutableArray new];
-    NSMutableArray<NSString *> *currentBucket = [[NSMutableArray alloc] initWithCapacity:50];
-    
-    for(NSString *objectId in self.objectIds) {
-        if(count < 49) {
-            count++;
-            [currentBucket addObject:objectId];
-        } else {
-            [currentBucket addObject:objectId];
-            count = 0;
-            [buckets addObject:[NSArray arrayWithArray:currentBucket]];
-            [currentBucket removeAllObjects];
-        }
-    }
-    
-    if(currentBucket.count > 0) {
-        [buckets addObject:[NSArray arrayWithArray:currentBucket]];
-    }
-    
-    return [NSArray arrayWithArray:buckets];
-}
-
-- (NSString *)getRequestUrlWithObjectId:(NSString *)objectId {
-    
-    NSDateFormatter *formatter = [NSDateFormatter new];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
-    NSString *since = @"";
-    if(self.startDate) {
-        since = [NSString stringWithFormat:@"&since=%@", [formatter stringFromDate:self.startDate]];
-    }
-    
-    NSString *until = @"";
-    if(self.endDate) {
-        until = [NSString stringWithFormat:@"&until=%@", [formatter stringFromDate:self.endDate]];
-    }
-    
-    NSString *url = [NSString stringWithFormat:@"%@/events?pretty=0&limit=1000%@%@&fields=description,name,place,owner,start_time,end_time,rsvp_status", objectId, since, until];
-    
-    return url;
-}
-
-- (NSData *)getBatchRequestDataWithObjectIds:(NSArray<NSString *> *)objectIds accessToken:(NSString *)accessToken {
-    
-    NSMutableDictionary *payload = [NSMutableDictionary new];
-    NSMutableArray *batch = [[NSMutableArray alloc] initWithCapacity:objectIds.count];
-    for(NSString *objectId in objectIds) {
-        NSMutableDictionary *dictionary = [NSMutableDictionary new];
-        NSString *relativeUrl = [self getRequestUrlWithObjectId:objectId];
-        [dictionary setObject:@"GET" forKey:@"method"];
-        [dictionary setObject:relativeUrl forKey:@"relative_url"];
-        
-        [batch addObject:dictionary];
-    }
-    
-    [payload setObject:batch forKey:@"batch"];
-    
-    [payload setObject:accessToken forKey:@"access_token"];
-    
-    NSError *error = nil;
-    NSData *data = [NSJSONSerialization dataWithJSONObject:payload options:kNilOptions error:&error];
-    
-//    NSArray *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-//    NSLog(@"\n\nPayload:\n%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-    
-    return data;
-    
 }
 
 

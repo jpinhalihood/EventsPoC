@@ -25,11 +25,5 @@ FOUNDATION_EXPORT double const EventsDefaultRadius;
 + (EventsManager *)sharedInstance;
 - (void)start;
 
-+ (void)loadEventsWithCompletion:(void (^) (EventsList *events, NSError *error))completion;
-+ (void)loadEventsBetween:(NSDate *)startDate and:(NSDate *)endDate completion:(void (^) (EventsList *events, NSError *error))completion;
-+ (void)loadEventsBetween:(NSDate *)startDate
-                      and:(NSDate *)endDate
-             withinRadius:(NSNumber *)radius
-               ofLocation:(CLLocation *)location
-               completion:(void (^) (EventsList *events, NSError *error))completion;
+
 @end

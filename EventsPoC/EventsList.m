@@ -9,10 +9,25 @@
 #import "EventsList.h"
 
 @interface EventsList()
-@property (nonatomic, strong) NSMutableArray* items;
+@property (nonatomic, strong) NSMutableArray<NSObject<EventProtocol>*> *items;
 @end
 
 @implementation EventsList
+
+// Thread safety
+@synthesize items = _items;
+- (void)setItems:(NSMutableArray<NSObject<EventProtocol>*> *)items {
+    @synchronized (self) {
+        _items = items;
+    }
+}
+
+- (NSMutableArray<NSObject<EventProtocol>*> *)items {
+    @synchronized (self) {
+        return _items;
+    }
+}
+
 
 -(id)init
 {
@@ -116,5 +131,15 @@
     }
     
     return list;
+}
+
+
+#pragma mark - NSCopying Methods
+- (id)copyWithZone:(NSZone *)zone {
+    EventsList *copy = [[EventsList allocWithZone:zone] init];
+    for(NSObject<EventProtocol> *event in self.allItems) {
+        [copy add:[event copy]];
+    }
+    return copy;
 }
 @end

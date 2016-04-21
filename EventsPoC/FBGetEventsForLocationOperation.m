@@ -10,6 +10,8 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "FBEvent.h"
 #import "EventsList.h"
+#import "FBConstants.h"
+#import "FBOperationHelper.h"
 
 double const FBGetEventsForLocationOperationDefaultRadiusInMeters = 1000 * 200; // 200 km in meters
 
@@ -38,74 +40,124 @@ double const FBGetEventsForLocationOperationDefaultRadiusInMeters = 1000 * 200; 
 - (void)main {
     
     @autoreleasepool {
-        if(self.isCancelled) {
+        if(self.isCancelled || !self.identifier) {
+            [self completeOperation];
             return;
         }
         
         if([[FBSDKAccessToken currentAccessToken].expirationDate compare:[NSDate new]] == NSOrderedDescending) {
             
-            NSString *url = [self getRequestUrl];
-            NSError *error = nil;
-            while (url != nil && !self.isCancelled) {
-                
-                EventsList *newEvents = nil;
-                NSDictionary *json = nil;
-                
-                url = [self fetchDataForUrl:url json:&json error:&error];
-                if(json && !error) {
-                    NSArray<NSDictionary*> *dataJson = [json objectForKey:@"data"];
-                    newEvents = [self getEventsFromJsonArray:dataJson];
-                }
-                
-                [self.events mergeItems:newEvents.allItems];
-                
+            NSString *accessToken = [FBSDKAccessToken currentAccessToken].tokenString;
+            
+            // Get object ids for likes
+            self.objectIds = [self getPlaceObjectIdsWithAccessToken:accessToken];
+            
+            if(self.isCancelled) {
+                return;
             }
             
+            NSArray<NSArray *> *buckets = [FBOperationHelper makeBucketsWithObjectIds:self.objectIds];
+            
+            if(self.isCancelled) {
+                return;
+            }
+            
+            // Get events
+            NSError *error = nil;
+            self.events = [self getEventsForObjectIds:buckets accessToken:accessToken error:&error];
+
+            // Sort by start time earliest to latest
             NSSortDescriptor *sortByStartDateDesc = [NSSortDescriptor sortDescriptorWithKey:@"startTime" ascending:NO];
             [self.events sortUsingDescriptors:@[sortByStartDateDesc]];
             
             if(self.completionAction) {
                 self.completionAction(self.events, error);
             }
-            [self completeOperation];
         }
         
+        [self completeOperation];
     }
     
 }
 
-- (NSString *)getRequestUrl {
-    NSString *accessToken = [FBSDKAccessToken currentAccessToken].tokenString;
+- (EventsList *)getEventsForObjectIds:(NSArray<NSArray *> *)buckets
+                          accessToken:(NSString *)accessToken
+                                error:(__autoreleasing NSError **)error {
     
-    NSDateFormatter *formatter = [NSDateFormatter new];
-    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];//2016-04-08T16:00:00-0300
-    NSString *since = @"";
-    if(self.startDate) {
-        since = [NSString stringWithFormat:@"&since=%@", [formatter stringFromDate:self.startDate]];
+    EventsList *events = [EventsList new];
+    for(NSArray *bucket in buckets) {
+        
+        if(self.isCancelled) {
+            break;
+        }
+        
+        EventsList *newEvents = nil;
+        NSData *payload = [FBOperationHelper getBatchRequestDataWithObjectIds:bucket
+                                                                    startDate:self.startDate
+                                                                      endDate:self.endDate
+                                                                  accessToken:accessToken];
+        NSString *url = FBGraphApiBaseUrl;
+        NSArray<NSDictionary*> *results = nil;
+        
+        NSError *fetchError = nil;
+        [self fetchDataForUrl:url body:payload json:&results error:&fetchError];
+        if(self.isCancelled) {
+            break;
+        }
+        
+        if(results && !fetchError) {
+            for(NSDictionary *dictionary in results) {
+                NSString *body = [dictionary objectForKey:@"body"];
+                NSData *bodyData = [body dataUsingEncoding:NSUTF8StringEncoding];
+                NSError *parseError = nil;
+                NSDictionary *bodyJson = [NSJSONSerialization JSONObjectWithData:bodyData options:kNilOptions error:&parseError];
+                NSArray *eventsJson = [bodyJson objectForKey:@"data"];
+                newEvents = [self getEventsFromJsonArray:eventsJson];
+                
+                for(NSObject<EventProtocol> *event in newEvents.allItems) {
+                    NSLog(@"Event: %@, Starts: %@ Ends: %@ Location: %@", event.eventName, event.startTime, event.endTime, event.placeName);
+                }
+                
+                [events mergeItems:newEvents.allItems];
+            }
+        }
+        
+        *error = fetchError;
     }
     
-    NSString *until = @"";
-    if(self.endDate) {
-        until = [NSString stringWithFormat:@"&until=%@", [formatter stringFromDate:self.endDate]];
-    }
+    
+    return events;
+}
+
+- (NSArray<NSString *> *)getPlaceObjectIdsWithAccessToken:(NSString *)accessToken {
     
     NSString *center = @"";
     if(self.latitude && self.longitude && self.radius) {
         center = [NSString stringWithFormat:@"&center=%@,%@&distance=%@", self.latitude.stringValue, self.longitude.stringValue, self.radius.stringValue];
     }
     
-    NSMutableCharacterSet *allowed = [NSMutableCharacterSet alphanumericCharacterSet];
-    NSString *unreserved = @"-._~/?";
-    [allowed addCharactersInString:unreserved];
-    NSString *query = [self.identifier stringByAddingPercentEncodingWithAllowedCharacters:allowed];
+    NSString *url = [NSString stringWithFormat:@"%@/search?q=&type=place%@&pretty=0&limit=100&fields=id&access_token=%@", FBGraphApiBaseUrl, center, accessToken];
     
-    NSString *url = [NSString stringWithFormat:@"https://graph.facebook.com/v2.5/search?q=%@&type=event%@%@%@&access_token=%@", query, center, since, until, accessToken];
+    NSError *error = nil;
+    NSMutableArray<NSString *> *objectIds = [NSMutableArray new];
+    [objectIds addObject:self.identifier];
     
-    return url;
+    while (url != nil && !self.isCancelled) {
+        
+        NSDictionary *json = nil;
+        url = [self fetchDataForUrl:url json:&json error:&error];
+        
+        if(json && !error) {
+            NSArray<NSDictionary*> *dataJson = [json objectForKey:@"data"];
+            for(NSDictionary *likeJson in dataJson) {
+                NSString *objectId = [likeJson objectForKey:@"id"];
+                [objectIds addObject:objectId];
+            }
+        }
+    }
+    
+    return [NSArray arrayWithArray:objectIds];
 }
-
-
-
 
 
 - (EventsList *)getEventsFromJsonArray:(NSArray<NSDictionary*> *)json {
@@ -119,7 +171,9 @@ double const FBGetEventsForLocationOperationDefaultRadiusInMeters = 1000 * 200; 
 }
 
 
-- (NSString *)fetchDataForUrl:(NSString *)url json:(__autoreleasing NSDictionary **)returnJson error:(__autoreleasing NSError **)returnError {
+- (NSString *)fetchDataForUrl:(NSString *)url
+                         json:(__autoreleasing NSDictionary **)returnJson
+                        error:(__autoreleasing NSError **)returnError {
     
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     __block NSDictionary *json = nil;
@@ -149,6 +203,48 @@ double const FBGetEventsForLocationOperationDefaultRadiusInMeters = 1000 * 200; 
     if(json) {
         NSDictionary *pagingJson = [json objectForKey:@"paging"];
         nextUrl = [self getNextUrlFromJson:pagingJson];
+        *returnError = nil;
+        *returnJson = json;
+    }
+    
+    return nextUrl;
+}
+
+
+- (NSString *)fetchDataForUrl:(NSString *)url
+                         body:(NSData *)payload
+                         json:(__autoreleasing NSArray **)returnJson
+                        error:(__autoreleasing NSError **)returnError {
+    
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    __block NSArray *json = nil;
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60 * 5];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:payload];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    self.task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        if(((NSHTTPURLResponse *)response).statusCode / 100 == 2) {
+            
+            if(data && !error) {
+                NSError *parseError = nil;
+                json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&parseError];
+            }
+            
+            dispatch_semaphore_signal(semaphore);
+        }
+        
+    }];
+    
+    [self.task resume];
+    
+    // wait until the task is done
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    
+    NSString *nextUrl = nil;
+    if(json) {
         *returnError = nil;
         *returnJson = json;
     }

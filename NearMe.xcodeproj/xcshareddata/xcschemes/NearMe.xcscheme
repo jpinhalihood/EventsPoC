@@ -34,7 +34,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1F530A80177BA5A0009A27C0"
-               BuildableName = "NearMe.octest"
+               BuildableName = "NearMe.xctest"
                BlueprintName = "NearMeTests"
                ReferencedContainer = "container:NearMe.xcodeproj">
             </BuildableReference>

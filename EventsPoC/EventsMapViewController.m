@@ -81,17 +81,6 @@ NSTimeInterval const EventsMapDefaultLocationUpdateInterval = 60;
     [self removeNotificationCenter];
 }
 
-- (void)initTestEvents {
-    NSObject<EventProtocol> *event = [FBEvent new];
-    event.eventDescription = @"This is a fake event description!";
-    event.eventHost = @"Yours Truly";
-    event.eventName = @"A Fake Event";
-    CLLocation *currentLocation = [self.locationManager location];
-    event.placeLattitude = [NSNumber numberWithDouble:currentLocation.coordinate.latitude];
-    event.placeLongitude = [NSNumber numberWithDouble:currentLocation.coordinate.longitude];
-    
-    [self.events add:event];
-}
 
 -(void)mapEvents:(EventsList *)events
 {
@@ -100,6 +89,16 @@ NSTimeInterval const EventsMapDefaultLocationUpdateInterval = 60;
     NSArray<MKPlacemark*> *placemarks = [weakSelf pinAnnotations:annotations];
 
     dispatch_async(dispatch_get_main_queue(), ^{
+        // Remove the existing pins except for current location
+        id currentLocation = self.mapView.userLocation;
+        NSMutableArray *removableAnnotations = [[NSMutableArray alloc] initWithArray:self.mapView.annotations];
+        if(currentLocation) {
+            [weakSelf.mapView removeAnnotation:currentLocation];
+        }
+        
+        [weakSelf.mapView removeAnnotations:removableAnnotations];
+        
+        // Add the list of pins
         [weakSelf.mapView addAnnotations:placemarks];
     });
 }
@@ -164,6 +163,10 @@ NSTimeInterval const EventsMapDefaultLocationUpdateInterval = 60;
     view.canShowCallout = YES;
 }
 
+- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
+    
+}
+
 #pragma mark - CLLocationManagerDelegate Methods
 -(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
@@ -182,20 +185,20 @@ NSTimeInterval const EventsMapDefaultLocationUpdateInterval = 60;
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
 {
-//    CLLocation *location = (CLLocation *)locations.firstObject;
-//
-//    NSDate *now = [NSDate new];
-//    NSTimeInterval secondsSinceLastLocationUpdate = [self.lastLocationUpdate timeIntervalSinceDate:now];
-//    if(secondsSinceLastLocationUpdate *-1 >= EventsMapDefaultLocationUpdateInterval
-//       || [location distanceFromLocation:self.lastLocation] > self.radius.doubleValue) {
-//        
+    CLLocation *location = (CLLocation *)locations.firstObject;
+
+    NSDate *now = [NSDate new];
+    NSTimeInterval secondsSinceLastLocationUpdate = [self.lastLocationUpdate timeIntervalSinceDate:now];
+    if(secondsSinceLastLocationUpdate *-1 >= EventsMapDefaultLocationUpdateInterval
+       || [location distanceFromLocation:self.lastLocation] > self.radius.doubleValue) {
+        
 //        [self filterEventsForLocation:location];
-//        self.lastLocationUpdate = [NSDate new];
-//        self.lastLocation = location;
-//        [self mapEvents:self.filteredEvents];
-//    }
+        self.lastLocationUpdate = [NSDate new];
+        self.lastLocation = location;
+        [self mapEvents:self.filteredEvents];
+    }
     
-    [self mapEvents:self.events];
+//    [self mapEvents:self.filteredEvents];
 }
 
 //- (void)filterEventsForLocation:(CLLocation *)location {
@@ -230,11 +233,8 @@ NSTimeInterval const EventsMapDefaultLocationUpdateInterval = 60;
 }
 
 - (void)handleUpdatedEventsList:(NSNotification *)notification {
-//    NSDictionary *userInfo = notification.userInfo;
-//    self.events = [userInfo objectForKey:KeyEventsListUpdatedNotificationPayload];
-    self.events = [EventsManager sharedInstance].filteredEvents;
+    self.filteredEvents = [EventsManager sharedInstance].filteredEvents;
     
-    [self initTestEvents];
 //    CLLocation *currentLocation = [self.locationManager location];
 //    [self filterEventsForLocation:currentLocation];
     [self mapEvents:self.filteredEvents];

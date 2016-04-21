@@ -12,6 +12,7 @@
 NSString * const EventsListUpdatedNotification = @"EventsListUpdatedNotification";
 NSString * const KeyEventsListUpdatedNotificationPayload = @"KeyEventsListUpdatedNotificationPayload";
 
+NSString * const EventsListNeedsUpdatingNotification = @"EventsListNeedsUpdatingNotification";
 
 @implementation EventNotifications
 

@@ -77,4 +77,27 @@ NSString * const KeyFBEventHost = @"owner";
     return self;
 }
 
+
+#pragma mark - NSCopying Methods
+- (id)copyWithZone:(NSZone *)zone {
+    FBEvent *copy = [[FBEvent allocWithZone:zone] init];
+    copy.eventId = [self.eventId copy];
+    copy.eventHost = [self.eventHost copy];
+    copy.eventName = [self.eventName copy];
+    copy.eventDescription = [self.eventDescription copy];
+    copy.rsvpStatus = [self.rsvpStatus copy];
+    copy.startTime = [self.startTime copy];
+    copy.endTime = [self.endTime copy];
+    copy.coverArtUrl = [self.coverArtUrl copy];
+    copy.placeName = [self.placeName copy];
+    copy.placeZip = [self.placeZip copy];
+    copy.placeCity = [self.placeCity copy];
+    copy.placeState = [self.placeState copy];
+    copy.placeStreet = [self.placeStreet copy];
+    copy.placeCountry = [self.placeCountry copy];
+    copy.placeLattitude = [self.placeLattitude copy];
+    copy.placeLongitude = [self.placeLongitude copy];
+    
+    return copy;
+}
 @end

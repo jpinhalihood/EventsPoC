@@ -13,6 +13,7 @@
 @class EventsList;
 
 @interface FBGetEventsForLocationOperation : AsynchronousOperation
+
 @property (nonatomic, strong) NSString *identifier;
 @property (nonatomic, assign) NSUInteger limit;
 @property (nonatomic, strong) NSDate *startDate;

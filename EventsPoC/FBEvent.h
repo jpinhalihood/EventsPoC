@@ -10,7 +10,7 @@
 #import "EventProtocol.h"
 
 
-@interface FBEvent : NSObject<EventProtocol>
+@interface FBEvent : NSObject<EventProtocol, NSCopying>
 
 @property (nonatomic, strong) NSNumber *eventId;
 @property (nonatomic, strong) NSString *eventName;

@@ -10,7 +10,7 @@
 #import "EventProtocol.h"
 
 
-@interface EventsList : NSObject
+@interface EventsList : NSObject<NSCopying>
 
 -(void)add:(NSObject<EventProtocol> * _Nonnull)event;
 -(void)addItems:(NSArray<NSObject<EventProtocol> *> * _Nonnull)items;
@@ -21,7 +21,7 @@
 -(NSArray * _Nonnull)allItems;
 -(NSUInteger)count;
 -(void)removeAllItems;
--(void)sortUsingDescriptors:(NSArray<NSSortDescriptor *> *)descriptors;
+-(void)sortUsingDescriptors:(NSArray<NSSortDescriptor *> * _Nonnull)descriptors;
 -(void)mergeItems:(NSArray<NSObject<EventProtocol>*> * _Nonnull)items;
 -(BOOL)containsItem:(NSObject<EventProtocol>* _Nonnull)item;
 

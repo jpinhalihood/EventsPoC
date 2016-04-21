@@ -17,6 +17,8 @@
 
 #import "FBGetLikesAndEventsOperation.h"
 #import "FBGetEventsForLocationOperation.h"
+#import "MergeEventsOperation.h"
+
 
 NSTimeInterval const EventsDefaultLocationUpdateInterval = 60;
 double const EventsDefaultRadius = 200 *1000; // 200 km in meters
@@ -26,6 +28,7 @@ double const EventsDefaultRadius = 200 *1000; // 200 km in meters
 @property (nonatomic, readwrite) EventsList *filteredEvents;
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) CLLocation *currentLocation;
 @property (nonatomic, strong) CLLocation *lastLocation;
 @property (nonatomic, strong) NSDate *startDate;
 @property (nonatomic, strong) NSDate *endDate;
@@ -37,6 +40,43 @@ double const EventsDefaultRadius = 200 *1000; // 200 km in meters
 @end
 
 @implementation EventsManager
+
+@synthesize filteredEvents = _filteredEvents;
+@synthesize allEvents = _allEvents;
+
+- (EventsList *)filteredEvents {
+    @synchronized (self) {
+        if(!_filteredEvents) {
+            _filteredEvents = [EventsList new];
+        }
+        return _filteredEvents;
+    }
+}
+
+- (void)setFilteredEvents:(EventsList *)filteredEvents {
+    @synchronized (self) {
+        _filteredEvents = filteredEvents;
+    }
+}
+
+- (EventsList *)allEvents {
+    @synchronized (self) {
+        if(!_allEvents) {
+            _allEvents = [EventsList new];
+        }
+        return _allEvents;
+    }
+}
+
+- (void)setAllEvents:(EventsList *)allEvents {
+    @synchronized (self) {
+        _allEvents = allEvents;
+    }
+}
+
+
+
+
 
 + (EventsManager *)sharedInstance {
     static EventsManager *sharedInstance = nil;
@@ -52,6 +92,8 @@ double const EventsDefaultRadius = 200 *1000; // 200 km in meters
     if(self = [super init]) {
         self.geocoder = [[CLGeocoder alloc] init];
         self.queue = [NSOperationQueue new];
+        [self.queue addObserver:self forKeyPath:@"operations" options:0 context:NULL];
+        
         self.locationManager = [CLLocationManager new];
     
         self.locationManager.delegate = self;
@@ -68,11 +110,92 @@ double const EventsDefaultRadius = 200 *1000; // 200 km in meters
 
 
 - (void)start {
-    CLLocation *currentLocation = [self.locationManager location];
-    
-    [self loadFBFriendAndLikeEventsForLocation:currentLocation starting:self.startDate ending:self.endDate];
-    [self loadFBEventsNearLocation:currentLocation starting:self.startDate ending:self.endDate];
+    self.currentLocation = [self.locationManager location];
+    [self loadEventsStarting:self.startDate ending:self.endDate location:self.currentLocation];
+}
 
+- (void)loadEventsStarting:(NSDate *)start ending:(NSDate *)end location:(CLLocation *)location {
+    
+    __weak __typeof(self) weakSelf = self;
+    __block NSMutableArray<EventsList *> *lists = [NSMutableArray new];
+    __block EventsList *mergedEvents;
+    
+    // Events near my location
+    [self.geocoder reverseGeocodeLocation:location
+                        completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        
+        
+//        // Merge Op
+        MergeEventsOperation *mergeOp = [[MergeEventsOperation alloc] initWithEventsToMerge:lists completion:^(EventsList *events) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                mergedEvents = events;
+                weakSelf.allEvents = [mergedEvents copy];
+                weakSelf.filteredEvents = [weakSelf filterEvents:mergedEvents forLocation:location radius:weakSelf.radius];
+                [weakSelf postEventsUpdatedNotificationWithEvents:weakSelf.filteredEvents];
+            });
+        }];
+        
+        FBGetEventsForLocationOperation *locationEventsOp;
+        NSString *locationName = placemarks.count ? placemarks.firstObject.locality : nil;
+        if(locationName) {
+            
+            locationEventsOp = [[FBGetEventsForLocationOperation alloc] initWithLocationName:locationName
+                                                                                  completion:^(EventsList *events, NSError *error) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSString *description = [NSString stringWithFormat:@"Loaded %ld location events\n", (long)events.count];
+                    [weakSelf logEvents:events description:description];
+                    [lists addObject:[events copy]];
+                });
+            }];
+            
+            locationEventsOp.startDate = start;
+            locationEventsOp.endDate = end;
+            locationEventsOp.latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
+            locationEventsOp.longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
+        }
+        
+        // My friends and my likes events
+        FBGetLikesAndEventsOperation *myLikesAndEventsOp =
+                            [[FBGetLikesAndEventsOperation alloc] initWithCompletion:^(EventsList *events, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSString *description = [NSString stringWithFormat:@"Loaded %ld Like/Friend Events\n", (long)events.count];
+                [weakSelf logEvents:events description:description];
+                [lists addObject:[events copy]];
+            });
+        }];
+                            
+        myLikesAndEventsOp.startDate = start;
+        myLikesAndEventsOp.endDate = end;
+
+        [mergeOp addDependency:myLikesAndEventsOp];
+        [mergeOp addDependency:locationEventsOp];
+        
+        
+        [self.queue addOperation:locationEventsOp];
+        [self.queue addOperation:myLikesAndEventsOp];
+        [self.queue addOperation:mergeOp];
+    }];
+
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    if(object == self.queue && [keyPath isEqualToString:@"operations"]) {
+        NSLog(@"\n==\nActive Operations: %ld", (long)self.queue.operationCount);
+        if(self.queue.operationCount == 0) {
+            NSLog(@"Completed all object retrieval ops");
+            NSLog(@"All Events Count: %ld", (long)self.allEvents.count);
+            NSLog(@"Filtered Events Count: %ld", (long)self.filteredEvents.count);
+        }
+    }
+}
+
+
+- (void)logEvents:(EventsList *)events description:(NSString *)description {
+    NSLog(@"%@", description);
+    for(NSObject<EventProtocol> *event in events.allItems) {
+        NSLog(@"Id: %@ | Name: %@ | Host: %@\n", event.eventId, event.eventName, event.eventHost);
+    }
+    
 }
 
 - (void)loadFBFriendAndLikeEventsForLocation:(CLLocation *)currentLocation starting:(NSDate *)start ending:(NSDate *)end {
@@ -80,25 +203,12 @@ double const EventsDefaultRadius = 200 *1000; // 200 km in meters
     NSLog(@"Loading Like/Friend events");
     
     __weak __typeof(self) weakSelf = self;
-    void (^myLikesAndEventsOpCompletion)(EventsList *, NSError *) = ^(EventsList *fbEvents, NSError *error) {
+    void (^myLikesAndEventsOpCompletion)(EventsList *, NSError *) = ^(EventsList *events, NSError *error) {
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            
-            NSLog(@"Loaded %ld Like/Friend Events\n", (long)fbEvents.count);
-            for(NSObject<EventProtocol> *event in fbEvents.allItems) {
-                NSLog(@"Id: %@ | Name: %@ | Host: %@\n", event.eventId, event.eventName, event.eventHost);
-            }
-            
-            if(fbEvents && fbEvents.count > 0) {
-                if(!weakSelf.allEvents) {
-                    weakSelf.allEvents = [EventsList listFromArrayOfEvents:fbEvents.allItems];
-                } else {
-                    [weakSelf.allEvents mergeItems:fbEvents.allItems];
-                }
-                
-                [weakSelf postEventsUpdatedNotificationWithEvents:weakSelf.allEvents];
-            }
-            
+            NSString *description = [NSString stringWithFormat:@"Loaded %ld location events\n", (long)events.count];
+            [weakSelf logEvents:events description:description];
+            [weakSelf postEventsUpdatedNotificationWithEvents:weakSelf.allEvents];
         });
     };
     
@@ -113,27 +223,13 @@ double const EventsDefaultRadius = 200 *1000; // 200 km in meters
     
     __weak __typeof(self) weakSelf = self;
     
-    void (^locationEventsOpCompletion)(EventsList *, NSError *) = ^(EventsList *fbEvents, NSError *error) {
+    void (^locationEventsOpCompletion)(EventsList *, NSError *) = ^(EventsList *events, NSError *error) {
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            NSLog(@"Loaded %ld location events\n", (long)fbEvents.count);
-            for(NSObject<EventProtocol> *event in fbEvents.allItems) {
-                NSLog(@"Id: %@ | Name: %@ | Host: %@\n", event.eventId, event.eventName, event.eventHost);
-            }
-            
-            if(fbEvents && fbEvents.count > 0) {
-                EventsList *unfilteredEvents = [EventsList listFromArrayOfEvents:fbEvents.allItems];
-                EventsList *filteredEvents = [self filterEvents:unfilteredEvents forLocation:currentLocation radius:weakSelf.radius];
-                if(!weakSelf.allEvents) {
-                    weakSelf.allEvents = [EventsList listFromArrayOfEvents:fbEvents.allItems];
-                } else {
-                    [weakSelf.allEvents mergeItems:filteredEvents.allItems];
-                }
-                
-                [weakSelf postEventsUpdatedNotificationWithEvents:weakSelf.allEvents];
-            }
-            
+            NSString *description = [NSString stringWithFormat:@"Loaded %ld location events\n", (long)events.count];
+            [weakSelf logEvents:events description:description];
+            [weakSelf postEventsUpdatedNotificationWithEvents:weakSelf.allEvents];
         });
     };
     
@@ -185,7 +281,12 @@ double const EventsDefaultRadius = 200 *1000; // 200 km in meters
     if(secondsSinceLastLocationUpdate *-1 >= EventsDefaultLocationUpdateInterval
        || [location distanceFromLocation:self.lastLocation] > self.radius.doubleValue) {
         
-        [self filterEventsForLocation:location];
+        if(self.filteredEvents) {
+            [self.filteredEvents removeAllItems];
+        }
+        
+        self.filteredEvents = [self filterEvents:self.allEvents forLocation:location radius:self.radius];
+        
         self.lastLocationUpdate = [NSDate new];
         self.lastLocation = location;
 
@@ -193,7 +294,10 @@ double const EventsDefaultRadius = 200 *1000; // 200 km in meters
             self.locationUpdatedAction(self.filteredEvents);
         }
     }
-    
+}
+
+- (void)refreshEventsForLocationChangedTo:(CLLocation *)newLocation {
+    [self loadFBEventsNearLocation:newLocation starting:self.startDate ending:self.endDate];
 }
 
 - (void)filterEventsForLocation:(CLLocation *)location {
@@ -214,7 +318,6 @@ double const EventsDefaultRadius = 200 *1000; // 200 km in meters
     }    
 }
 
-
 - (EventsList *)filterEvents:(EventsList *)events forLocation:(CLLocation *)location radius:(NSNumber *)radius {
     EventsList *filteredEvents = [EventsList new];
     for(NSObject<EventProtocol> *event in events.allItems) {
@@ -229,78 +332,5 @@ double const EventsDefaultRadius = 200 *1000; // 200 km in meters
     
     return filteredEvents;
 }
-
-
-
-+ (void)loadEventsWithCompletion:(void (^) (EventsList *events, NSError *error))completion {
-    NSDate *start = [NSDate new];
-    NSDate *end = [start dateByAddingTimeInterval:60 * 60 * 24];
-    [EventsManager loadEventsBetween:start and:end completion:completion];
-}
-
-+ (void)loadEventsBetween:(NSDate *)startDate
-                      and:(NSDate *)endDate
-               completion:(void (^) (EventsList *events, NSError *error))completion {
-    
-    [EventsManager loadEventsBetween:startDate and:endDate withinRadius:nil ofLocation:nil completion:completion];
-}
-
-//+ (void)loadEventsBetween:(NSDate *)startDate
-//                      and:(NSDate *)endDate
-//             withinRadius:(NSNumber *)radius
-//               ofLocation:(CLLocation *)location
-//               completion:(void (^) (EventsList *events, NSError *error))completion {
-//    
-//    NSOperationQueue *queue = [NSOperationQueue new];
-//    NSMutableArray<NSObject<EventProtocol>*> *events = [NSMutableArray new];
-//    
-//    void (^myLikesAndEventsOpCompletion)(EventsList *, NSError *) = ^(EventsList *fbEvents, NSError *error) {
-//
-//        for(NSObject<EventProtocol> *fbEvent in fbEvents) {
-//            [events addObject:fbEvent];
-//        }
-//        
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            
-//            NSLog(@"%ld Events\n", (long)fbEvents.count);
-//            for(NSObject<EventProtocol> *event in fbEvents) {
-//                NSLog(@"Id: %@ | Name: %@ | Host: %@\n", event.eventId, event.eventName, event.eventHost);
-//            }
-//            
-//            EventsList *list = nil;
-//            if(events && events.count > 0) {
-//                if(location) {
-//                    for(FBEvent *event in events) {
-//                        if(event.placeLongitude && event.placeLattitude) {
-//                            CLLocation *eventLocation = [[CLLocation alloc] initWithLatitude:event.placeLattitude.doubleValue
-//                                                                                   longitude:event.placeLongitude.doubleValue];
-//                            if([eventLocation distanceFromLocation:location] <= radius.doubleValue) {
-//                                if(!list) {
-//                                    list = [EventsList new];
-//                                }
-//                                [list add:event];
-//                            }
-//                        }
-//                    }
-//                } else {
-//                    list = [EventsList listFromArrayOfEvents:events];
-//                }
-//            }
-//            
-//            if(completion) {
-//                completion(list, error);
-//            }
-//            
-//        });
-//    };
-//    
-//    FBGetLikesAndEventsOperation *myLikesAndEventsOp = [[FBGetLikesAndEventsOperation alloc] initWithCompletion:myLikesAndEventsOpCompletion];
-//    myLikesAndEventsOp.startDate = startDate;
-//    myLikesAndEventsOp.endDate = endDate;
-//    [queue addOperation:myLikesAndEventsOp];
-//
-//}
-
-
 
 @end

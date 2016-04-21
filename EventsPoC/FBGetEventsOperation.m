@@ -10,6 +10,8 @@
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "FBEvent.h"
+#import "FBConstants.h"
+
 
 NSUInteger const FBGetEventsOperationDefaultLimit = 10;
 
@@ -81,7 +83,7 @@ NSUInteger const FBGetEventsOperationDefaultLimit = 10;
     }
     
     
-    NSString *url = [NSString stringWithFormat:@"https://graph.facebook.com/v2.5/%@/events?access_token=%@&pretty=0&limit=%lul&fields=id,name,description,start_time,end_time,rsvp_status,cover,place%@%@", self.identifier, accessToken, (unsigned long)self.limit, since, until];
+    NSString *url = [NSString stringWithFormat:@"%@/%@/events?access_token=%@&pretty=0&limit=%lul&fields=id,name,description,start_time,end_time,rsvp_status,cover,place%@%@", FBGraphApiBaseUrl, self.identifier, accessToken, (unsigned long)self.limit, since, until];
     
     return url;
 }
