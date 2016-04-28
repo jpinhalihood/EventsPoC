@@ -72,12 +72,12 @@
     [formatter setDateFormat:@"yyyy-MM-dd"];
     NSString *since = @"";
     if(startDate) {
-        since = [NSString stringWithFormat:@"&since=%@", [formatter stringFromDate:startDate]];
+        since = [NSString stringWithFormat:@"&since=%ld", (long)[startDate timeIntervalSince1970]];
     }
     
     NSString *until = @"";
     if(endDate) {
-        until = [NSString stringWithFormat:@"&until=%@", [formatter stringFromDate:endDate]];
+        until = [NSString stringWithFormat:@"&until=%ld", (long)[endDate timeIntervalSince1970]];
     }
     
     NSString *url = [NSString stringWithFormat:@"%@/events?pretty=0&limit=1000%@%@&fields=description,name,place,owner,start_time,end_time,rsvp_status", objectId, since, until];

@@ -43,6 +43,7 @@ double const EventsDefaultRadius = 200 *1000; // 200 km in meters
 
 @synthesize filteredEvents = _filteredEvents;
 @synthesize allEvents = _allEvents;
+@synthesize radius = _radius;
 
 - (EventsList *)filteredEvents {
     @synchronized (self) {
@@ -74,7 +75,17 @@ double const EventsDefaultRadius = 200 *1000; // 200 km in meters
     }
 }
 
+- (NSNumber *)radius {
+    @synchronized (self) {
+        return _radius;
+    }
+}
 
+- (void)setRadius:(NSNumber *)radius {
+    @synchronized (self) {
+        _radius = radius;
+    }
+}
 
 
 
@@ -111,6 +122,7 @@ double const EventsDefaultRadius = 200 *1000; // 200 km in meters
 
 - (void)start {
     self.currentLocation = [self.locationManager location];
+    NSLog(@"Current Location: %f (Lat) %f (Lng)", self.currentLocation.coordinate.latitude, self.currentLocation.coordinate.longitude);
     [self loadEventsStarting:self.startDate ending:self.endDate location:self.currentLocation];
 }
 
@@ -125,7 +137,7 @@ double const EventsDefaultRadius = 200 *1000; // 200 km in meters
                         completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         
         
-//        // Merge Op
+        // Merge Op
         MergeEventsOperation *mergeOp = [[MergeEventsOperation alloc] initWithEventsToMerge:lists completion:^(EventsList *events) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 mergedEvents = events;
@@ -260,10 +272,7 @@ double const EventsDefaultRadius = 200 *1000; // 200 km in meters
     [[NSNotificationCenter defaultCenter] postNotificationName:EventsListUpdatedNotification object:nil userInfo:userInfo];
 }
 
-- (void)setRadius:(NSNumber *)radius {
-    _radius = radius;
-    [self filterEventsForLocation:self.lastLocation];
-}
+
 
 
 
