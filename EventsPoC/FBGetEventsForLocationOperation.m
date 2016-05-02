@@ -66,9 +66,9 @@ double const FBGetEventsForLocationOperationDefaultRadiusInMeters = 1000 * 200; 
             NSError *error = nil;
             self.events = [self getEventsForObjectIds:buckets accessToken:accessToken error:&error];
 
-            // Sort by start time earliest to latest
-            NSSortDescriptor *sortByStartDateDesc = [NSSortDescriptor sortDescriptorWithKey:@"startTime" ascending:NO];
-            [self.events sortUsingDescriptors:@[sortByStartDateDesc]];
+//            // Sort by start time earliest to latest
+//            NSSortDescriptor *sortByStartDateDesc = [NSSortDescriptor sortDescriptorWithKey:@"startTime" ascending:NO];
+//            [self.events sortUsingDescriptors:@[sortByStartDateDesc]];
             
             if(self.completionAction) {
                 self.completionAction(self.events, error);
@@ -223,8 +223,8 @@ double const FBGetEventsForLocationOperationDefaultRadiusInMeters = 1000 * 200; 
     [request setHTTPBody:payload];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
-    NSString *payloadStr = [[NSString alloc] initWithData:payload encoding:NSUTF8StringEncoding];
-    NSLog(@"\n========Payload=========\n%@\n", payloadStr);
+//    NSString *payloadStr = [[NSString alloc] initWithData:payload encoding:NSUTF8StringEncoding];
+//    NSLog(@"\n========Payload=========\n%@\n", payloadStr);
     
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     self.task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {

@@ -11,6 +11,7 @@
 
 
 @class EventsList;
+@class EventBriteEventsForLocationOp;
 
 FOUNDATION_EXPORT double const EventsDefaultRadius;
 

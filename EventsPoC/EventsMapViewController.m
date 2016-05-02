@@ -165,14 +165,14 @@ NSTimeInterval const EventsMapDefaultLocationUpdateInterval = 60;
 
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated {
     
-    CLLocationCoordinate2D centerCoord = mapView.centerCoordinate;
-    CLLocation *centerLocation = [[CLLocation alloc] initWithLatitude:centerCoord.latitude longitude:centerCoord.longitude];
-    CLLocationCoordinate2D topCoord = [mapView convertPoint:CGPointMake(floorf(self.mapView.bounds.size.width/2.0), 0.0) toCoordinateFromView:self.mapView];
-    CLLocation *topLocation = [[CLLocation alloc] initWithLatitude:topCoord.latitude longitude:topCoord.longitude];
-    CLLocationDistance radius = [topLocation distanceFromLocation:centerLocation];
-    [EventsManager sharedInstance].radius = [NSNumber numberWithDouble:radius];
-    
-    NSLog(@"Region Changed- Radus: %f", radius);
+//    CLLocationCoordinate2D centerCoord = mapView.centerCoordinate;
+//    CLLocation *centerLocation = [[CLLocation alloc] initWithLatitude:centerCoord.latitude longitude:centerCoord.longitude];
+//    CLLocationCoordinate2D topCoord = [mapView convertPoint:CGPointMake(floorf(self.mapView.bounds.size.width/2.0), 0.0) toCoordinateFromView:self.mapView];
+//    CLLocation *topLocation = [[CLLocation alloc] initWithLatitude:topCoord.latitude longitude:topCoord.longitude];
+//    CLLocationDistance radius = [topLocation distanceFromLocation:centerLocation];
+//    [EventsManager sharedInstance].radius = [NSNumber numberWithDouble:radius];
+//    
+//    NSLog(@"Region Changed- Radius: %f", radius);
 }
 
 

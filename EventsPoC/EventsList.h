@@ -18,7 +18,7 @@
 -(void)remove:(NSObject<EventProtocol> * _Nonnull)event;
 -(NSArray * _Nonnull)toArray;
 -(NSObject<EventProtocol> * _Nonnull)itemAt:(NSUInteger)index;
--(NSArray * _Nonnull)allItems;
+-(NSArray<NSObject<EventProtocol>*> * _Nonnull)allItems;
 -(NSUInteger)count;
 -(void)removeAllItems;
 -(void)sortUsingDescriptors:(NSArray<NSSortDescriptor *> * _Nonnull)descriptors;

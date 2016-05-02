@@ -49,6 +49,9 @@
 		DB60A88B1C76A4D900DF6A0A /* FBPagedApiOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DB60A88A1C76A4D900DF6A0A /* FBPagedApiOperation.m */; };
 		DB7019A21CC861B1006327CD /* FBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7019A11CC861B1006327CD /* FBConstants.m */; };
 		DB7019A51CC8663C006327CD /* FBOperationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7019A41CC8663C006327CD /* FBOperationHelper.m */; };
+		DB7019AF1CD2D9C1006327CD /* EBEventsForLocationOp.m in Sources */ = {isa = PBXBuildFile; fileRef = DB7019AE1CD2D9C1006327CD /* EBEventsForLocationOp.m */; };
+		DB7019B81CD2E71B006327CD /* EventBriteEventsForLocationOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7019B71CD2E71B006327CD /* EventBriteEventsForLocationOp.swift */; };
+		DB7019BA1CD3043C006327CD /* EBEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7019B91CD3043C006327CD /* EBEvent.swift */; };
 		DB711E3F1C755847008A3930 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB711E3E1C755847008A3930 /* Media.xcassets */; };
 		DB711E431C7562E0008A3930 /* ConfigurationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB711E421C7562E0008A3930 /* ConfigurationTableViewController.m */; };
 		DB711E461C756701008A3930 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB711E451C756701008A3930 /* MainViewController.m */; };
@@ -148,6 +151,11 @@
 		DB7019A11CC861B1006327CD /* FBConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBConstants.m; sourceTree = "<group>"; };
 		DB7019A31CC8663C006327CD /* FBOperationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBOperationHelper.h; sourceTree = "<group>"; };
 		DB7019A41CC8663C006327CD /* FBOperationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBOperationHelper.m; sourceTree = "<group>"; };
+		DB7019AD1CD2D9C1006327CD /* EBEventsForLocationOp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBEventsForLocationOp.h; sourceTree = "<group>"; };
+		DB7019AE1CD2D9C1006327CD /* EBEventsForLocationOp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EBEventsForLocationOp.m; sourceTree = "<group>"; };
+		DB7019B01CD2DA51006327CD /* NearMe-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NearMe-Bridging-Header.h"; path = "EventsPoC/NearMe-Bridging-Header.h"; sourceTree = "<group>"; };
+		DB7019B71CD2E71B006327CD /* EventBriteEventsForLocationOp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBriteEventsForLocationOp.swift; sourceTree = "<group>"; };
+		DB7019B91CD3043C006327CD /* EBEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EBEvent.swift; sourceTree = "<group>"; };
 		DB711E3D1C755199008A3930 /* SegmentedViewControllerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SegmentedViewControllerProtocol.h; sourceTree = "<group>"; };
 		DB711E3E1C755847008A3930 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		DB711E411C7562E0008A3930 /* ConfigurationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationTableViewController.h; sourceTree = "<group>"; };
@@ -214,6 +222,7 @@
 			children = (
 				DB352B621C978154000BFE5D /* Launch Screen.storyboard */,
 				DBABE8AB1C7D35B400512FAC /* version.h */,
+				DB7019B01CD2DA51006327CD /* NearMe-Bridging-Header.h */,
 				1F530A61177BA59F009A27C0 /* EventsPoC */,
 				1F530A88177BA5A0009A27C0 /* EventsPoCTests */,
 				1F530A5A177BA59F009A27C0 /* Frameworks */,
@@ -299,6 +308,7 @@
 		DB05E9931C6EBB6800AF2B12 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				DB7019AC1CD2D999006327CD /* Eventbrite */,
 				DB60A8851C769BA500DF6A0A /* Events */,
 				DB05E9941C6EBB7B00AF2B12 /* AsynchronousOperation.h */,
 				DB05E9951C6EBB7B00AF2B12 /* AsynchronousOperation.m */,
@@ -383,6 +393,17 @@
 				DB7019A41CC8663C006327CD /* FBOperationHelper.m */,
 			);
 			name = Operations;
+			sourceTree = "<group>";
+		};
+		DB7019AC1CD2D999006327CD /* Eventbrite */ = {
+			isa = PBXGroup;
+			children = (
+				DB7019B71CD2E71B006327CD /* EventBriteEventsForLocationOp.swift */,
+				DB7019AD1CD2D9C1006327CD /* EBEventsForLocationOp.h */,
+				DB7019AE1CD2D9C1006327CD /* EBEventsForLocationOp.m */,
+				DB7019B91CD3043C006327CD /* EBEvent.swift */,
+			);
+			name = Eventbrite;
 			sourceTree = "<group>";
 		};
 		DB711E401C7562C4008A3930 /* Configuration View */ = {
@@ -505,9 +526,9 @@
 		1F530A50177BA59F009A27C0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0730;
 				LastTestingUpgradeCheck = 0730;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Jeff Price";
 				TargetAttributes = {
 					1F530A57177BA59F009A27C0 = {
@@ -598,7 +619,9 @@
 				DBAD37101C925CBA005FF45E /* RadiusSelectionTableViewCell.m in Sources */,
 				1F530A68177BA59F009A27C0 /* main.m in Sources */,
 				DB7DF3A01C62F630008AB469 /* GoogleGeoCoderLocationDO.m in Sources */,
+				DB7019BA1CD3043C006327CD /* EBEvent.swift in Sources */,
 				DB05E9961C6EBB7B00AF2B12 /* AsynchronousOperation.m in Sources */,
+				DB7019AF1CD2D9C1006327CD /* EBEventsForLocationOp.m in Sources */,
 				1F9F8E451819FF290058DD5C /* EventAnnotationAdapter.m in Sources */,
 				1F530A6C177BA59F009A27C0 /* AppDelegate.m in Sources */,
 				DB25E5BE1C6C1AEF0068C64F /* OAuthLoginHelper.m in Sources */,
@@ -608,6 +631,7 @@
 				DB25E5C51C6C34AC0068C64F /* FBLoginViewController.m in Sources */,
 				1F530A9B177BB00E009A27C0 /* EventsMapViewController.m in Sources */,
 				1F530AA3177BDE9C009A27C0 /* EventAnnotation.m in Sources */,
+				DB7019B81CD2E71B006327CD /* EventBriteEventsForLocationOp.swift in Sources */,
 				DB05E9921C6EB0A200AF2B12 /* FBEvent.m in Sources */,
 				1F530AA6177D049A009A27C0 /* EventGeocoder.m in Sources */,
 				1F9F8E391818AC3A0058DD5C /* MapViewControllerDelegate.m in Sources */,
@@ -691,6 +715,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -760,7 +785,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ca.jeffprice.events;
 				PRODUCT_NAME = NearMe;
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_INTERFACE_HEADER_NAME = "EventsPoC-Swift.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "EventsPoC/NearMe-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
@@ -788,7 +814,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ca.jeffprice.events;
 				PRODUCT_NAME = NearMe;
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_INTERFACE_HEADER_NAME = "EventsPoC-Swift.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "EventsPoC/NearMe-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
 			};
@@ -806,6 +833,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EventsPoC/NearMe-Prefix.pch";
 				INFOPLIST_FILE = "EventsPoCTests/NearMeTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "ca.jeffprice.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NearMe;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
@@ -823,6 +851,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EventsPoC/NearMe-Prefix.pch";
 				INFOPLIST_FILE = "EventsPoCTests/NearMeTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "ca.jeffprice.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NearMe;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};

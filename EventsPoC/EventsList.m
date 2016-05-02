@@ -66,17 +66,17 @@
     }
 }
 
--(NSArray*)toArray
+-(NSArray<NSObject<EventProtocol>*> *)toArray
 {
     return self.items;
 }
 
--(NSObject<EventProtocol>*)itemAt:(NSUInteger)index
+-(NSObject<EventProtocol> *)itemAt:(NSUInteger)index
 {
     return [self.items objectAtIndex:index];
 }
 
--(NSArray *)allItems
+-(NSArray<NSObject<EventProtocol>*> *)allItems
 {
     return [NSArray arrayWithArray:self.items];
 }

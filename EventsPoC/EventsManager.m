@@ -19,6 +19,9 @@
 #import "FBGetEventsForLocationOperation.h"
 #import "MergeEventsOperation.h"
 
+#import "NearMe-Swift.h"
+
+
 
 NSTimeInterval const EventsDefaultLocationUpdateInterval = 60;
 double const EventsDefaultRadius = 200 *1000; // 200 km in meters
@@ -141,7 +144,13 @@ double const EventsDefaultRadius = 200 *1000; // 200 km in meters
         MergeEventsOperation *mergeOp = [[MergeEventsOperation alloc] initWithEventsToMerge:lists completion:^(EventsList *events) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 mergedEvents = events;
-                weakSelf.allEvents = [mergedEvents copy];
+//                weakSelf.allEvents = [mergedEvents copy];
+                weakSelf.allEvents = mergedEvents;
+                
+                // Sort by start time earliest to latest
+                NSSortDescriptor *sortByStartDateDesc = [NSSortDescriptor sortDescriptorWithKey:@"startTime" ascending:NO];
+                [weakSelf.allEvents sortUsingDescriptors:@[sortByStartDateDesc]];
+                                
                 weakSelf.filteredEvents = [weakSelf filterEvents:mergedEvents forLocation:location radius:weakSelf.radius];
                 [weakSelf postEventsUpdatedNotificationWithEvents:weakSelf.filteredEvents];
             });
@@ -179,10 +188,23 @@ double const EventsDefaultRadius = 200 *1000; // 200 km in meters
         myLikesAndEventsOp.startDate = start;
         myLikesAndEventsOp.endDate = end;
 
+        EventBriteEventsForLocationOp *ebLocationEventsOp = [[EventBriteEventsForLocationOp alloc] initWithLatitude:self.currentLocation.coordinate.latitude longitude:self.currentLocation.coordinate.longitude radius:self.radius.doubleValue];
+               
+        ebLocationEventsOp.startDate = self.startDate;
+        ebLocationEventsOp.endDate = self.endDate;
+        ebLocationEventsOp.completionAction = ^(EventsList *ebEvents, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSString *description = [NSString stringWithFormat:@"Loaded %ld EventBrite Events\n", (long)ebEvents.count];
+                [weakSelf logEvents:ebEvents description:description];
+                [lists addObject:ebEvents];
+            });
+        };
+                            
+        [mergeOp addDependency:ebLocationEventsOp];
         [mergeOp addDependency:myLikesAndEventsOp];
         [mergeOp addDependency:locationEventsOp];
         
-        
+        [self.queue addOperation:ebLocationEventsOp];
         [self.queue addOperation:locationEventsOp];
         [self.queue addOperation:myLikesAndEventsOp];
         [self.queue addOperation:mergeOp];
